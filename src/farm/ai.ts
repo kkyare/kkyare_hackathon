@@ -5,7 +5,7 @@ import { templateBriefing, type FarmBrief } from './brief'
 
 export const FARM_AI_MODEL = 'claude-sonnet-5-5'
 
-export async function briefWithClaude(b: FarmBrief): Promise<{ text: string; by: 'claude' | 'template' }> {
+export async function briefWithClaude(b: FarmBrief): Promise<{ text: string; by: 'claude' | 'template'; error?: string }> {
   const fallback = { text: templateBriefing(b), by: 'template' as const }
   if (!process.env.ANTHROPIC_API_KEY) return fallback
   try {
@@ -18,9 +18,10 @@ export async function briefWithClaude(b: FarmBrief): Promise<{ text: string; by:
       messages: [{ role: 'user', content: JSON.stringify({ ...b, learning: undefined }) }],
     })
     const text = msg.content.map((c) => (c.type === 'text' ? c.text : '')).join('').trim()
-    return text ? { text, by: 'claude' } : fallback
-  } catch {
-    return fallback
+    return text ? { text, by: 'claude' } : { ...fallback, error: 'empty response' }
+  } catch (e) {
+    console.error('[farm/brief] Claude call failed:', e)
+    return { ...fallback, error: (e as Error).message?.slice(0, 300) }
   }
 }
 
@@ -73,7 +74,8 @@ export async function searchWithClaude(query: string, candidates: Candidate[]): 
     const valid = new Set(candidates.map((c) => c.field.id))
     const fieldIds = (json.fieldIds ?? []).filter((id) => valid.has(id)).slice(0, 5)
     return fieldIds.length ? { fieldIds, reason: json.reason ?? '', by: 'claude' } : fallback()
-  } catch {
+  } catch (e) {
+    console.error('[farm/search] Claude call failed:', e)
     return fallback()
   }
 }

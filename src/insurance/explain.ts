@@ -34,7 +34,8 @@ export async function explainWithClaude(claim: Claim, field: Field, report: Clai
     })
     const text = msg.content.map((b) => (b.type === 'text' ? b.text : '')).join('').trim()
     return text ? { ...report, explanation: text } : report
-  } catch {
+  } catch (e) {
+    console.error('[insurance/explain] Claude call failed:', e)
     return report
   }
 }
