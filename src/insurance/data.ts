@@ -48,3 +48,7 @@ export function observationFor(fieldId: string, t0: string): Observation | undef
   return fieldObs.find((o) => o.fieldId === fieldId && o.hourly[0]?.time === t0)
 }
 export const snapshotById = (id: string) => snapshots.find((s) => s.id === id)
+
+/** Arena(`runArena`)에 넘길 조회 함수: 다운스케일링·의사결정 과제용 */
+export const getSnapshot = (snapshotId: string) => snapshotById(snapshotId)
+export const getObservation = (task: { field: { id: string }; t0: string }) => observationFor(task.field.id, task.t0)
