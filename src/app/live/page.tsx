@@ -1,39 +1,35 @@
 'use client'
 // TODO(shadcn): components/ui 가 생기면 StepCard -> Card, Badge -> Badge, <select> -> Select, <button> -> Button 으로 교체.
 // TODO(next): ?scenario= 읽기는 next/navigation useSearchParams(+Suspense) 로 교체 가능. 지금은 Next 의존 없이 window 로 읽는다.
-import { useEffect, useState, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
+// 공통 계약 타입만 type-only 로 가져온다 (런타임 import 없음). 서버 전용 replay.ts·arena/api.ts(node:fs, SDK)는 끌어오지 않는다.
+import type { Answer, Score, Task } from '../../core/types'
 
 type Status = 'GO' | 'CAUTION' | 'NO_GO'
 type Frame = { time: string; windMph: number | null; gustMph: number | null; precipIn: number | null; status: Status; reasons: string[] }
 type ModelSummary = { model: string; issuedAt: string; windowMaxGust: number | null; windowMaxWind: number | null; violation: boolean }
-// /api/live 응답의 wire 타입. 서버 전용 replay.ts(node:fs)를 클라이언트 번들에 끌어오지 않으려고 여기서 따로 선언한다.
+// /api/live 응답의 wire 타입 (src/families/nowcasting/replay.ts Replay 와 같은 모양). task 는 그대로 /api/arena/run 에 넘긴다.
 type Replay = {
   demo: true
   scenario: string
-  task: {
-    id: string
-    t0: string
-    resolveAt: string
-    prompt: string
-    field: { id: string; name: string; acres: number; crop: string; stationId: string }
-  }
+  task: Task
   snapshotSummary: { snapshotId: string; models: ModelSummary[] }
-  answer: { model: string; probability?: number; decision?: string; rationale: string }
+  answer: Answer
   frames: Frame[]
   verdict: { violation: boolean; status: Status; reasons: string[] }
-  score: {
-    brier?: number
-    regretUsd?: number
-    costUsd?: number
-    oracleCostUsd?: number
-    skill: number
-    correct?: boolean
-    leakFlags: string[]
-    resolvedWith?: { stationId: string; at: string }
-  }
+  score: Score
   assumptions: { costUsdPerAcre: number; lossUsdPerAcre: number }
 }
 type PanelState = { kind: 'loading' } | { kind: 'ok'; data: Replay } | { kind: 'error'; message: string }
+// POST /api/arena/run 응답의 wire 타입 (src/arena/api.ts ArenaRunResponse 와 같은 모양)
+type ArenaResult = {
+  answers: Answer[]
+  scores: Score[]
+  errors: { taskId: string; model: string; message: string }[]
+  live: boolean // 모든 답이 실제 Claude 호출이면 true. 하나라도 저장 응답이면 false
+  replayed: number // 저장 응답으로 대체된 수
+}
+type ArenaState = { kind: 'idle' } | { kind: 'loading' } | { kind: 'ok'; data: ArenaResult } | { kind: 'error'; message: string }
 
 const SCENARIOS = [
   { id: 'forecast-miss', label: 'forecast-miss · 예보가 빗나간 날' },
@@ -45,6 +41,13 @@ const STEP_MS = 600
 const SCALE_TOP_MPH = 25
 const THRESHOLD_MPH = [10, 15]
 const ASSUMPTION_BADGE = '가정: 연기 $7/acre · 재살포 $31/acre'
+const SKILL_HINT = '1=완벽, 0=기준 예보와 같음, 음수=더 나쁨'
+// Arena 비교 모델 (src/core/agent.ts ARENA_MODELS 와 같은 순서). agent.ts 는 SDK를 import 하므로 여기서 따로 적는다.
+const ARENA_MODELS = [
+  { id: 'claude-haiku-5-5', label: 'Haiku' },
+  { id: 'claude-sonnet-5-5', label: 'Sonnet' },
+  { id: 'claude-opus-5-5', label: 'Opus' },
+] as const
 
 const UI = {
   card: 'flex min-w-0 flex-col gap-4 rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm',
@@ -58,6 +61,8 @@ const TONE = {
   neutral: 'bg-zinc-100 text-zinc-700 ring-zinc-200',
   demo: 'bg-amber-50 text-amber-800 ring-amber-200',
   info: 'bg-sky-50 text-sky-700 ring-sky-200',
+  live: 'bg-emerald-50 text-emerald-700 ring-emerald-200',
+  error: 'bg-red-50 text-red-700 ring-red-200',
 }
 const STATUS_STYLE: Record<Status, { chip: string; text: string; bar: string; barSoft: string }> = {
   GO: { chip: 'bg-emerald-50 text-emerald-700 ring-emerald-200', text: 'text-emerald-700', bar: 'bg-emerald-500', barSoft: 'bg-emerald-300' },
@@ -85,6 +90,7 @@ const hhmmZ = (iso: string) => `${iso.slice(11, 16)}Z`
 const dateZ = (iso: string) => `${iso.slice(0, 10)} ${hhmmZ(iso)}`
 const cdt = (iso: string) => `${String((Number(iso.slice(11, 13)) + 19) % 24).padStart(2, '0')}:${iso.slice(14, 16)} CDT`
 const num = (v: number | null | undefined, digits = 1) => (v == null ? '—' : v.toFixed(digits))
+const pct = (v: number | null | undefined) => (v == null ? '—' : `${Math.round(v * 100)}%`)
 const usd = (v: number) => `$${v.toLocaleString('en-US', { maximumFractionDigits: 0 })}`
 const signed = (v: number) => `${v > 0 ? '+' : ''}${v.toFixed(2)}`
 
@@ -208,6 +214,117 @@ function HourChart({ frames, shown }: { frames: Frame[]; shown: number }) {
   )
 }
 
+// 같은 과제를 Haiku·Sonnet·Opus 로 돌려 비교한다. 저장 답 재생이 기본 흐름이고 이 패널은 버튼을 눌렀을 때만 호출한다.
+// ?mock=1: 저장 응답(fixtures/arena/runs.json)으로 재생. 저장 응답이 없는 과제는 API 의 오류를 그대로 보여 준다 (숫자를 만들어 내지 않는다).
+function ArenaPanel({ task }: { task: Task }) {
+  const [state, setState] = useState<ArenaState>({ kind: 'idle' })
+  const abortRef = useRef<AbortController | null>(null)
+  useEffect(() => () => abortRef.current?.abort(), [])
+
+  const run = () => {
+    abortRef.current?.abort()
+    const ac = new AbortController()
+    abortRef.current = ac
+    setState({ kind: 'loading' })
+    fetch('/api/arena/run?mock=1', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ tasks: [task], models: ARENA_MODELS.map((m) => m.id) }),
+      signal: ac.signal,
+    })
+      .then(async (res) => {
+        const body = (await res.json().catch(() => ({}))) as ArenaResult | { error?: string }
+        if (!res.ok || !('answers' in body)) throw new Error(('error' in body && body.error) || `HTTP ${res.status}`)
+        setState({ kind: 'ok', data: body })
+      })
+      .catch((e: unknown) => {
+        if (ac.signal.aborted) return
+        setState({ kind: 'error', message: e instanceof Error ? e.message : String(e) })
+      })
+  }
+
+  const result = state.kind === 'ok' ? state.data : null
+  const rows = result
+    ? ARENA_MODELS.map((m) => ({
+        ...m,
+        answer: result.answers.find((a) => a.model === m.id && a.taskId === task.id),
+        score: result.scores.find((s) => s.model === m.id && s.taskId === task.id),
+        error: result.errors.find((e) => e.model === m.id && e.taskId === task.id),
+      }))
+    : []
+  const cell = 'py-1.5 pr-2 whitespace-nowrap'
+
+  return (
+    <div className="flex flex-col gap-3 border-t border-zinc-100 pt-4">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className={UI.label}>Arena 비교</span>
+          {result && result.answers.length > 0 && <Badge tone={result.live ? TONE.live : TONE.demo}>{result.live ? 'LIVE' : 'SAVED'}</Badge>}
+          {result && result.errors.length > 0 && <Badge tone={TONE.error}>오류 {result.errors.length}건</Badge>}
+        </div>
+        <button type="button" onClick={run} disabled={state.kind === 'loading'} className={UI.button}>
+          Arena로 실행 (Haiku·Sonnet·Opus)
+        </button>
+      </div>
+      {state.kind === 'loading' && (
+        <>
+          <p className="text-xs text-zinc-500">세 모델을 실행하는 중…</p>
+          <Skeleton lines={3} />
+        </>
+      )}
+      {state.kind === 'error' && (
+        <div role="alert" className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800">
+          <span className="font-semibold">Arena 실행 실패.</span> <span className={`text-red-600 ${UI.mono}`}>{state.message}</span>
+        </div>
+      )}
+      {result && (
+        <>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-zinc-200 text-left whitespace-nowrap">
+                  <th className={`py-1.5 pr-2 ${UI.label}`}>모델</th>
+                  <th className={`py-1.5 pr-2 text-right ${UI.label}`}>확률</th>
+                  <th className={`py-1.5 pr-2 ${UI.label}`}>결정</th>
+                  <th className={`py-1.5 pr-2 text-right ${UI.label}`}>Brier</th>
+                  <th className={`py-1.5 pr-2 text-right ${UI.label}`}>후회</th>
+                  <th className={`py-1.5 text-right ${UI.label}`}>Skill</th>
+                </tr>
+              </thead>
+              <tbody>
+                {rows.map((r) => (
+                  <tr key={r.id} className="border-b border-zinc-100 last:border-0">
+                    <td className={`${cell} font-medium`} title={r.id}>
+                      {r.label}
+                    </td>
+                    {r.answer ? (
+                      <>
+                        <td className={`${cell} text-right ${UI.mono}`}>{pct(r.answer.probability)}</td>
+                        <td className={`${cell} ${UI.mono}`}>{r.answer.decision ?? '—'}</td>
+                        <td className={`${cell} text-right ${UI.mono}`}>{num(r.score?.brier, 3)}</td>
+                        <td className={`${cell} text-right ${UI.mono}`}>{r.score?.regretUsd == null ? '—' : usd(r.score.regretUsd)}</td>
+                        <td className={`py-1.5 text-right whitespace-nowrap ${UI.mono}`}>{r.score ? signed(r.score.skill) : '—'}</td>
+                      </>
+                    ) : (
+                      <td colSpan={5} className={`py-1.5 text-xs break-all text-red-700 ${UI.mono}`}>
+                        {r.error?.message ?? '응답 없음'}
+                      </td>
+                    )}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="text-xs text-zinc-500">
+            {result.replayed > 0 && `저장 응답 ${result.replayed}건 · `}
+            Brier 낮을수록 좋음 · 후회 $/acre · Skill {SKILL_HINT}
+          </p>
+        </>
+      )}
+    </div>
+  )
+}
+
 function ReplayPanel({ scenario }: { scenario: string }) {
   const [state, setState] = useState<PanelState>({ kind: 'loading' })
   const [shown, setShown] = useState(0)
@@ -312,7 +429,7 @@ function ReplayPanel({ scenario }: { scenario: string }) {
               <div className="flex items-end gap-4">
                 <div>
                   <div className={UI.label}>조건이 깨질 확률</div>
-                  <div className={`text-5xl font-semibold tracking-tight ${UI.mono}`}>{p == null ? '—' : `${Math.round(p * 100)}%`}</div>
+                  <div className={`text-5xl font-semibold tracking-tight ${UI.mono}`}>{pct(p)}</div>
                 </div>
                 <div className="pb-1">
                   <div className={UI.label}>결정</div>
@@ -325,6 +442,7 @@ function ReplayPanel({ scenario }: { scenario: string }) {
                 <div className={`mb-1 ${UI.label}`}>근거</div>
                 <p className="text-sm leading-relaxed text-zinc-700">{data.answer.rationale}</p>
               </div>
+              <ArenaPanel task={data.task} />
             </>
           )}
         </StepCard>
@@ -382,7 +500,7 @@ function ReplayPanel({ scenario }: { scenario: string }) {
                 <Stat label="정답 여부" value={correct == null ? '—' : correct ? '✓ 맞음' : '✗ 틀림'} tone={correct ? 'text-emerald-700' : 'text-red-700'} hint={`결정 ${data.answer.decision ?? '—'}`} />
                 <Stat label="후회 (regret)" value={`${usd(regret)}/acre`} tone={regret > 0 ? 'text-red-700' : 'text-emerald-700'} hint={`필지 전체 ≈ ${usd(regret * data.task.field.acres)}`} />
                 <Stat label="Brier" value={num(data.score.brier, 3)} hint="낮을수록 좋음 (0~1)" />
-                <Stat label="Skill" value={signed(data.score.skill)} hint="모델 합의 대비 (−1~+1)" />
+                <Stat label="Skill" value={signed(data.score.skill)} hint={SKILL_HINT} />
               </div>
               <dl className="grid grid-cols-2 gap-x-3 gap-y-1 text-xs text-zinc-500">
                 <dt>비용 / oracle</dt>
