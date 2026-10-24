@@ -46,12 +46,14 @@
 - [x] `src/arena/run.ts`: 과제 × 모델 실행(동시 3개 제한) → 패밀리 `score()` → `leakAttempts`를 `leakFlags`에 합침
   - 진행 이벤트(`start/answer/score/error`)로 스트리밍, 실패는 `errors`로 모으고 계속
   - `replayRunner(saved)`(저장 기록 재생), `withFallback(실제, saved)`(실패 시 대체)
-- [ ] `POST /api/arena/run` `{ taskIds | tasks, models }` → `{ answers, scores }`. `?mock=1`이면 `fixtures/arena/`
+- [x] `POST /api/arena/run` `{ tasks, models? }` → `{ answers, scores, errors, live, replayed }`. `?mock=1`이거나 키가 없으면 `fixtures/arena/runs.json`
+  - 실제 호출이 실패하면 저장 응답으로 대체, 하나라도 대체되면 `live: false` (LIVE 배지는 실제 호출만)
+  - 과제별 스냅샷·관측 연결은 `src/arena/data.ts` (현재 나우캐스팅). `taskIds`는 아직 미지원
 - [ ] `/arena` 화면: 모델 레인 3개(도구 호출 로그·확률·결정·실측·점수), LIVE/DEMO DATA 배지
 - [x] 점수표 집계 `src/arena/scoreboard.ts`: 모델 × 패밀리 (Brier·CRPS·regret $·skill·정답률·누출 수)
 - [ ] 점수표 화면
 - [ ] 실제 키로 3모델 한 번 돌려 `fixtures/arena/`에 저장
-- [ ] **2:00 1차 합치기**: 실제 패밀리 1개가 generate → run → score 한 바퀴
+- [x] **2:00 1차 합치기**: 나우캐스팅으로 generate → run → score 한 바퀴 (`src/arena/integration.test.ts`, 예보 복사 답은 skill 0 확인)
 
 ### 4. 보정 곡선·리더보드·누출 감사 (2:00-3:30)
 - [x] `src/arena/calibration.ts`: 10구간 binning, 모델별 (예측 확률, 실제 빈도, 개수) + Brier 분해(reliability·resolution·uncertainty)

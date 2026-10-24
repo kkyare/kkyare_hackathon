@@ -1,0 +1,82 @@
+// 1차 합치기: 실제 패밀리(나우캐스팅)로 generate → Arena run → score 한 바퀴 (fixtures 사용, Claude 호출 없음)
+import type Anthropic from '@anthropic-ai/sdk'
+import { describe, expect, it } from 'vitest'
+import { runAgent, type MessagesClient } from '../core/agent'
+import type { Task } from '../core/types'
+import { families } from '../families/index'
+import { buildDemoTasks, loadSnapshotForTask, referenceProbability } from '../families/nowcasting/index'
+import { BadRequest, handleArenaRun } from './api'
+import type { AgentRunner, ArenaRun } from './run'
+import { scoreboard } from './scoreboard'
+
+const { tasks } = buildDemoTasks(6)
+const MODELS = ['claude-haiku-5-5', 'claude-opus-5-5']
+
+// 원천 예보 비율을 그대로 내는 가짜 에이전트 → 나우캐스팅 skill은 0이어야 한다
+const copyForecast: AgentRunner = async ({ task, model }) => {
+  const p = referenceProbability(loadSnapshotForTask(task))
+  return { answer: { taskId: task.id, model, probability: p, decision: p >= 0.5 ? 'delay' : 'spray', rationale: '예보 복사', toolCalls: [] }, leakFlags: [] }
+}
+
+describe('1차 합치기: 나우캐스팅 × Arena', () => {
+  it('generate → run → score 한 바퀴, 예보 복사는 skill 0', async () => {
+    const r = await handleArenaRun({ tasks, models: MODELS }, { families, saved: [], mock: false, live: copyForecast })
+    expect(r.errors).toEqual([])
+    expect(r.scores).toHaveLength(tasks.length * MODELS.length)
+    expect(r).toMatchObject({ live: true, replayed: 0 })
+    for (const s of r.scores) {
+      expect(s.family).toBe('nowcasting')
+      expect(s.skill).toBe(0)
+      expect(s.resolvedWith?.stationId).toBe('DSM')
+      expect(s.leakFlags).toEqual([])
+    }
+    expect(scoreboard(r.scores).map(c => [c.model, c.n])).toEqual([['claude-haiku-5-5', 6], ['claude-opus-5-5', 6]])
+  })
+
+  it('실제 runAgent가 나우캐스팅 스냅샷·answerSchema로 돈다 (가짜 client)', async () => {
+    const task = tasks[0]
+    let step = 0
+    const client: MessagesClient = {
+      messages: {
+        async create(params) {
+          const submit = params.tools!.find(t => 'name' in t && t.name === 'submit_answer') as Anthropic.Tool
+          expect(submit.input_schema.required).toEqual(['probability', 'decision', 'rationale'])
+          const content = step++ === 0
+            ? [{ type: 'tool_use', id: 'a', name: 'list_forecast_models', input: {} }]
+            : [{ type: 'tool_use', id: 'b', name: 'submit_answer', input: { probability: 0.2, decision: 'spray', rationale: '돌풍 예보 낮음' } }]
+          return { content, usage: { input_tokens: 1, output_tokens: 1 } } as unknown as Anthropic.Message
+        },
+      },
+    }
+    const live: AgentRunner = input => runAgent({ ...input, client })
+    const r = await handleArenaRun({ tasks: [task], models: ['claude-sonnet-5-5'] }, { families, saved: [], mock: false, live })
+    expect(r.errors).toEqual([])
+    expect(r.answers[0].toolCalls.map(c => c.name)).toEqual(['list_forecast_models'])
+    expect(r.scores[0].brier).toBeDefined()
+  })
+
+  it('mock이면 저장 응답, 실패하면 저장 응답으로 대체하고 LIVE 아님', async () => {
+    const saved: ArenaRun[] = tasks.slice(0, 2).map(t => ({
+      taskId: t.id, model: 'claude-opus-5-5', leakFlags: [],
+      answer: { taskId: t.id, model: 'claude-opus-5-5', probability: 0.5, decision: 'delay', rationale: 'saved', toolCalls: [] },
+    }))
+    const mocked = await handleArenaRun({ tasks: tasks.slice(0, 2), models: ['claude-opus-5-5'] }, { families, saved, mock: true })
+    expect(mocked).toMatchObject({ live: false, replayed: 2 })
+    expect(mocked.scores).toHaveLength(2)
+
+    const down: AgentRunner = async () => { throw new Error('529 overloaded') }
+    const fb = await handleArenaRun({ tasks: tasks.slice(0, 2), models: ['claude-opus-5-5'] }, { families, saved, mock: false, live: down })
+    expect(fb).toMatchObject({ live: false, replayed: 2 })
+  })
+
+  it('등록 안 된 패밀리·잘못된 요청', async () => {
+    const s2s: Task = { ...tasks[0], id: 'task-s2s-0001', family: 's2s' }
+    const r = await handleArenaRun({ tasks: [s2s], models: ['m'] }, { families, saved: [], mock: false, live: copyForecast })
+    expect(r.errors[0].message).toContain("family 's2s'")
+
+    const deps = { families, saved: [], mock: true }
+    await expect(handleArenaRun({}, deps)).rejects.toBeInstanceOf(BadRequest)
+    await expect(handleArenaRun({ taskIds: ['x'] }, deps)).rejects.toBeInstanceOf(BadRequest)
+    await expect(handleArenaRun({ tasks, models: [] }, deps)).rejects.toBeInstanceOf(BadRequest)
+  })
+})
