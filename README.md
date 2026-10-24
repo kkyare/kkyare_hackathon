@@ -8,7 +8,9 @@ Ambition for Korea Claude 해커톤 **꺄레** 팀 레포입니다.
 
 ## 문서
 
-- [리서치 및 제품 초안](docs/research_yujin.md)
+- [리서치 및 제품 초안 (FieldBench)](docs/research_yujin.md)
+- [SprayWindow 리서치](docs/research_sungho/): 경쟁사, 고객, 데이터·기술, Why now, 서비스 정의, 문제 근거, 사업 계획, dispatcher 검증
+  - 시작점: [00 종합](docs/research_sungho/00_summary.md) · [05 서비스 정의서](docs/research_sungho/05_service_spec.md) · [07 사업 계획](docs/research_sungho/07_business_plan.md)
 
 ## Credits
 
