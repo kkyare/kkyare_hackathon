@@ -4,7 +4,7 @@ import * as fs from 'node:fs'
 import * as path from 'node:path'
 import type { Answer, HourlyPoint, Score, Task } from '../../core/types'
 import { SCENARIOS, loadFields, loadForecastRuns, loadObservation, type ScenarioId } from '../../core/weather'
-import { answerSchema, buildScenarioSnapshot, nowcasting } from './index'
+import { answerSchema, buildDemoTasks, buildScenarioSnapshot, nowcasting, scenarioOfSnapshotId } from './index'
 import { DEFAULT_RULES, evaluateHour, evaluateWindow, type ReasonCode, type SprayStatus } from './rules'
 
 export type ReplayScenario = ScenarioId
@@ -88,6 +88,21 @@ function maxOf(values: (number | null)[]): number | null {
   return xs.length ? Math.max(...xs) : null
 }
 
+function replayTaskId(scenario: ReplayScenario, fieldId: string, t0: string): string {
+  const raw = readFixtureJson('arena', 'runs.json') as { runs?: { taskId?: unknown }[] }
+  const savedIds = new Set((raw.runs ?? []).flatMap((run) => typeof run.taskId === 'string' ? [run.taskId] : []))
+  const recordedTask = buildDemoTasks(Number.MAX_SAFE_INTEGER).tasks.find((candidate) =>
+    candidate.field.id === fieldId &&
+    scenarioOfSnapshotId(candidate.snapshotId) === scenario &&
+    candidate.t0 === t0 &&
+    savedIds.has(candidate.id),
+  )
+  if (recordedTask) return recordedTask.id
+
+  const yyyymmddThhZ = t0.replace(/[-:]/g, '').replace('.000', '').replace(/(\d{8}T\d{2})\d{4}Z$/, '$1Z')
+  return `task-nc-live-${scenario}-${fieldId}-${yyyymmddThhZ}`
+}
+
 export function buildReplay(scenario: ReplayScenario, fieldId?: string, t0?: string): Replay {
   if (!isReplayScenario(scenario)) throw new Error(`unknown scenario: ${scenario}`)
   const t0ms = Date.parse(t0 ?? DEFAULT_T0[scenario])
@@ -103,6 +118,7 @@ export function buildReplay(scenario: ReplayScenario, fieldId?: string, t0?: str
   const snapshot = buildScenarioSnapshot(field, t0Iso, scenario, runs, obs)
   const [task] = nowcasting.generate({ fields: [field], snapshots: [snapshot], count: 1 })
   if (!task) throw new Error(`task generation failed for ${snapshot.id}`)
+  task.id = replayTaskId(scenario, field.id, t0Iso)
 
   const answer = loadSavedAnswer(scenario, task.id)
   const score = nowcasting.score(task, answer, obs, snapshot)

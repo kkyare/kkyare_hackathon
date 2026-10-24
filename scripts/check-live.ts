@@ -1,5 +1,6 @@
 import { buildReplay, REPLAY_SCENARIOS } from '../src/families/nowcasting/replay'
 import { GET } from '../src/app/api/live/route'
+import { loadSavedRuns } from '../src/arena/data'
 
 let failures = 0
 const check = (name: string, ok: boolean, extra = '') => {
@@ -13,6 +14,14 @@ const throws = (fn: () => unknown) => {
   } catch {
     return true
   }
+}
+
+const replayIds = REPLAY_SCENARIOS.map((scenario) => buildReplay(scenario).task.id)
+check('(a) scenario task ids are distinct', new Set(replayIds).size === REPLAY_SCENARIOS.length, replayIds.join(', '))
+const savedTaskIds = new Set(loadSavedRuns().map((run) => run.taskId))
+for (const scenario of REPLAY_SCENARIOS) {
+  const replay = buildReplay(scenario)
+  console.log(`INFO (a) ${scenario} saved Arena run - ${replay.task.id}: ${savedTaskIds.has(replay.task.id)}`)
 }
 
 // (a) 세 시나리오 공통 모양
