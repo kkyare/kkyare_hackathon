@@ -6,7 +6,7 @@ import type { Answer, FamilyId, Task } from '../core/types'
 import { engineAnswer as decisionEngine } from '../families/decision/index'
 import { engineAnswer as downscalingEngine } from '../families/downscaling/index'
 import { families } from '../families/index'
-import { snapshotById } from '../insurance/data'
+import { observationFor, snapshotById } from '../insurance/data'
 import { handleArenaRun, handleExport } from './api'
 import { demoTasks } from './data'
 import type { AgentRunner } from './run'
@@ -59,11 +59,23 @@ describe('Arena × 등록된 패밀리 전부', () => {
     })
   }
 
-  it('납품: 라벨은 이진 확률 패밀리(나우캐스팅·서리 결정)에만 붙는다', () => {
+  it('납품: 이진 패밀리는 outcome, 다운스케일링은 value·reference, S2S는 라벨 없음', () => {
     const all = FAMILIES.flatMap(tasksOf)
     const lines = handleExport({ tasks: all }, { format: 'jsonl', families }).body.trim().split('\n').map(l => JSON.parse(l))
     const labeled = new Set(lines.filter(l => l.label).map(l => l.family))
-    expect([...labeled].sort()).toEqual(['decision', 'nowcasting'])
+    expect([...labeled].sort()).toEqual(['decision', 'downscaling', 'nowcasting'])
+    for (const l of lines.filter(l => l.family === 'nowcasting' || l.family === 'decision')) expect([0, 1]).toContain(l.label.outcome)
+
+    // 다운스케일링 라벨은 패밀리 score()와 같은 값: 실측 그대로면 CRPS 0, 원천 예보 그대로면 skill 0
+    const ds = all.filter(t => t.family === 'downscaling')
+    for (const t of ds) {
+      const { label } = lines.find(l => l.id === t.id)
+      const snapshot = snapshotById(t.snapshotId)!
+      const obs = observationFor(t.field.id, t.t0)!
+      const at = (value: number): Answer => ({ taskId: t.id, model: 'x', quantiles: [{ q: 0.5, value }], rationale: '', toolCalls: [] })
+      expect(families.downscaling!.score(t, at(label.value), obs, snapshot).crps).toBe(0)
+      expect(families.downscaling!.score(t, at(label.reference), obs, snapshot).skill).toBe(0)
+    }
     const pack = JSON.parse(handleExport({ tasks: all }).body)
     expect(pack.families.sort()).toEqual(['decision', 'downscaling', 'nowcasting', 's2s'])
     expect(pack.meta.count).toBe(all.length)

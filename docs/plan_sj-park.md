@@ -76,10 +76,11 @@
 - [ ] 데이터 카드 화면: 출처(Open-Meteo·IEM ASOS·NOAA CPC), 기간·지역, 패밀리별 개수, 누출 방지 방식, Arena baseline 점수, "가정" 표시
 
 ### 6. P1 verifiers (3:30-4:00)
-- [x] `py/verifiers_env/`: TaskPack JSONL 로드, Brier/regret reward, `load_environment()` (`SingleTurnEnv`, 보상 = 결정 + 0.5·Brier + 0.1·형식)
-  - 정답은 내보내기 JSONL의 `label.outcome`(TS 패밀리 `score()`로 판정, holdout이면 빠짐)을 쓴다 — Python이 패밀리 규칙을 다시 구현하지 않게
-  - 샘플 `data/sample.jsonl`: 나우캐스팅 데모 12개 (위반 6·정상 6)
-- [ ] CRPS 보상 (다운스케일링 패밀리 main 머지 후)
+- [x] `py/verifiers_env/`: TaskPack JSONL 로드, `load_environment()` (`SingleTurnEnv`)
+  - 이진(나우캐스팅·서리 결정): `scoring.ts reward()`와 같은 -(regret/L) - 0.5·Brier, 분위수(다운스케일링): CRPS 스킬 [-1, 1], + 0.1·형식. 형식 위반은 최저점
+  - 정답은 내보내기 JSONL의 `label`(이진 `outcome`, 다운스케일링 `value`·`reference`, TS 패밀리 함수로 계산, holdout이면 빠짐) — Python이 패밀리 규칙을 다시 구현하지 않게
+  - 샘플 `data/sample.jsonl`: 나우캐스팅 12 + 다운스케일링 6 + 서리 결정 6 (DEMO DATA)
+- [x] CRPS 보상 (다운스케일링)
 - [ ] `prime env push`
 - [ ] 안 되면 JSON 내보내기로 충분
 
