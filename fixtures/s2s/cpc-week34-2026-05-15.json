@@ -1,0 +1,14 @@
+{
+  "demo": true,
+  "product": "CPC Week 3-4 temperature outlook (format mock)",
+  "issuedAt": "2026-05-15T00:00:00Z",
+  "validFrom": "2026-05-30",
+  "validTo": "2026-06-12",
+  "normalsBasis": "1991-2020 (demo)",
+  "stationId": "DSM",
+  "boundariesF": {
+    "below": 66.0,
+    "above": 69.5
+  },
+  "terciles": [0.25, 0.33, 0.42]
+}
