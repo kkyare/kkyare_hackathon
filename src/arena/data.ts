@@ -2,13 +2,36 @@
 import * as fs from 'node:fs'
 import * as path from 'node:path'
 import { loadObservationForTask, loadSnapshotForTask } from '../families/nowcasting/index'
+import { loadS2sObservationForTask } from '../families/s2s/index'
+import { observationFor, snapshotById } from '../insurance/data'
 import type { FamilyId, Observation, Snapshot, Task } from '../core/types'
 import type { ArenaRun } from './run'
 
-interface TaskData { snapshot(task: Task): Snapshot; observation(task: Task): Observation }
+interface TaskData { snapshot(task: Task): Snapshot | undefined; observation(task: Task): Observation | undefined }
+
+// 다운스케일링·서리 결정: fixtures/downscaling (유진님 insurance/data)
+const downscalingData: TaskData = {
+  snapshot: task => snapshotById(task.snapshotId),
+  observation: task => observationFor(task.field.id, task.t0),
+}
 
 const loaders: Partial<Record<FamilyId, TaskData>> = {
   nowcasting: { snapshot: loadSnapshotForTask, observation: loadObservationForTask },
+  downscaling: downscalingData,
+  decision: downscalingData,
+  // S2S는 t0 예보 런이 없다 (CPC 전망은 과제 prompt에 담김). score 라우트와 같은 빈 스냅샷
+  s2s: {
+    snapshot: task => ({ id: task.snapshotId, t0: task.t0, fieldId: task.field.id, forecasts: [], obsUntilT0: [] }),
+    observation: loadS2sObservationForTask,
+  },
+}
+
+const attempt = <T,>(fn: () => T | undefined): T | undefined => {
+  try {
+    return fn()
+  } catch {
+    return undefined
+  }
 }
 
 // runArena에 넘길 조회 함수. 과제마다 한 번씩 미리 불러 둔다 (못 찾으면 runArena가 errors로 보고)
@@ -18,12 +41,11 @@ export function taskData(tasks: Task[]) {
   for (const task of tasks) {
     const l = loaders[task.family]
     if (!l) continue
-    try {
-      snapshots.set(task.snapshotId, l.snapshot(task))
-      observations.set(task.id, l.observation(task))
-    } catch {
-      // 스냅샷·관측을 못 찾은 과제는 runArena에서 오류로 남는다
-    }
+    // 못 찾으면 비워 둔다: 스냅샷이 없으면 runArena가 오류로 남기고, 관측이 없으면 답만 받고 채점은 건너뛴다
+    const snapshot = attempt(() => l.snapshot(task))
+    const obs = attempt(() => l.observation(task))
+    if (snapshot) snapshots.set(task.snapshotId, snapshot)
+    if (obs) observations.set(task.id, obs)
   }
   return {
     snapshots: [...snapshots.values()],

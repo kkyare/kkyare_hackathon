@@ -48,7 +48,8 @@
   - `replayRunner(saved)`(저장 기록 재생), `withFallback(실제, saved)`(실패 시 대체)
 - [x] `POST /api/arena/run` `{ tasks, models? }` → `{ answers, scores, errors, live, replayed }`. `?mock=1`이거나 키가 없으면 `fixtures/arena/runs.json`
   - 실제 호출이 실패하면 저장 응답으로 대체, 하나라도 대체되면 `live: false` (LIVE 배지는 실제 호출만)
-  - 과제별 스냅샷·관측 연결은 `src/arena/data.ts` (현재 나우캐스팅). `taskIds`는 아직 미지원
+  - 과제별 스냅샷·관측 연결은 `src/arena/data.ts`: 나우캐스팅·다운스케일링·서리 결정·S2S 4개 모두 (`src/arena/families.test.ts`). `taskIds`는 아직 미지원
+  - S2S는 t0 예보 런이 없어 빈 스냅샷 → 에이전트가 CPC 전망을 도구로 볼 수 없음 (도구 추가는 성호님과 상의)
 - [ ] `/arena` 화면: 모델 레인 3개(도구 호출 로그·확률·결정·실측·점수), LIVE/DEMO DATA 배지
 - [x] 점수표 집계 `src/arena/scoreboard.ts`: 모델 × 패밀리 (Brier·CRPS·regret $·skill·정답률·누출 수)
 - [ ] 점수표 화면
