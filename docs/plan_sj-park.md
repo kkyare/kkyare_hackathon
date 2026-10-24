@@ -35,11 +35,12 @@
 - [x] vitest: 어떤 인자로도 t0 이후 관측·t0 이후 발표 예보가 나오지 않음
 
 ### 2. `agent.ts` (0:15-0:45)
-- [ ] `runAgent({ task, snapshot, model, answerSchema, client? }) → { answer, leakAttempts, usage }`
-- [ ] 도구 루프(최대 8턴) → `submit_answer` 도구(입력 스키마 = 패밀리 `answerSchema`의 JSON Schema)로 종료
-- [ ] `submit_answer` 입력을 `answerSchema`로 검증, 실패하면 오류를 돌려주고 한 번 더
-- [ ] 모델 ID: `claude-haiku-5-5`, `claude-sonnet-5-5`, `claude-opus-5-5`. 키는 서버에서만
-- [ ] vitest: 가짜 client로 도구 호출 → 제출 흐름, `toolCalls` 기록
+- [x] `runAgent({ task, snapshot, model, answerSchema, client? }) → { answer, leakAttempts, usage }`
+- [x] 도구 루프(최대 8턴, 마지막 턴·도구 없이 끝난 다음 턴은 제출 강제) → `submit_answer` 도구(입력 스키마 = 패밀리 `answerSchema`의 JSON Schema)로 종료
+- [x] `submit_answer` 입력을 `answerSchema`로 검증, 실패하면 오류를 돌려주고 한 번 더
+- [x] 모델 ID: `claude-haiku-5-5`, `claude-sonnet-5-5`, `claude-opus-5-5`. 키는 서버에서만
+- [x] vitest: 가짜 client로 도구 호출 → 제출 흐름, `toolCalls` 기록
+- [ ] 실제 키로 3모델 스모크 테스트 (키 받으면)
 
 ### 3. Arena 실행·점수표 (0:45-2:00)
 - [ ] `src/arena/run.ts`: 과제 × 모델 실행(동시 3개 제한) → 패밀리 `score()` → `leakAttempts`를 `leakFlags`에 합침
