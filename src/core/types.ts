@@ -54,6 +54,7 @@ export interface Score {
   regretUsd?: number; costUsd?: number; oracleCostUsd?: number
   skill: number
   correct?: boolean
+  outcome?: 0 | 1                           // 이진 사건의 실제 결과 (Arena 보정 곡선용, probability 과제면 채워 주기)
   leakFlags: string[]
   resolvedWith?: { stationId: string; at: string }   // 어떤 관측으로 채점했는지 (재현성)
 }
