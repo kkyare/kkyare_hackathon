@@ -70,8 +70,9 @@ describe('skillScore', () => {
   it('오차를 절반으로 줄이면 0.5', () => {
     expect(skillScore(1.5, 3)).toBeCloseTo(0.5)
   })
-  it('기준보다 나쁘면 음수', () => {
-    expect(skillScore(6, 3)).toBeLessThan(0)
+  it('기준보다 나쁘면 음수, 아래쪽은 -1로 자른다', () => {
+    expect(skillScore(4.5, 3)).toBeCloseTo(-0.5)
+    expect(skillScore(30, 3)).toBe(-1)
   })
 })
 
