@@ -1,3 +1,5 @@
+// 팀 vitest 설정이 *.test.ts만 실행해서 JSX 대신 createElement를 쓴다
+import { createElement } from 'react'
 import { renderToString } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import { handleArenaTasks, handleAudit } from '../../arena/api'
@@ -53,14 +55,14 @@ describe('GET /api/arena/tasks, POST /api/arena/audit', () => {
 
 describe('페이지 렌더링 (서버, 초기 상태)', () => {
   it('Arena: 제목·DEMO DATA·버튼', () => {
-    const html = renderToString(<ArenaPage />)
+    const html = renderToString(createElement(ArenaPage))
     expect(html).toContain('Model Arena')
     expect(html).toContain('DEMO DATA')
     expect(html).toContain('실제 실행 (LIVE)')
   })
 
   it('납품: 패밀리 선택·내려받기', () => {
-    const html = renderToString(<ExportPage />)
+    const html = renderToString(createElement(ExportPage))
     expect(html).toContain('납품')
     expect(html).toContain('TaskPack JSON')
     expect(html).toContain('비공개 평가셋')
