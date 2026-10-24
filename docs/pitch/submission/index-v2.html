@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Weather Decision Gym · Pitch v2 (2 slides)</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+ /* Ambition for Korea GUIDE.md: 1920x1080, 2장, 하단 로고 띠 90%, 팀 이름 왼쪽 위, 본문 28px 이상 */
+ @page{size:1920px 1080px;margin:0}
+ *{margin:0;padding:0;box-sizing:border-box;word-break:keep-all}
+ :root{--paper:#e9ecE6;--paper2:#f4f6f2;--ink:#1c2620;--ink2:#4a5650;--rule:#c5ccc3;--canopy:#4e7a3a;--corn:#c99a1e;--loam:#7a4a2a;--frost:#3b6a94}
+ body{font-family:'Pretendard Variable','Pretendard',-apple-system,sans-serif;background:#777}
+ .s{width:1920px;height:1080px;position:relative;overflow:hidden;background:var(--paper);color:var(--ink);page-break-after:always;margin:0 auto 40px}
+ @media print{body{background:none}.s{margin:0}}
+ .team{position:absolute;top:52px;left:96px;font-size:28px;font-weight:700;color:var(--ink2)}
+ .topic{position:absolute;top:52px;right:96px;font-size:28px;font-weight:600;color:var(--ink2)}
+ .topic b{color:var(--ink)}
+ .body{position:absolute;left:96px;right:96px;top:130px;bottom:150px;display:flex;flex-direction:column;gap:30px}
+ h1{font-size:104px;font-weight:800;line-height:1;letter-spacing:-.02em}
+ .one{font-size:44px;font-weight:600;line-height:1.25;max-width:1500px}
+ .cols{display:grid;grid-template-columns:1fr 1fr;gap:72px;margin-top:10px}
+ .col{border-top:6px solid var(--ink);padding-top:22px}
+ .col.corn{border-color:var(--corn)} .col.frost{border-color:var(--frost)}
+ .col h2{font-size:30px;font-weight:700;margin-bottom:14px}
+ .col p{font-size:32px;line-height:1.42}
+ .col p.big{font-size:72px;font-weight:800;line-height:1;margin:6px 0 8px;color:var(--loam)}
+ .note{font-size:28px;color:var(--ink2)}
+ .shots{display:grid;grid-template-columns:1.1fr 1fr;gap:36px;height:400px}
+ .shot{position:relative;border:2px solid var(--rule);background:var(--paper2);overflow:hidden}
+ .shot img{width:100%;height:100%;object-fit:cover;object-position:top left;display:block}
+ .cap{font-size:28px;color:var(--ink2);margin-top:10px}
+ .row2{display:grid;grid-template-columns:1.1fr 1fr;gap:36px}
+ .k{font-weight:800;color:var(--canopy)}
+ .foot{position:absolute;left:5%;right:5%;bottom:32px}
+ .foot img{width:100%;display:block}
+ .s1 .body{top:112px;gap:16px}
+ .s1 h1{font-size:66px}
+ .s1 .one{font-size:36px}
+ .flow{display:grid;grid-template-columns:1.05fr 70px 1fr 70px 1fr;align-items:stretch;margin-top:6px}
+ .colh{font-size:28px;font-weight:700;color:var(--ink2);margin-bottom:12px}
+ .farm{background:var(--paper2);border-left:8px solid var(--canopy);padding:16px 20px;margin-bottom:16px}
+ .farm.poultry{border-color:var(--corn)}
+ .farm h3{font-size:30px;font-weight:700;line-height:1.2}
+ .farm h3 small{font-size:28px;font-weight:500;color:var(--ink2)}
+ .farm p{font-size:28px;line-height:1.35;color:var(--ink)}
+ .farm .out{margin-top:6px;font-weight:700}
+ .tag{display:inline-block;font-size:28px;font-weight:600;color:var(--loam)}
+ .arrow{display:flex;align-items:center;justify-content:center}
+ .step{background:var(--ink);color:var(--paper2);padding:16px 20px;margin-bottom:12px}
+ .step b{font-size:30px;display:block;line-height:1.2}
+ .step span{font-size:28px;line-height:1.3;color:#d9dfd6}
+ .loop{display:flex;align-items:center;gap:12px;font-size:28px;font-weight:600;color:var(--canopy);margin-top:2px}
+ .buyer{border-top:6px solid var(--frost);padding:12px 0 6px;margin-bottom:12px}
+ .buyer.ins{border-color:var(--corn)}
+ .buyer h3{font-size:30px;font-weight:700;line-height:1.2}
+ .buyer p{font-size:28px;line-height:1.35}
+ .strip{display:grid;grid-template-columns:1fr 1fr;gap:56px;border-top:2px solid var(--rule);padding-top:14px}
+ .strip p{font-size:28px;line-height:1.38}
+ .strip b.n{color:var(--loam);font-size:34px}
+</style></head>
+<body>
+
+<section class="s s1">
+  <div class="team">Team 꺄레 (kkyare)</div>
+  <div class="topic">Topic <b>AttentionX · a service US RL Eval &amp; data companies pay for</b></div>
+  <div class="body">
+    <h1>Weather Decision Gym</h1>
+    <p class="one">Field-level weather and loss forecasts for US farm insurers.</p>
+    <div class="flow">
+      <div>
+        <div class="colh">Farm data in</div>
+        <div class="farm">
+          <h3>Corn farm <small>· Iowa, 280 acres</small></h3>
+          <p>Satellite, forecasts, field sensors, harvests</p>
+          <p class="out">→ 2026 yield: 84.5% of normal</p>
+        </div>
+        <div class="farm poultry">
+          <h3>Poultry farm <small>· Iowa broilers</small></h3>
+          <p>Heat-index forecast, barn temps, flock records</p>
+          <p class="out">→ heat-wave flock loss % <span class="tag">(next)</span></p>
+        </div>
+      </div>
+      <div class="arrow"><svg width="64" height="40" viewBox="0 0 64 40" aria-hidden="true"><path d="M4 20 H50" stroke="#1c2620" stroke-width="5" fill="none"/><path d="M44 8 L60 20 L44 32 Z" fill="#1c2620"/></svg></div>
+      <div>
+        <div class="colh">Our engine</div>
+        <div class="step"><b>1. Field-level weather</b><span>Forecasts downscaled to each field or barn</span></div>
+        <div class="step"><b>2. Loss model</b><span>Weather → yield % or flock loss %</span></div>
+        <div class="step"><b>3. Retrain on real outcomes</b><span>Every harvest and flock record retrains it</span></div>
+        <div class="loop"><svg width="40" height="32" viewBox="0 0 40 32" aria-hidden="true"><path d="M34 16 A13 12 0 1 1 22 4" stroke="#4e7a3a" stroke-width="4" fill="none"/><path d="M18 0 L28 4 L19 10 Z" fill="#4e7a3a"/></svg>error 6.2 → 2.5 %p after 3 seasons</div>
+      </div>
+      <div class="arrow"><svg width="64" height="40" viewBox="0 0 64 40" aria-hidden="true"><path d="M4 20 H50" stroke="#1c2620" stroke-width="5" fill="none"/><path d="M44 8 L60 20 L44 32 Z" fill="#1c2620"/></svg></div>
+      <div>
+        <div class="colh">Who pays</div>
+        <div class="buyer ins">
+          <h3>Crop &amp; livestock insurers</h3>
+          <p>Premium, payout and renewal ranges; claim checks</p>
+        </div>
+        <div class="buyer">
+          <h3>US RL eval &amp; data companies</h3>
+          <p>Auto-graded weather tasks, scored by next-day observations</p>
+        </div>
+      </div>
+    </div>
+    <div class="strip">
+      <p><b>Target</b> · US crop &amp; poultry insurers in the Corn Belt; US RL eval and data companies.</p>
+      <p><b>Problem</b> · <b class="n">73%</b> of US crop insurance payouts are weather-driven ($118.7B, 2001–2022).</p>
+    </div>
+  </div>
+  <div class="foot"><img src="footer-for-light-slides.png" alt=""></div>
+</section>
+
+<section class="s">
+  <div class="team">Team 꺄레 (kkyare)</div>
+  <div class="topic"><b>Built today</b> · weather-decision-gym.vercel.app</div>
+  <div class="body" style="top:118px;gap:22px">
+    <div class="shots">
+      <div class="shot"><img src="shot-map.png" alt="Farm map: Sentinel-2 satellite view of 48 Iowa fields with a per-farm yield forecast panel"></div>
+      <div class="shot"><img src="shot-insurance.png" alt="Insurer console: risk score map, actual loss ratio by score band, premium and renewal ranges"></div>
+    </div>
+    <div class="row2" style="margin-top:-6px">
+      <p class="cap">Farm map: pick a field, get its 2026 yield as % of normal.</p>
+      <p class="cap">Insurer console: risk score vs. real losses → rate ranges.</p>
+    </div>
+    <div class="cols" style="margin-top:4px;gap:56px">
+      <div class="col">
+        <h2>How it works</h2>
+        <p>Field weather → yield % per farm → retrained on each real harvest: error falls <span class="k">6.2 → 2.5 %p</span>. <b>Claude</b> finds farms, writes briefings, and is the agent graded in our RL tasks.</p>
+      </div>
+      <div class="col">
+        <h2>Why us · next 7 days</h2>
+        <p>One engine, two buyers: insurer rate ranges and auto-graded RL tasks. Next 7 days: live Open-Meteo, IEM and NOAA feeds, one insurer pilot.</p>
+        <p class="note" style="margin-top:8px">Demo uses mock Iowa farms.</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><img src="footer-for-light-slides.png" alt=""></div>
+</section>
+
+</body></html>
