@@ -127,6 +127,6 @@ describe('납품: 나우캐스팅 과제 내보내기', () => {
   it('잘못된 요청', () => {
     expect(() => handleExport({})).toThrow(BadRequest)
     expect(() => handleExport({ tasks: mixed }, { format: 'csv' })).toThrow(BadRequest)
-    expect(() => handleExport({ tasks: [{ ...mixed[0], family: 's2s' }] })).toThrow(BadRequest)
+    expect(() => handleExport({ tasks: [{ ...mixed[0], family: 'decision', snapshotId: 'snap-missing' }] })).toThrow(BadRequest)
   })
 })

@@ -35,7 +35,12 @@ export interface RunAgentResult {
 export class AgentError extends Error {}
 
 let defaultClient: Anthropic | undefined
-const getDefaultClient = () => (defaultClient ??= new Anthropic())
+// workspace에 묶이지 않은 키는 anthropic-workspace-id 헤더가 필요하다 (.env.example 참고)
+export function createClient(): Anthropic {
+  const workspace = process.env.ANTHROPIC_WORKSPACE_ID
+  return new Anthropic(workspace ? { defaultHeaders: { 'anthropic-workspace-id': workspace } } : {})
+}
+const getDefaultClient = () => (defaultClient ??= createClient())
 
 function submitTool(answerSchema: z.ZodTypeAny): Anthropic.Tool {
   const { $schema: _, ...schema } = z.toJSONSchema(answerSchema) as Record<string, unknown>

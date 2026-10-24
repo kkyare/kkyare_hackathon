@@ -1,6 +1,6 @@
 // 누출 감사: (1) 도구 기록(leakFlags) 집계 (2) Claude로 rationale 검사 — t0 이후에야 알 수 있는 사실을 아는 듯 말하는가
 import Anthropic from '@anthropic-ai/sdk'
-import type { MessagesClient } from '../core/agent'
+import { createClient, type MessagesClient } from '../core/agent'
 import type { ModelId, Score, Task } from '../core/types'
 import { pool, type ArenaRun } from './run'
 
@@ -33,7 +33,7 @@ const reportTool: Anthropic.Tool = {
 }
 
 let defaultClient: Anthropic | undefined
-const getDefaultClient = () => (defaultClient ??= new Anthropic())
+const getDefaultClient = () => (defaultClient ??= createClient())
 
 function auditPrompt(task: Task, run: ArenaRun) {
   return [

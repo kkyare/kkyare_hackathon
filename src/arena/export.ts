@@ -57,6 +57,9 @@ function resolutionSlice(task: Task, obs: Observation | undefined): Observation 
 export interface Label { outcome: 0 | 1 }
 
 export function labelOf(family: Family, task: Task, obs: Observation, snapshot: Snapshot): Label | undefined {
+  // 이진 확률(probability)을 받는 패밀리만. S2S(3분위)·다운스케일링(분위수)은 brier로 역산할 수 없다
+  const shape = (family.answerSchema as { shape?: Record<string, unknown> }).shape
+  if (!shape || !('probability' in shape)) return undefined
   // p = 0으로 채점하면 brier = (0 - y)² = y
   const s = family.score(task, { taskId: task.id, model: 'label', probability: 0, rationale: '', toolCalls: [] }, obs, snapshot)
   if (s.outcome === 0 || s.outcome === 1) return { outcome: s.outcome }
