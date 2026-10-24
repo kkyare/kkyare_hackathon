@@ -1,5 +1,6 @@
 // 납품: TaskPack(JSON), RL 파이프라인용 JSONL, 데이터 카드(Markdown)
 import type { Family, FamilyId, Observation, Snapshot, Task, TaskPack } from '../core/types'
+import { minTemp, rawGridMeanMin } from '../families/downscaling/model'
 import type { Cell } from './scoreboard'
 
 export const PRICE_PER_TASK_USD = 100      // PLAN 9-4 가정값 (시장 하단)
@@ -53,11 +54,23 @@ function resolutionSlice(task: Task, obs: Observation | undefined): Observation 
   }
 }
 
-// 정답 라벨: 패밀리 score()로 판정한 이진 사건 결과. Python 쪽(verifiers)이 규칙을 다시 구현하지 않게 미리 붙인다
-export interface Label { outcome: 0 | 1 }
+// 정답 라벨. Python 쪽(verifiers)이 패밀리 규칙을 다시 구현하지 않게 미리 붙인다
+//   이진 사건: outcome (패밀리 score()로 판정)
+//   연속 변수(분위수 답): value = 실측, reference = 원천 예보 값 (CRPS 스킬 기준)
+export interface Label { outcome?: 0 | 1; value?: number; reference?: number }
+
+// 분위수 답을 받는 패밀리: 패밀리 score()가 쓰는 함수 그대로
+const CONTINUOUS: Partial<Record<FamilyId, (task: Task, obs: Observation, snapshot: Snapshot) => Label | undefined>> = {
+  downscaling: (task, obs, snapshot) => {
+    const value = minTemp(obs.hourly, task.t0, task.resolveAt)
+    return value === null ? undefined : { value, reference: rawGridMeanMin(snapshot) }
+  },
+}
 
 export function labelOf(family: Family, task: Task, obs: Observation, snapshot: Snapshot): Label | undefined {
-  // 이진 확률(probability)을 받는 패밀리만. S2S(3분위)·다운스케일링(분위수)은 brier로 역산할 수 없다
+  const continuous = CONTINUOUS[family.id]
+  if (continuous) return continuous(task, obs, snapshot)
+  // 이진 확률(probability)을 받는 패밀리만. S2S(3분위)는 brier로 역산할 수 없다
   const shape = (family.answerSchema as { shape?: Record<string, unknown> }).shape
   if (!shape || !('probability' in shape)) return undefined
   // p = 0으로 채점하면 brier = (0 - y)² = y

@@ -6,9 +6,9 @@ import type { Answer, FamilyId, Task } from '../core/types'
 import { engineAnswer as decisionEngine } from '../families/decision/index'
 import { engineAnswer as downscalingEngine } from '../families/downscaling/index'
 import { families } from '../families/index'
-import { snapshotById } from '../insurance/data'
+import { observationFor, snapshotById } from '../insurance/data'
 import { handleArenaRun, handleExport } from './api'
-import { demoTasks } from './data'
+import { demoTasks, loadSavedRuns } from './data'
 import type { AgentRunner } from './run'
 
 const FAMILIES: FamilyId[] = ['nowcasting', 'downscaling', 'decision', 's2s']
@@ -59,13 +59,38 @@ describe('Arena × 등록된 패밀리 전부', () => {
     })
   }
 
-  it('납품: 라벨은 이진 확률 패밀리(나우캐스팅·서리 결정)에만 붙는다', () => {
+  it('납품: 이진 패밀리는 outcome, 다운스케일링은 value·reference, S2S는 라벨 없음', () => {
     const all = FAMILIES.flatMap(tasksOf)
     const lines = handleExport({ tasks: all }, { format: 'jsonl', families }).body.trim().split('\n').map(l => JSON.parse(l))
     const labeled = new Set(lines.filter(l => l.label).map(l => l.family))
-    expect([...labeled].sort()).toEqual(['decision', 'nowcasting'])
+    expect([...labeled].sort()).toEqual(['decision', 'downscaling', 'nowcasting'])
+    for (const l of lines.filter(l => l.family === 'nowcasting' || l.family === 'decision')) expect([0, 1]).toContain(l.label.outcome)
+
+    // 다운스케일링 라벨은 패밀리 score()와 같은 값: 실측 그대로면 CRPS 0, 원천 예보 그대로면 skill 0
+    const ds = all.filter(t => t.family === 'downscaling')
+    for (const t of ds) {
+      const { label } = lines.find(l => l.id === t.id)
+      const snapshot = snapshotById(t.snapshotId)!
+      const obs = observationFor(t.field.id, t.t0)!
+      const at = (value: number): Answer => ({ taskId: t.id, model: 'x', quantiles: [{ q: 0.5, value }], rationale: '', toolCalls: [] })
+      expect(families.downscaling!.score(t, at(label.value), obs, snapshot).crps).toBe(0)
+      expect(families.downscaling!.score(t, at(label.reference), obs, snapshot).skill).toBe(0)
+    }
     const pack = JSON.parse(handleExport({ tasks: all }).body)
     expect(pack.families.sort()).toEqual(['decision', 'downscaling', 'nowcasting', 's2s'])
     expect(pack.meta.count).toBe(all.length)
+  })
+})
+
+describe('저장 응답 (fixtures/arena/runs.json, 실제 Claude 기록)', () => {
+  it('?mock=1 데모: 패밀리당 과제 2개 × 3모델이 전부 재생·채점된다', async () => {
+    const saved = loadSavedRuns()
+    const tasks = FAMILIES.flatMap(f => demoTasks(f, 2))
+    const r = await handleArenaRun({ tasks }, { families, saved, mock: true })
+    expect(r.errors).toEqual([])
+    expect(r).toMatchObject({ live: false, replayed: tasks.length * 3 })
+    expect(r.scores).toHaveLength(tasks.length * 3)
+    // 저장 응답은 실제 도구 호출 기록을 담고 있다
+    expect(r.answers.every(a => a.toolCalls.length > 0)).toBe(true)
   })
 })
