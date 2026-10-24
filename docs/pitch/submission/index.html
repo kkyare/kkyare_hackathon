@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Weather Decision Gym · Pitch (2 slides)</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+ /* Ambition for Korea GUIDE.md: 1920x1080, 2장, 하단 로고 띠 90%, 팀 이름 왼쪽 위, 본문 28px 이상 */
+ @page{size:1920px 1080px;margin:0}
+ *{margin:0;padding:0;box-sizing:border-box;word-break:keep-all}
+ :root{--paper:#e9ecE6;--paper2:#f4f6f2;--ink:#1c2620;--ink2:#4a5650;--rule:#c5ccc3;--canopy:#4e7a3a;--corn:#c99a1e;--loam:#7a4a2a;--frost:#3b6a94}
+ body{font-family:'Pretendard Variable','Pretendard',-apple-system,sans-serif;background:#777}
+ .s{width:1920px;height:1080px;position:relative;overflow:hidden;background:var(--paper);color:var(--ink);page-break-after:always;margin:0 auto 40px}
+ @media print{body{background:none}.s{margin:0}}
+ .team{position:absolute;top:52px;left:96px;font-size:28px;font-weight:700;color:var(--ink2)}
+ .topic{position:absolute;top:52px;right:96px;font-size:28px;font-weight:600;color:var(--ink2)}
+ .topic b{color:var(--ink)}
+ .body{position:absolute;left:96px;right:96px;top:130px;bottom:150px;display:flex;flex-direction:column;gap:30px}
+ h1{font-size:104px;font-weight:800;line-height:1;letter-spacing:-.02em}
+ .one{font-size:44px;font-weight:600;line-height:1.25;max-width:1500px}
+ .cols{display:grid;grid-template-columns:1fr 1fr;gap:72px;margin-top:10px}
+ .col{border-top:6px solid var(--ink);padding-top:22px}
+ .col.corn{border-color:var(--corn)} .col.frost{border-color:var(--frost)}
+ .col h2{font-size:30px;font-weight:700;margin-bottom:14px}
+ .col p{font-size:32px;line-height:1.42}
+ .col p.big{font-size:72px;font-weight:800;line-height:1;margin:6px 0 8px;color:var(--loam)}
+ .note{font-size:28px;color:var(--ink2)}
+ .shots{display:grid;grid-template-columns:1.1fr 1fr;gap:36px;height:400px}
+ .shot{position:relative;border:2px solid var(--rule);background:var(--paper2);overflow:hidden}
+ .shot img{width:100%;height:100%;object-fit:cover;object-position:top left;display:block}
+ .cap{font-size:28px;color:var(--ink2);margin-top:10px}
+ .row2{display:grid;grid-template-columns:1.1fr 1fr;gap:36px}
+ .k{font-weight:800;color:var(--canopy)}
+ .foot{position:absolute;left:5%;right:5%;bottom:32px}
+ .foot img{width:100%;display:block}
+</style></head>
+<body>
+
+<section class="s">
+  <div class="team">Team 꺄레 (kkyare)</div>
+  <div class="topic">Topic <b>AttentionX · a service US RL Eval &amp; data companies pay for</b></div>
+  <div class="body">
+    <h1>Weather Decision Gym</h1>
+    <p class="one">Field-level weather and yield forecasts for US crop insurers, retrained on every season’s real harvest.</p>
+    <div class="cols">
+      <div class="col corn">
+        <h2>Target market</h2>
+        <p><b>US crop insurers and reinsurers</b> in the Corn Belt (Iowa, Illinois, Minnesota), for corn and soybean policies.</p>
+        <p style="margin-top:14px">The same verifier is sold to <b>US RL eval and data companies</b> as auto-graded weather tasks.</p>
+      </div>
+      <div class="col frost">
+        <h2>Problem</h2>
+        <p class="big">73%</p>
+        <p>of US crop insurance payouts are weather-driven ($118.7B, 2001–2022). Yet pricing and claim checks run on county-level weather. No one has field-level weather-to-yield data checked against real harvests.</p>
+        <p class="note" style="margin-top:12px">Source: EWG analysis of USDA RMA data</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><img src="footer-for-light-slides.png" alt=""></div>
+</section>
+
+<section class="s">
+  <div class="team">Team 꺄레 (kkyare)</div>
+  <div class="topic"><b>Built today</b> · weather-decision-gym.vercel.app</div>
+  <div class="body" style="top:118px;gap:22px">
+    <div class="shots">
+      <div class="shot"><img src="shot-map.png" alt="Farm map: Sentinel-2 satellite view of 48 Iowa fields with a per-farm yield forecast panel"></div>
+      <div class="shot"><img src="shot-insurance.png" alt="Insurer console: risk score map, actual loss ratio by score band, premium and renewal ranges"></div>
+    </div>
+    <div class="row2" style="margin-top:-6px">
+      <p class="cap">Farm map: pick a field, get its 2026 yield as % of normal.</p>
+      <p class="cap">Insurer console: risk score vs. real losses → rate ranges.</p>
+    </div>
+    <div class="cols" style="margin-top:4px;gap:56px">
+      <div class="col">
+        <h2>How it works</h2>
+        <p>Field weather → yield % per farm → retrained on each real harvest: error falls <span class="k">6.2 → 2.5 %p</span>. <b>Claude</b> finds farms, writes briefings, and is the agent graded in our RL tasks.</p>
+      </div>
+      <div class="col">
+        <h2>Why us · next 7 days</h2>
+        <p>One engine, two buyers: insurer rate ranges and auto-graded RL tasks. Next 7 days: live Open-Meteo, IEM and NOAA feeds, one insurer pilot.</p>
+        <p class="note" style="margin-top:8px">Demo uses mock Iowa farms.</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><img src="footer-for-light-slides.png" alt=""></div>
+</section>
+
+</body></html>
