@@ -59,7 +59,8 @@
 - [ ] 보정 곡선(Recharts) + 대각선
 - [x] 리더보드 집계: `leaderboard()`(패밀리별 평균 skill을 다시 평균), `topModelMissRate()`
 - [ ] 리더보드 화면: "최고 모델도 틀린 과제 비율" 강조
-- [ ] 누출 감사: 도구 기록 집계 + Claude로 rationale 검사(t0 이후 사실을 아는 듯 말하는가) → 적발 카드
+- [x] 누출 감사 로직 `src/arena/leakAudit.ts`: 도구 기록 집계 + Claude(`report_audit` 강제)로 rationale 검사 → `audit:future_knowledge`, `applyAudit`, 모델별 요약
+- [ ] 누출 감사 화면: 적발 카드
 
 ### 5. 납품 (2:00-3:30)
 - [x] `src/arena/export.ts`: `buildTaskPack(tasks, { snapshots, resolutions?, holdout })` — `meta.marketValueUsd = 과제 수 × $100`(9-4 가정), `demo: true`

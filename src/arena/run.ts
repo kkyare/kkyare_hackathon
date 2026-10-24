@@ -33,7 +33,7 @@ export interface RunArenaInput {
 
 export interface ArenaResult { answers: Answer[]; scores: Score[]; runs: ArenaRun[]; errors: ArenaError[] }
 
-async function pool<T>(items: T[], limit: number, fn: (item: T) => Promise<void>) {
+export async function pool<T>(items: T[], limit: number, fn: (item: T) => Promise<void>) {
   let next = 0
   const workers = Array.from({ length: Math.min(limit, items.length) }, async () => {
     while (next < items.length) await fn(items[next++])
