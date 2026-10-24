@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+/* "연구소 장비 + 트레이딩 터미널" 톤: 다크 기본, 판정 3색 + 강조 1색 */
+:root {
+  --bg: #0a0a0a;
+  --panel: #111111;
+  --line: #262626;
+  --text: #f5f5f5;
+  --muted: #a3a3a3;
+  --go: #22c55e;
+  --caution: #eab308;
+  --nogo: #ef4444;
+  --accent: #60a5fa;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
