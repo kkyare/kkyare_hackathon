@@ -1,27 +1,23 @@
 // 농장 브리핑과 농장 찾기에 쓰는 Claude 호출. ANTHROPIC_API_KEY가 없거나 실패하면 규칙 기반으로 대신한다.
-import Anthropic from '@anthropic-ai/sdk'
+import { askClaude, CLAUDE_MODEL } from '../lib/claude'
 import type { Field, RiskScore } from '../core/types'
 import { templateBriefing, type FarmBrief } from './brief'
 
-export const FARM_AI_MODEL = 'claude-sonnet-5-5'
+export const FARM_AI_MODEL = CLAUDE_MODEL
 
-export async function briefWithClaude(b: FarmBrief): Promise<{ text: string; by: 'claude' | 'template'; error?: string }> {
+export async function briefWithClaude(b: FarmBrief): Promise<{ text: string; by: 'claude' | 'template' }> {
   const fallback = { text: templateBriefing(b), by: 'template' as const }
   if (!process.env.ANTHROPIC_API_KEY) return fallback
   try {
-    const msg = await new Anthropic().messages.create({
-      model: FARM_AI_MODEL,
-      max_tokens: 500,
-      system:
+    const text = await askClaude(
         '너는 미국 대형 농장과 작물보험사를 돕는 농업 기상 분석가다. 주어진 숫자만 근거로 한국어 4문장 이내 브리핑을 쓴다. ' +
         '올해 예상 생산량과 범위, 가장 큰 날씨 요인, 이 필지의 과거 수확 기록이 예측에 어떻게 반영됐는지, 지금 할 일 하나를 말한다. 숫자를 바꾸거나 근거에 없는 사실을 만들지 않는다.',
-      messages: [{ role: 'user', content: JSON.stringify({ ...b, learning: undefined }) }],
-    })
-    const text = msg.content.map((c) => (c.type === 'text' ? c.text : '')).join('').trim()
-    return text ? { text, by: 'claude' } : { ...fallback, error: 'empty response' }
+      JSON.stringify({ ...b, learning: undefined }),
+    )
+    return text ? { text, by: 'claude' } : fallback
   } catch (e) {
     console.error('[farm/brief] Claude call failed:', e)
-    return { ...fallback, error: (e as Error).message?.slice(0, 300) }
+    return fallback
   }
 }
 
@@ -63,13 +59,10 @@ export async function searchWithClaude(query: string, candidates: Candidate[]): 
       id: c.field.id, name: c.field.name, crop: c.field.crop, acres: c.field.acres, terrain: c.field.terrain, elevationM: c.field.elevationM,
       risk: Object.fromEntries(c.scores.map((s) => [s.peril, s.score])),
     }))
-    const msg = await new Anthropic().messages.create({
-      model: FARM_AI_MODEL,
-      max_tokens: 300,
-      system: '사용자 요청에 맞는 농장을 목록에서 최대 5곳 고른다. JSON 한 줄만 출력한다: {"fieldIds":["..."],"reason":"한국어 한 문장"}. 목록에 없는 id는 쓰지 않는다.',
-      messages: [{ role: 'user', content: `요청: ${query}\n목록: ${JSON.stringify(list)}` }],
-    })
-    const text = msg.content.map((c) => (c.type === 'text' ? c.text : '')).join('')
+    const text = await askClaude(
+      '사용자 요청에 맞는 농장을 목록에서 최대 5곳 고른다. JSON 한 줄만 출력한다: {"fieldIds":["..."],"reason":"한국어 한 문장"}. 목록에 없는 id는 쓰지 않는다.',
+      `요청: ${query}\n목록: ${JSON.stringify(list)}`,
+    )
     const json = JSON.parse(text.slice(text.indexOf('{'), text.lastIndexOf('}') + 1)) as { fieldIds: string[]; reason: string }
     const valid = new Set(candidates.map((c) => c.field.id))
     const fieldIds = (json.fieldIds ?? []).filter((id) => valid.has(id)).slice(0, 5)
