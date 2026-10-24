@@ -52,7 +52,8 @@
   - S2S는 t0 예보 런이 없어 빈 스냅샷 → 에이전트가 CPC 전망을 도구로 볼 수 없음 (도구 추가는 성호님과 상의)
 - [x] `/arena` 화면 (`src/app/arena/page.tsx`): 모델 레인 3개(도구 호출 로그·확률·결정·실측·점수), DEMO DATA + Claude 응답 LIVE/재생 배지
   - 기본은 저장 응답 재생, "실제 실행 (LIVE)"은 서버에 키가 있을 때만. 과제 목록 `GET /api/arena/tasks`
-  - 뼈대 없이 성호님 live 화면 방식(`'use client'` + Tailwind). shadcn 교체·`nav.ts` 메뉴 등록은 뼈대가 올라오면
+  - 팀 디자인 시스템(측량지 팔레트 CSS 변수, `Section`·`Figure`·`Badge`·`Button`)으로 맞춤, `nav.ts`에 Arena·납품 등록
+  - 모델 색은 팀 위험도 색(canopy/corn/loam)과 섞이지 않게 별도 범주색, `--paper` 배경에서 dataviz 검증
 - [x] 점수표 집계 `src/arena/scoreboard.ts`: 모델 × 패밀리 (Brier·CRPS·regret $·skill·정답률·누출 수)
 - [x] 점수표 화면 (`/arena` 안)
 - [x] 실제 키로 3모델 한 번 돌려 `fixtures/arena/runs.json`에 저장 (`scripts/record-arena.ts --count 2`: 4개 패밀리 × 2 × 3모델 = 24회, 90초, 오류 0)
