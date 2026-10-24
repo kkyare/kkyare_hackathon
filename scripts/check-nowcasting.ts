@@ -35,7 +35,8 @@ check('(c) oracle decision -> regret 0', regretOk)
 
 // (d)
 const pool = buildDemoTasks(Number.MAX_SAFE_INTEGER).tasks
-// (b2) skill is not clamped: confidently wrong answer vs a good reference gives skill < -1
+// (b2) skill is the symmetric form, not a clamp: worse than the reference -> (ref - brier) / brier in [-1, 0),
+//      better than the reference -> 1 - brier / ref (same as the plain Brier skill score)
 {
   const t = pool.find((t) => {
     const y = yOf(t)
@@ -43,7 +44,11 @@ const pool = buildDemoTasks(Number.MAX_SAFE_INTEGER).tasks
   })!
   const y = yOf(t)
   const bad = nowcasting.score(t, ans(t, 1 - y, y ? 'spray' : 'delay'), loadObservationForTask(t), loadSnapshotForTask(t))
-  check('(b2) unclamped skill < -1 and finite', Number.isFinite(bad.skill) && bad.skill < -1, String(bad.skill))
+  const ref = (referenceProbability(loadSnapshotForTask(t)) - y) ** 2
+  const worse = (ref - bad.brier!) / bad.brier!
+  check('(b2) worse answer -> (ref-brier)/brier in [-1, 0)', Math.abs(bad.skill - worse) < 1e-12 && bad.skill >= -1 && bad.skill < 0, String(bad.skill))
+  const good = nowcasting.score(t, ans(t, y, y ? 'delay' : 'spray'), loadObservationForTask(t), loadSnapshotForTask(t))
+  check('(b2) better answer -> 1 - brier/ref', Math.abs(good.skill - (1 - good.brier! / ref)) < 1e-12 && good.skill > 0, String(good.skill))
 }
 const find = (scenario: string, t0: string) => pool.find((t) => t.snapshotId.endsWith('@' + scenario) && t.t0 === t0)!
 const gb = find('gust-block', '2026-06-10T16:00:00.000Z')

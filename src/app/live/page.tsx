@@ -84,10 +84,15 @@ const REASON_LABEL: Record<string, string> = {
 }
 const DECISION_LABEL: Record<string, string> = { spray: '지금 살포', delay: '3시간 연기' }
 
-const hhZ = (iso: string) => `${iso.slice(11, 13)}Z`
+// 화면은 다른 페이지처럼 현지 시각(아이오와 6월 = CDT, UTC-5)을 먼저 보여 주고 UTC(Z)는 보조로 둔다.
+const CDT_OFFSET_MS = -5 * 3_600_000
+const toCdt = (iso: string) => new Date(Date.parse(iso) + CDT_OFFSET_MS).toISOString()
 const hhmmZ = (iso: string) => `${iso.slice(11, 16)}Z`
-const dateZ = (iso: string) => `${iso.slice(0, 10)} ${hhmmZ(iso)}`
-const cdt = (iso: string) => `${String((Number(iso.slice(11, 13)) + 19) % 24).padStart(2, '0')}:${iso.slice(14, 16)} CDT`
+const hourLocal = (iso: string) => `${Number(toCdt(iso).slice(11, 13))}시`
+const hhmmLocal = (iso: string) => toCdt(iso).slice(11, 16)
+const dateLocal = (iso: string) => toCdt(iso).slice(0, 10)
+/** 예보 발표 시각처럼 기준일보다 앞선 날이면 '전날'을 붙인다. */
+const hourLocalFrom = (iso: string, refIso: string) => `${dateLocal(iso) < dateLocal(refIso) ? '전날 ' : ''}${hourLocal(iso)}`
 const num = (v: number | null | undefined, digits = 1) => (v == null ? '—' : v.toFixed(digits))
 const pct = (v: number | null | undefined) => (v == null ? '—' : `${Math.round(v * 100)}%`)
 const usd = (v: number) => `$${v.toLocaleString('en-US', { maximumFractionDigits: 0 })}`
@@ -132,7 +137,7 @@ function Empty({ text }: { text: string }) {
   return <div className="rounded-lg border border-dashed border-zinc-200 p-4 text-sm text-zinc-400">{text}</div>
 }
 
-function ModelTable({ models }: { models: ModelSummary[] }) {
+function ModelTable({ models, t0 }: { models: ModelSummary[]; t0: string }) {
   return (
     <table className="w-full text-sm">
       <thead>
@@ -147,13 +152,15 @@ function ModelTable({ models }: { models: ModelSummary[] }) {
       <tbody>
         {models.map((m) => (
           <tr key={m.model} className="border-b border-zinc-100 last:border-0">
-            <td className="py-1.5 pr-2 font-medium" title={m.model}>
+            <td className="py-1.5 pr-2 font-medium whitespace-nowrap" title={m.model}>
               {MODEL_LABEL[m.model] ?? m.model}
             </td>
-            <td className={`py-1.5 pr-2 whitespace-nowrap text-zinc-500 ${UI.mono}`}>{hhZ(m.issuedAt)}</td>
+            <td className={`py-1.5 pr-2 whitespace-nowrap text-zinc-500 ${UI.mono}`} title={hhmmZ(m.issuedAt)}>
+              {hourLocalFrom(m.issuedAt, t0)}
+            </td>
             <td className={`py-1.5 pr-2 text-right whitespace-nowrap ${UI.mono}`}>{num(m.windowMaxWind)}</td>
             <td className={`py-1.5 pr-2 text-right whitespace-nowrap ${UI.mono}`}>{num(m.windowMaxGust)}</td>
-            <td className="py-1.5">
+            <td className="py-1.5 whitespace-nowrap">
               <Badge tone={m.violation ? STATUS_STYLE.NO_GO.chip : STATUS_STYLE.GO.chip}>{m.violation ? '위반' : '정상'}</Badge>
             </td>
           </tr>
@@ -192,7 +199,9 @@ function HourChart({ frames, shown }: { frames: Frame[]; shown: number }) {
           const s = STATUS_STYLE[f.status]
           return (
             <div key={f.time} className={`flex flex-col items-center gap-0.5 whitespace-nowrap text-xs ${UI.mono} transition-opacity duration-300 ${on ? 'opacity-100' : 'opacity-40'}`}>
-              <div className="text-zinc-600">{hhZ(f.time)}</div>
+              <div className="text-zinc-600" title={hhmmZ(f.time)}>
+                {hourLocal(f.time)}
+              </div>
               {on ? (
                 <div className={`font-semibold ${s.text}`}>{f.status}</div>
               ) : (
@@ -239,6 +248,8 @@ function ArenaPanel({ task }: { task: Task }) {
   }
 
   const result = state.kind === 'ok' ? state.data : null
+  // 저장 응답이 하나도 없는 과제는 API 오류 문자열 대신 안내 한 줄을 보여 준다 (숫자는 만들지 않는다).
+  const noSaved = result != null && result.answers.length === 0
   const rows = result
     ? ARENA_MODELS.map((m) => ({
         ...m,
@@ -255,7 +266,7 @@ function ArenaPanel({ task }: { task: Task }) {
         <div className="flex flex-wrap items-center gap-2">
           <span className={UI.label}>모델 비교</span>
           {result && result.answers.length > 0 && <Badge tone={result.live ? TONE.live : TONE.demo}>{result.live ? 'LIVE' : 'SAVED'}</Badge>}
-          {result && result.errors.length > 0 && <Badge tone={TONE.error}>오류 {result.errors.length}건</Badge>}
+          {result && !noSaved && result.errors.length > 0 && <Badge tone={TONE.neutral}>저장된 답 없음 {result.errors.length}건</Badge>}
         </div>
         <Button type="button" variant="solid" onClick={run} disabled={state.kind === 'loading'} className="shrink-0 whitespace-nowrap">
           세 모델로 실행 (Haiku, Sonnet, Opus)
@@ -272,7 +283,16 @@ function ArenaPanel({ task }: { task: Task }) {
           <span className="font-semibold">모델 실행에 실패했습니다.</span> <span className={`text-red-600 ${UI.mono}`}>{state.message}</span>
         </div>
       )}
-      {result && (
+      {noSaved && (
+        <p className="rounded-lg border border-dashed border-zinc-300 px-3 py-2 text-sm text-zinc-600">
+          이 과제는 아직 녹화된 모델 답이 없습니다.{' '}
+          <a href="/arena" className="font-medium underline underline-offset-2">
+            모델 비교
+          </a>
+          에서 같은 방식으로 채점한 Haiku·Sonnet·Opus 결과를 볼 수 있습니다.
+        </p>
+      )}
+      {result && !noSaved && (
         <>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
@@ -295,14 +315,14 @@ function ArenaPanel({ task }: { task: Task }) {
                     {r.answer ? (
                       <>
                         <td className={`${cell} text-right ${UI.mono}`}>{pct(r.answer.probability)}</td>
-                        <td className={`${cell} ${UI.mono}`}>{r.answer.decision ?? '—'}</td>
+                        <td className={cell}>{r.answer.decision ? (DECISION_LABEL[r.answer.decision] ?? r.answer.decision) : '—'}</td>
                         <td className={`${cell} text-right ${UI.mono}`}>{num(r.score?.brier, 3)}</td>
                         <td className={`${cell} text-right ${UI.mono}`}>{r.score?.regretUsd == null ? '—' : usd(r.score.regretUsd)}</td>
                         <td className={`py-1.5 text-right whitespace-nowrap ${UI.mono}`}>{r.score ? signed(r.score.skill) : '—'}</td>
                       </>
                     ) : (
-                      <td colSpan={5} className={`py-1.5 text-xs break-all text-red-700 ${UI.mono}`}>
-                        {r.error?.message ?? '응답 없음'}
+                      <td colSpan={5} className="py-1.5 text-xs text-zinc-500" title={r.error?.message}>
+                        {r.error ? '저장된 답 없음' : '응답 없음'}
                       </td>
                     )}
                   </tr>
@@ -388,15 +408,17 @@ function ReplayPanel({ scenario }: { scenario: string }) {
               <dl className="grid grid-cols-2 gap-x-3 gap-y-2 text-sm">
                 <div>
                   <dt className={UI.label}>과제를 낸 시각</dt>
-                  <dd className={`whitespace-nowrap ${UI.mono}`}>{hhmmZ(data.task.t0)}</dd>
+                  <dd className={`whitespace-nowrap ${UI.mono}`}>{hhmmLocal(data.task.t0)}</dd>
                   <dd className="text-xs text-zinc-500">
-                    {data.task.t0.slice(0, 10)}, 현지 {cdt(data.task.t0)}
+                    {dateLocal(data.task.t0)} 현지, <span className="whitespace-nowrap">{hhmmZ(data.task.t0)}</span>
                   </dd>
                 </div>
                 <div>
                   <dt className={UI.label}>채점 시각</dt>
-                  <dd className={UI.mono}>{hhmmZ(data.task.resolveAt)}</dd>
-                  <dd className="text-xs text-zinc-500">관측소 {data.task.field.stationId}</dd>
+                  <dd className={UI.mono}>{hhmmLocal(data.task.resolveAt)}</dd>
+                  <dd className="text-xs text-zinc-500">
+                    {hhmmZ(data.task.resolveAt)}, 관측소 {data.task.field.stationId}
+                  </dd>
                 </div>
                 <div className="col-span-2">
                   <dt className={UI.label}>필지</dt>
@@ -409,7 +431,7 @@ function ReplayPanel({ scenario }: { scenario: string }) {
               <div>
                 <div className={`mb-1 ${UI.label}`}>과제 시점의 모델별 예보, 4시간 중 최댓값 (mph)</div>
                 <div className="overflow-x-auto">
-                  <ModelTable models={data.snapshotSummary.models} />
+                  <ModelTable models={data.snapshotSummary.models} t0={data.task.t0} />
                 </div>
               </div>
             </>
@@ -461,7 +483,7 @@ function ReplayPanel({ scenario }: { scenario: string }) {
                   aria-label="도착한 관측 시간"
                   className="w-full accent-zinc-900"
                 />
-                <span className={`w-14 shrink-0 text-right text-xs text-zinc-500 ${UI.mono}`}>{shown > 0 ? hhmmZ(frames[shown - 1].time) : hhmmZ(data.task.t0)}</span>
+                <span className={`w-14 shrink-0 text-right text-xs text-zinc-500 ${UI.mono}`}>{shown > 0 ? hhmmLocal(frames[shown - 1].time) : hhmmLocal(data.task.t0)}</span>
               </div>
               <HourChart frames={frames} shown={shown} />
             </>
@@ -492,7 +514,7 @@ function ReplayPanel({ scenario }: { scenario: string }) {
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-2">
-                <Stat label="정답 여부" value={correct == null ? '—' : correct ? '✓ 맞음' : '✗ 틀림'} tone={correct ? 'text-emerald-700' : 'text-red-700'} hint={`결정 ${data.answer.decision ?? '—'}`} />
+                <Stat label="정답 여부" value={correct == null ? '—' : correct ? '✓ 맞음' : '✗ 틀림'} tone={correct ? 'text-emerald-700' : 'text-red-700'} hint={`결정: ${data.answer.decision ? (DECISION_LABEL[data.answer.decision] ?? data.answer.decision) : '—'}`} />
                 <Stat label="최선 대비 손해" value={`${usd(regret)}/acre`} tone={regret > 0 ? 'text-red-700' : 'text-emerald-700'} hint={`필지 전체 ≈ ${usd(regret * data.task.field.acres)}`} />
                 <Stat label="Brier" value={num(data.score.brier, 3)} hint="낮을수록 좋음 (0~1)" />
                 <Stat label="Skill" value={signed(data.score.skill)} hint={SKILL_HINT} />
@@ -509,7 +531,7 @@ function ReplayPanel({ scenario }: { scenario: string }) {
                 <dt>미래 정보 차단</dt>
                 <dd>{data.score.leakFlags.length === 0 ? '통과 (과제 이후 데이터를 쓰지 않음)' : `${data.score.leakFlags.length}건`}</dd>
                 <dt>채점 근거</dt>
-                <dd className={UI.mono}>{data.score.resolvedWith ? `${data.score.resolvedWith.stationId} @ ${hhmmZ(data.score.resolvedWith.at)}` : '—'}</dd>
+                <dd className={UI.mono}>{data.score.resolvedWith ? `${data.score.resolvedWith.stationId}, ${hhmmLocal(data.score.resolvedWith.at)} (${hhmmZ(data.score.resolvedWith.at)})` : '—'}</dd>
               </dl>
             </>
           )}

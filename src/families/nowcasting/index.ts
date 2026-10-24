@@ -68,8 +68,10 @@ export const nowcasting: Family = {
     const costUsd = answer.decision === 'spray' ? y * LOSS_USD_PER_ACRE : COST_USD_PER_ACRE
     const oracleCostUsd = y ? COST_USD_PER_ACRE : 0
     const brierRef = (referenceProbability(snapshot) - y) ** 2
-    // Matching the reference exactly is zero skill, even when both Briers are 0 (1 - 0/1e-6 would give +1).
-    const skill = brier === brierRef ? 0 : 1 - brier / brierRef
+    // Symmetric Brier skill in [-1, 1]: equals 1 - brier/brierRef when the answer beats the reference, and
+    // (brierRef - brier)/brier when it is worse, so a tiny brierRef on an easy day cannot blow up to -3 or -39.
+    // Matching the reference exactly (including both 0) is zero skill.
+    const skill = brier === brierRef ? 0 : (brierRef - brier) / Math.max(brier, brierRef)
     return {
       taskId: task.id,
       model: answer.model,
