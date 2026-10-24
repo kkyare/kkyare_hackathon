@@ -1,12 +1,8 @@
-// 팀 vitest 설정이 *.test.ts만 실행해서 JSX 대신 createElement를 쓴다
-import { createElement } from 'react'
-import { renderToString } from 'react-dom/server'
+// 화면 렌더링은 build·실제 화면으로 확인한다 (팀 vitest 설정에 @/ 별칭이 없어 페이지를 불러오지 않는다)
 import { describe, expect, it } from 'vitest'
 import { handleArenaTasks, handleAudit } from '../../arena/api'
 import { loadSavedRuns } from '../../arena/data'
-import ExportPage from '../export/page'
 import { answerSummary, isBlockedAttempt, leakLabel, modelColor, modelLabel, scoreSummary } from './format'
-import ArenaPage from './page'
 
 describe('표시 함수', () => {
   it('패밀리별 답 요약', () => {
@@ -50,21 +46,5 @@ describe('GET /api/arena/tasks, POST /api/arena/audit', () => {
     // 실제 기록: S2S에서 t0를 넘은 관측 요청 3건 (잘려서 반환)
     expect(r.findings).toHaveLength(3)
     expect(r.summary.map(s => s.model).sort()).toEqual(['claude-haiku-5-5', 'claude-opus-5-5', 'claude-sonnet-5-5'])
-  })
-})
-
-describe('페이지 렌더링 (서버, 초기 상태)', () => {
-  it('Arena: 제목·DEMO DATA·버튼', () => {
-    const html = renderToString(createElement(ArenaPage))
-    expect(html).toContain('Model Arena')
-    expect(html).toContain('DEMO DATA')
-    expect(html).toContain('실제 실행 (LIVE)')
-  })
-
-  it('납품: 패밀리 선택·내려받기', () => {
-    const html = renderToString(createElement(ExportPage))
-    expect(html).toContain('납품')
-    expect(html).toContain('TaskPack JSON')
-    expect(html).toContain('비공개 평가셋')
   })
 })

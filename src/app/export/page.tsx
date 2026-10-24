@@ -1,9 +1,11 @@
 'use client'
 // 납품: 과제 묶음(TaskPack)을 JSON·JSONL·데이터 카드로 내려받는다 (데모 장면 2:35 "오늘 바로 데이터 회사에 보낼 수 있다")
 import { useEffect, useState } from 'react'
-import type { FamilyId, Score, Task } from '../../core/types'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Figure, Section } from '@/components/ui/card'
+import type { FamilyId, Score, Task } from '@/core/types'
 import { FAMILY_LABEL, usd } from '../arena/format'
-import { Badge, Card, Empty, Stat, TONE, UI } from '../arena/ui'
 
 type TasksResponse = { tasks: Task[]; models: string[]; replayable: boolean }
 type Format = 'json' | 'jsonl' | 'card'
@@ -11,15 +13,15 @@ type Format = 'json' | 'jsonl' | 'card'
 const FAMILIES: FamilyId[] = ['nowcasting', 'downscaling', 'decision', 's2s']
 const PRICE_PER_TASK_USD = 100 // PLAN 9-4 가정값 (src/arena/export.ts와 같은 값)
 const FORMATS: { id: Format; label: string; hint: string }[] = [
-  { id: 'json', label: 'TaskPack JSON', hint: '과제 + t0 스냅샷 (+ 정답 관측)' },
-  { id: 'jsonl', label: 'JSONL', hint: '한 줄에 과제 하나, RL 파이프라인·verifiers 입력' },
+  { id: 'json', label: 'TaskPack JSON', hint: '과제와 t0 스냅샷, 공개 피드면 정답 관측까지' },
+  { id: 'jsonl', label: 'JSONL', hint: '한 줄에 과제 하나, RL 파이프라인과 verifiers 입력' },
   { id: 'card', label: '데이터 카드', hint: 'Markdown, 출처·누출 방지·baseline' },
 ]
 
 async function exportPack(tasks: Task[], scores: Score[], format: Format, holdout: boolean, download: boolean) {
   const q = new URLSearchParams({ format, ...(holdout && { holdout: '1' }), ...(download && { download: '1' }) })
   const res = await fetch(`/api/export?${q}`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tasks, scores }) })
-  if (!res.ok) throw new Error((await res.json()).error ?? `HTTP ${res.status}`)
+  if (!res.ok) throw new Error((await res.json()).error ?? `/api/export → HTTP ${res.status}`)
   return res
 }
 
@@ -98,67 +100,68 @@ export default function ExportPage() {
   }
 
   return (
-    <main className="min-h-screen break-keep bg-zinc-50 text-zinc-900">
-      <div className="mx-auto flex max-w-screen-xl flex-col gap-5 px-4 py-6 sm:px-6">
-        <header className="flex flex-wrap items-center gap-3">
-          <h1 className="text-2xl font-semibold tracking-tight">납품</h1>
-          <Badge tone={TONE.demo}>DEMO DATA</Badge>
-          <Badge tone={TONE.neutral}>가정: 과제당 {usd(PRICE_PER_TASK_USD)}</Badge>
-        </header>
-        <p className="max-w-3xl text-sm text-zinc-600">
-          과제와 t0 스냅샷을 묶어 RL 데이터 회사에 보낼 형식으로 내려받습니다. 비공개 평가셋은 정답(관측·라벨)을 빼고 보냅니다.
+    <main className="mx-auto max-w-6xl space-y-10 px-4 py-8">
+      <header className="max-w-3xl space-y-2">
+        <h1 className="figure text-4xl font-bold">오늘 바로 보낼 수 있는 과제 묶음</h1>
+        <p className="text-[var(--ink-2)]">
+          과제와 t0 스냅샷을 묶어 RL 데이터 회사가 받는 형식으로 내려받습니다. 비공개 평가셋은 정답 관측과 라벨을 빼고 보내고, 채점은 우리 서버에서 합니다.
         </p>
-        {error && <div className="rounded-lg bg-red-50 p-3 text-sm text-red-700 ring-1 ring-red-200">오류: {error}</div>}
+      </header>
+      {error && <p className="border-l-4 border-[var(--loam)] pl-3 text-sm">{error}</p>}
 
-        <div className="grid gap-5 lg:grid-cols-[22rem_1fr]">
-          <div className="flex flex-col gap-5">
-            <Card title="묶음 구성">
-              <fieldset className="flex flex-col gap-2">
-                <legend className={UI.label}>패밀리</legend>
-                {FAMILIES.map(f => (
-                  <label key={f} className="flex items-center gap-2 text-sm">
-                    <input type="checkbox" checked={picked.has(f)} onChange={() => toggle(f)} />
-                    {FAMILY_LABEL[f]}
-                    <span className={`ml-auto text-zinc-400 ${UI.mono}`}>{all?.tasks.filter(t => t.family === f).length ?? 0}</span>
-                  </label>
-                ))}
-              </fieldset>
-              <label className="flex items-center justify-between gap-2 text-sm">
-                <span className={UI.label}>패밀리당 과제 수</span>
-                <select className={UI.select} value={count} onChange={e => setCount(Number(e.target.value))}>
-                  {[1, 2, 3, 5, 10].map(n => <option key={n} value={n}>{n}</option>)}
-                </select>
-              </label>
-              <label className="flex items-start gap-2 text-sm">
-                <input type="checkbox" className="mt-1" checked={holdout} onChange={e => setHoldout(e.target.checked)} />
-                <span>
-                  비공개 평가셋 (holdout)
-                  <span className="block text-xs text-zinc-500">정답 관측·라벨을 빼고 보냄. 채점은 우리 서버에서</span>
-                </span>
-              </label>
-            </Card>
+      <div className="grid gap-10 lg:grid-cols-[20rem_1fr]">
+        <div className="space-y-10">
+          <Section title="묶음 구성">
+            <fieldset className="space-y-2">
+              <legend className="mb-1 text-xs text-[var(--ink-2)]">과제 패밀리</legend>
+              {FAMILIES.map(f => (
+                <label key={f} className="flex items-center gap-2 text-sm">
+                  <input type="checkbox" className="accent-[var(--ink)]" checked={picked.has(f)} onChange={() => toggle(f)} />
+                  {FAMILY_LABEL[f]}
+                  <span className="tnum ml-auto text-[var(--ink-2)]">{all?.tasks.filter(t => t.family === f).length ?? 0}</span>
+                </label>
+              ))}
+            </fieldset>
+            <label className="mt-4 flex items-center justify-between gap-2 text-sm">
+              <span className="text-xs text-[var(--ink-2)]">패밀리당 과제 수</span>
+              <select className="rounded-sm border border-[var(--rule)] bg-[var(--paper-2)] px-2 py-1" value={count} onChange={e => setCount(Number(e.target.value))}>
+                {[1, 2, 3, 5, 10].map(n => <option key={n} value={n}>{n}</option>)}
+              </select>
+            </label>
+            <label className="mt-4 flex items-start gap-2 text-sm">
+              <input type="checkbox" className="mt-1 accent-[var(--ink)]" checked={holdout} onChange={e => setHoldout(e.target.checked)} />
+              <span>
+                비공개 평가셋
+                <span className="block text-xs text-[var(--ink-2)]">정답 관측과 라벨을 빼고 보냅니다</span>
+              </span>
+            </label>
+          </Section>
 
-            <div className="grid grid-cols-2 gap-3">
-              <Stat label="과제 수" value={tasks.length} />
-              <Stat label="시장가 추정" value={usd(tasks.length * PRICE_PER_TASK_USD)} hint="가정값" />
+          <Section>
+            <div className="grid grid-cols-2 gap-6">
+              <Figure label="과제 수" value={String(tasks.length)} />
+              <Figure label={`시장가 추정 (과제당 ${usd(PRICE_PER_TASK_USD)}, 가정)`} value={usd(tasks.length * PRICE_PER_TASK_USD)} />
             </div>
+          </Section>
 
-            <Card title="내려받기">
-              <div className="flex flex-col gap-2">
-                {FORMATS.map(f => (
-                  <button key={f.id} className={`${UI.buttonGhost} justify-between`} disabled={tasks.length === 0} onClick={() => download(f.id)}>
-                    <span>{f.label}</span>
-                    <span className="text-xs font-normal text-zinc-500">{f.hint}</span>
-                  </button>
-                ))}
-              </div>
-            </Card>
-          </div>
-
-          <Card title="데이터 카드 미리보기" aside={scores.length > 0 && <Badge tone={TONE.info}>Arena baseline 포함 (저장 응답)</Badge>}>
-            {card ? <pre className="max-h-[40rem] overflow-auto whitespace-pre-wrap rounded-lg bg-zinc-50 p-4 text-xs leading-relaxed text-zinc-800">{card}</pre> : <Empty text="패밀리를 하나 이상 고르세요" />}
-          </Card>
+          <Section title="내려받기">
+            <div className="space-y-2">
+              {FORMATS.map(f => (
+                <Button key={f.id} className="flex w-full flex-col items-start text-left" disabled={tasks.length === 0} onClick={() => download(f.id)}>
+                  <span>{f.label}</span>
+                  <span className="text-xs font-normal text-[var(--ink-2)]">{f.hint}</span>
+                </Button>
+              ))}
+            </div>
+          </Section>
         </div>
+
+        <Section title="데이터 카드" note={scores.length > 0 ? 'Arena baseline은 저장된 Claude 응답 기준' : undefined}>
+          {scores.length > 0 && <div className="mb-3"><Badge tone="frost">Arena baseline 포함</Badge></div>}
+          {card
+            ? <pre className="max-h-[40rem] overflow-auto whitespace-pre-wrap bg-[var(--paper-2)] p-4 text-xs leading-relaxed">{card}</pre>
+            : <p className="text-sm text-[var(--ink-2)]">패밀리를 하나 이상 고르세요.</p>}
+        </Section>
       </div>
     </main>
   )
