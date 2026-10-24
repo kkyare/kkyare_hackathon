@@ -159,7 +159,7 @@ py/verifiers_env/   ← P1
 
 | 시간 | 영모 | 성제 | 성호 | 유진 |
 |---|---|---|---|---|
-| 0:00-0:15 | **4명: `types.ts`·`Family` 인터페이스·보험 청구 형식 합의** | | | |
+| 0:00-0:15 | **4명: 9절 합의안 확인(5분), 바꿀 것만 말하기. 유진님이 `core/types.ts`를 9-2 그대로 올림** | | | |
 | 0:15-0:45 | 버전 고정 뼈대, 셸 UI, Vercel 배포 | `agent.ts`, `tools.ts` | `weather.ts`, `snapshot.ts`, **목업 데이터 형식·첫 fixtures** | `scoring.ts` + 경계값 테스트 |
 | 0:45 | **core 머지 + 목업 fixtures 1차** → 모두 fixtures로 개발 시작 | | | |
 | 0:45-2:00 | 대시보드(자동 생성, $ 카운터) | Arena 실행·점수표 | 나우캐스팅 생성기 + 살포 규칙 | 다운스케일링 생성기 + CRPS |
@@ -171,20 +171,139 @@ py/verifiers_env/   ← P1
 | 4:00-4:30 | 데모 순서대로 전체 통과, fixtures 누락 점검 | | | |
 | 4:30-5:00 | 리허설, PPT 2장 (영모님 총괄, 각자 장면 캡처 + 숫자 1개) | | | |
 
-## 9. 공통 데이터 형식
+## 9. 합의안 (이대로 시작, 바꿀 사람은 먼저 알리기)
 
+처음 15분 합의를 생략할 수 있게 초안을 확정안으로 둔다. `src/core/types.ts`는 아래를 그대로 옮긴다.
+
+### 9-1. 공통 규칙
+| 항목 | 합의 |
+|---|---|
+| 시각 | ISO 8601 **UTC** 문자열 (`2026-05-12T06:00:00Z`) |
+| 단위 | 기온 **°F**, 풍속·돌풍 **mph**(IEM knot ×1.151), 강수 **inch**, 면적 **acre**, 고도 **m**, 돈 **USD** |
+| ID | 소문자-하이픈 (`field-ia-01`, `task-ds-0001`, `claim-0001`) |
+| 점수 방향 | Brier·CRPS·regret은 **낮을수록 좋음**, skill은 **높을수록 좋음**(1=완벽, 0=기준 예보와 같음, 음수=더 나쁨) |
+| 결측 | 값 없음은 `null` (IEM `M` → `null`) |
+| 목업 표시 | 모든 fixture 최상위에 `"demo": true` |
+
+### 9-2. 타입
 ```ts
-Field        { id, name, lat, lon, acres, crop, stationId }
-Snapshot     { t0, forecasts: { model, issuedAt, hourly[] }[], obsUntilT0[] }
-Task         { id, family, t0, horizon, field, snapshotRef, prompt, context: { C?, L?, rules? }, resolveAt }
-Answer       { taskId, model, probability | quantiles, decision, rationale, toolCalls[] }
-Observation  { stationId, hourly: { time, tempF, windMph, gustMph, precipIn }[] }   // knot → mph ×1.151
-Score        { taskId, model, brier?, crps?, regretUsd?, oracleCostUsd?, skill, leakFlags[] }
-TaskPack     { id, families[], tasks: Task[], meta: { count, marketValueUsd, period, region } }
-Claim        { id, fieldId, peril: 'frost'|'hail'|'excess_rain'|'drought', date, claimedLossUsd }
-ClaimReport  { claimId, conditionProbability, evidence: { fieldEstimate, nearbyObs, forecastAtT0 }, verdict: 'supported'|'unclear'|'not_supported' }
-RiskScore    { fieldId, peril, season, score, drivers[] }
+export type FamilyId = 'downscaling' | 'nowcasting' | 's2s' | 'decision'
+export type ModelId = string            // 'claude-haiku-5-5' | 'claude-sonnet-5-5' | 'claude-opus-5-5' | ...
+
+export interface Field {
+  id: string; name: string; farmId: string
+  lat: number; lon: number; elevationM: number
+  acres: number; crop: 'corn' | 'soybean' | 'orchard'
+  stationId: string                     // 가장 가까운 ASOS (예: 'DSM')
+  terrain?: 'valley' | 'flat' | 'ridge' // 냉기 고임 보정용
+}
+
+export interface HourlyPoint {
+  time: string
+  tempF: number | null; dewF?: number | null
+  windMph: number | null; gustMph: number | null; windDirDeg?: number | null
+  precipIn: number | null
+}
+
+export interface ForecastRun { model: string; issuedAt: string; gridElevationM?: number; hourly: HourlyPoint[] }
+
+export interface Snapshot {                // t0 시점에 알 수 있었던 것만
+  id: string; t0: string; fieldId: string
+  forecasts: ForecastRun[]
+  obsUntilT0: HourlyPoint[]
+}
+
+export interface Observation { stationId: string; hourly: HourlyPoint[] }
+
+export interface Task {
+  id: string; family: FamilyId
+  t0: string; resolveAt: string
+  field: Field; snapshotId: string
+  prompt: string
+  context: { costUsdPerAcre?: number; lossUsdPerAcre?: number; thresholdF?: number; rules?: Record<string, number> }
+  difficulty?: 'easy' | 'medium' | 'hard'
+}
+
+export interface Answer {
+  taskId: string; model: ModelId
+  probability?: number                      // 이진 사건 확률 (0-1)
+  quantiles?: { q: number; value: number }[] // 연속 변수 분포 (q: 0.1, 0.5, 0.9 ...)
+  terciles?: [number, number, number]       // S2S: [below, near, above], 합 1
+  decision?: string                         // 'protect' | 'none' | 'spray' | 'delay' ...
+  rationale: string
+  toolCalls: { name: string; args: unknown; at: string }[]
+}
+
+export interface Score {
+  taskId: string; model: ModelId; family: FamilyId
+  brier?: number; crps?: number
+  regretUsd?: number; costUsd?: number; oracleCostUsd?: number
+  skill: number
+  correct?: boolean
+  leakFlags: string[]
+}
+
+export interface TaskPack {
+  id: string; families: FamilyId[]; tasks: Task[]
+  meta: { count: number; marketValueUsd: number; period: string; region: string; demo: boolean }
+}
+
+export type Peril = 'frost' | 'hail' | 'excess_rain' | 'drought'
+
+export interface Claim { id: string; fieldId: string; peril: Peril; date: string; claimedLossUsd: number }
+
+export interface ClaimReport {
+  claimId: string; peril: Peril
+  conditionProbability: number              // 피해 조건이 실제로 있었을 확률
+  verdict: 'supported' | 'unclear' | 'not_supported'
+  evidence: {
+    fieldEstimate: { variable: string; value: number; sigma: number; unit: string }
+    nearbyObs: { stationId: string; value: number | null; unit: string }
+    forecastAtT0?: { model: string; value: number | null; unit: string }[]
+  }
+  explanation?: string                      // Claude 해설 (선택)
+}
+
+export interface RiskScore { fieldId: string; peril: Peril; season: string; score: number /* 0-100 */; drivers: string[] }
+
+export interface Family {
+  id: FamilyId
+  generate(opts: { fields: Field[]; snapshots: Snapshot[]; count?: number }): Task[]
+  answerSchema: import('zod').ZodTypeAny
+  score(task: Task, answer: Answer, obs: Observation, snapshot: Snapshot): Score
+}
 ```
+
+### 9-3. API (요청 → 응답, 모두 JSON, `?mock=1`이면 fixtures 사용)
+| 라우트 | 주인 | 요청 | 응답 |
+|---|---|---|---|
+| `POST /api/families/[family]/generate` | 각 패밀리 주인 | `{ count?, fieldIds? }` | `Task[]` |
+| `POST /api/families/[family]/score` | 각 패밀리 주인 | `{ task, answer }` | `Score` |
+| `POST /api/arena/run` | 성제 | `{ taskIds \| tasks, models: ModelId[] }` | `{ answers: Answer[], scores: Score[] }` |
+| `POST /api/export` | 성제 | `{ tasks }` | `TaskPack` (+ 다운로드) |
+| `POST /api/insurance/verify` | 유진 | `Claim` | `ClaimReport` |
+| `GET /api/insurance/risk?fieldId=&peril=` | 유진 | - | `RiskScore` |
+
+### 9-4. 판정 기준값 (가정, 화면에 "가정" 표시)
+| 항목 | 값 |
+|---|---|
+| 서리 | 최저기온 ≤ 32°F (강한 서리 ≤ 28°F) |
+| 서리 방제 비용-손실 | C = $120/acre, L = $1,200/acre → C/L = 0.10 |
+| 폭우 | 24시간 강수 ≥ 2.0 inch |
+| 살포 | 풍속 3-10 mph, 돌풍 ≤ 10 mph 아니면 CAUTION, 살포 후 N시간 무강우 (성호님 확정) |
+| 청구 판정 | 조건 확률 ≥ 0.7 supported / ≤ 0.3 not_supported / 그 사이 unclear |
+| 기온감률 | 고도 100m당 -1.2°F (6.5°C/km), 골짜기(valley) 밤 -2°F 추가 |
+| 가격 (덱용) | 과제당 $100(시장 하단), 청구 검증 건당 $15, 리스크 점수 에이커당 연 $0.50 |
+
+### 9-5. 데모 공통값
+| 항목 | 값 |
+|---|---|
+| 지역 | 아이오와 중부, 관측소 DSM(Des Moines) 주변 필지 6-8개 |
+| 서리 시나리오 | 2026-05-12 밤 (늦서리, 목업) |
+| 폭우 시나리오 | 2026-06-18 (목업) |
+| 살포 시나리오 | 2026-06 중 돌풍 날 (성호님 확정) |
+| Arena 모델 | `claude-haiku-5-5`, `claude-sonnet-5-5`, `claude-opus-5-5` |
+| 서비스 이름 | 가칭 Weather Decision Gym (확정 전까지 이 이름) |
 
 ## 10. 기술적으로 가능한가
 
@@ -266,7 +385,4 @@ RiskScore    { fieldId, peril, season, score, drivers[] }
 
 ## 14. 시작 전에 정할 것
 
-1. 서비스 이름
-2. 데모 지역·날짜 (아이오와, 서리·우박 등 피해가 있었던 날 = 청구 검증 데모용)
-3. Arena 모델 구성 (Claude 3종 / 타사 키)
-4. 가정값 (C, L, 청구 건당·에이커당 가격)
+9절 합의안으로 모두 기본값이 정해져 있다. 바꿀 것만 팀 채팅에서 말하고 이 문서를 고친다.
