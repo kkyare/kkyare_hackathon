@@ -71,7 +71,8 @@ describe('1차 합치기: 나우캐스팅 × Arena', () => {
 
   it('등록 안 된 패밀리·잘못된 요청', async () => {
     const s2s: Task = { ...tasks[0], id: 'task-s2s-0001', family: 's2s' }
-    const r = await handleArenaRun({ tasks: [s2s], models: ['m'] }, { families, saved: [], mock: false, live: copyForecast })
+    const onlyNowcasting = { nowcasting: families.nowcasting }
+    const r = await handleArenaRun({ tasks: [s2s], models: ['m'] }, { families: onlyNowcasting, saved: [], mock: false, live: copyForecast })
     expect(r.errors[0].message).toContain("family 's2s'")
 
     const deps = { families, saved: [], mock: true }
