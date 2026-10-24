@@ -43,17 +43,21 @@
 - [ ] 실제 키로 3모델 스모크 테스트 (키 받으면)
 
 ### 3. Arena 실행·점수표 (0:45-2:00)
-- [ ] `src/arena/run.ts`: 과제 × 모델 실행(동시 3개 제한) → 패밀리 `score()` → `leakAttempts`를 `leakFlags`에 합침
+- [x] `src/arena/run.ts`: 과제 × 모델 실행(동시 3개 제한) → 패밀리 `score()` → `leakAttempts`를 `leakFlags`에 합침
+  - 진행 이벤트(`start/answer/score/error`)로 스트리밍, 실패는 `errors`로 모으고 계속
+  - `replayRunner(saved)`(저장 기록 재생), `withFallback(실제, saved)`(실패 시 대체)
 - [ ] `POST /api/arena/run` `{ taskIds | tasks, models }` → `{ answers, scores }`. `?mock=1`이면 `fixtures/arena/`
 - [ ] `/arena` 화면: 모델 레인 3개(도구 호출 로그·확률·결정·실측·점수), LIVE/DEMO DATA 배지
-- [ ] 점수표: 모델 × 패밀리 (Brier·CRPS·regret $·skill)
+- [x] 점수표 집계 `src/arena/scoreboard.ts`: 모델 × 패밀리 (Brier·CRPS·regret $·skill·정답률·누출 수)
+- [ ] 점수표 화면
 - [ ] 실제 키로 3모델 한 번 돌려 `fixtures/arena/`에 저장
 - [ ] **2:00 1차 합치기**: 실제 패밀리 1개가 generate → run → score 한 바퀴
 
 ### 4. 보정 곡선·리더보드·누출 감사 (2:00-3:30)
 - [ ] `src/arena/calibration.ts`: 10구간 binning, 모델별 (예측 확률, 실제 빈도, 개수)
 - [ ] 보정 곡선(Recharts) + 대각선
-- [ ] 리더보드: 모델별 평균 skill 순위, "최고 모델도 틀린 과제 비율" 강조
+- [x] 리더보드 집계: `leaderboard()`(패밀리별 평균 skill을 다시 평균), `topModelMissRate()`
+- [ ] 리더보드 화면: "최고 모델도 틀린 과제 비율" 강조
 - [ ] 누출 감사: 도구 기록 집계 + Claude로 rationale 검사(t0 이후 사실을 아는 듯 말하는가) → 적발 카드
 
 ### 5. 납품 (2:00-3:30)
