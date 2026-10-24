@@ -14,7 +14,7 @@ export async function POST(req: Request): Promise<Response> {
   if (!body.task || typeof body.task.snapshotId !== 'string') return json({ error: 'task with snapshotId required' }, 400)
   const parsed = answerSchema.safeParse(body.answer)
   if (!parsed.success) return json({ error: 'invalid answer', issues: parsed.error.issues }, 400)
-  const answer = { taskId: body.task.id, model: 'unknown', toolCalls: [], ...(parsed.data as object) } as Answer
+  const answer = { taskId: body.task.id, model: 'unknown', rationale: '', toolCalls: [], ...(parsed.data as object) } as Answer
   try {
     const snapshot = loadSnapshotForTask(body.task)
     const obs = loadObservationForTask(body.task)
