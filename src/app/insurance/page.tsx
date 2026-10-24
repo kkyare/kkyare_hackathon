@@ -45,6 +45,15 @@ export default function InsuranceConsole() {
   }, [])
 
   const field = scores.find((s) => s.fieldId === selected)
+  // 제목 아래 한 줄: 이 화면 데이터에서 가장 먼저 봐야 할 사실
+  const finding = useMemo(() => {
+    const bins = curve?.bins.filter((b) => b.n > 0) ?? []
+    if (bins.length < 2) return null
+    const lo = bins[0]
+    const hi = bins[bins.length - 1]
+    const times = lo.lossRatio > 0 ? Math.round(hi.lossRatio / lo.lossRatio) : null
+    return `${perilLabel(peril)} 위험점수 ${hi.scoreFrom}점 이상 필지의 실제 손해율은 ${pct(hi.lossRatio)}로, ${lo.scoreFrom}-${lo.scoreTo}점 필지(${pct(lo.lossRatio)})${times && times > 1 ? `의 ${times}배` : '보다 높습니다'}입니다.`.replace('높습니다입니다', '높습니다')
+  }, [curve, peril])
   const verify = async (claim: Claim) => {
     setReports((r) => ({ ...r, [claim.id]: 'loading' }))
     try {
@@ -58,10 +67,8 @@ export default function InsuranceConsole() {
   return (
     <main className="mx-auto max-w-6xl space-y-10 px-4 py-8">
       <header className="max-w-3xl space-y-2">
-        <h1 className="figure text-4xl font-bold">필지마다 다른 날씨, 필지마다 다른 요율</h1>
-        <p className="text-[var(--ink-2)]">
-          위험점수가 높았던 필지가 실제로 더 많이 잃었는지 지난 세 시즌 청구로 검증하고, 그 결과로 보험수가와 피해보상액, 갱신 요율의 범위를 냅니다.
-        </p>
+        <h1 className="text-2xl font-semibold">요율 검증</h1>
+        <p className="text-[var(--ink-2)]">{finding ?? '지난 세 시즌 청구를 필지별 위험점수와 맞춰 보는 중입니다.'}</p>
         <div className="flex gap-2 pt-2" role="tablist" aria-label="위험 종류">
           {PERILS.map((p) => (
             <Button key={p.id} role="tab" aria-selected={p.id === peril} active={p.id === peril} onClick={() => setPeril(p.id)}>{p.label}</Button>
@@ -95,7 +102,7 @@ export default function InsuranceConsole() {
               </Bar>
             </BarChart>
           </ResponsiveContainer>
-          <p className="text-sm">점수가 높은 구간일수록 실제 손해율이 높습니다. 이 검증 데이터가 요율의 근거가 됩니다.</p>
+          <p className="text-sm text-[var(--ink-2)]">아래 요율 범위는 이 표에서 나옵니다. 같은 점수 구간 필지들의 실제 손해로 보험료를 정합니다.</p>
         </Section>
       </div>
 

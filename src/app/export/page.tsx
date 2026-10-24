@@ -13,9 +13,9 @@ type Format = 'json' | 'jsonl' | 'card'
 const FAMILIES: FamilyId[] = ['nowcasting', 'downscaling', 'decision', 's2s']
 const PRICE_PER_TASK_USD = 100 // PLAN 9-4 가정값 (src/arena/export.ts와 같은 값)
 const FORMATS: { id: Format; label: string; hint: string }[] = [
-  { id: 'json', label: 'TaskPack JSON', hint: '과제와 t0 스냅샷, 공개 피드면 정답 관측까지' },
-  { id: 'jsonl', label: 'JSONL', hint: '한 줄에 과제 하나, RL 파이프라인과 verifiers 입력' },
-  { id: 'card', label: '데이터 카드', hint: 'Markdown, 출처·누출 방지·baseline' },
+  { id: 'json', label: 'TaskPack JSON', hint: '과제와 과제 시점 예보 자료. 공개용이면 정답 관측 포함' },
+  { id: 'jsonl', label: 'JSONL', hint: '한 줄에 과제 하나. 학습 파이프라인과 verifiers에 바로 넣는 형식' },
+  { id: 'card', label: '데이터 카드', hint: 'Markdown 문서. 데이터 출처, 미래 정보 차단 방식, 기준 성능' },
 ]
 
 async function exportPack(tasks: Task[], scores: Score[], format: Format, holdout: boolean, download: boolean) {
@@ -102,9 +102,9 @@ export default function ExportPage() {
   return (
     <main className="mx-auto max-w-6xl space-y-10 px-4 py-8">
       <header className="max-w-3xl space-y-2">
-        <h1 className="figure text-4xl font-bold">오늘 바로 보낼 수 있는 과제 묶음</h1>
+        <h1 className="text-2xl font-semibold">데이터 납품</h1>
         <p className="text-[var(--ink-2)]">
-          과제와 t0 스냅샷을 묶어 RL 데이터 회사가 받는 형식으로 내려받습니다. 비공개 평가셋은 정답 관측과 라벨을 빼고 보내고, 채점은 우리 서버에서 합니다.
+          과제와 과제 시점의 예보 자료를 묶어 AI 학습 데이터 회사가 쓰는 형식으로 내려받습니다. 비공개 평가용은 정답 관측을 빼고 보내고, 채점은 저희 서버에서 합니다.
         </p>
       </header>
       {error && <p className="border-l-4 border-[var(--loam)] pl-3 text-sm">{error}</p>}
@@ -132,7 +132,7 @@ export default function ExportPage() {
               <input type="checkbox" className="mt-1 accent-[var(--ink)]" checked={holdout} onChange={e => setHoldout(e.target.checked)} />
               <span>
                 비공개 평가셋
-                <span className="block text-xs text-[var(--ink-2)]">정답 관측과 라벨을 빼고 보냅니다</span>
+                <span className="block text-xs text-[var(--ink-2)]">정답 관측을 빼고 보냅니다</span>
               </span>
             </label>
           </Section>
@@ -156,8 +156,8 @@ export default function ExportPage() {
           </Section>
         </div>
 
-        <Section title="데이터 카드" note={scores.length > 0 ? 'Arena baseline은 저장된 Claude 응답 기준' : undefined}>
-          {scores.length > 0 && <div className="mb-3"><Badge tone="frost">Arena baseline 포함</Badge></div>}
+        <Section title="데이터 카드" note={scores.length > 0 ? '기준 성능은 저장된 Claude 응답으로 계산' : undefined}>
+          {scores.length > 0 && <div className="mb-3"><Badge tone="frost">모델 비교 결과 포함</Badge></div>}
           {card
             ? <pre className="max-h-[40rem] overflow-auto whitespace-pre-wrap bg-[var(--paper-2)] p-4 text-xs leading-relaxed">{card}</pre>
             : <p className="text-sm text-[var(--ink-2)]">패밀리를 하나 이상 고르세요.</p>}

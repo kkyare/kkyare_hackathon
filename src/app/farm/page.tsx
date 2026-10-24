@@ -31,9 +31,9 @@ export default function FarmConnectionPage() {
   return (
     <main className="mx-auto max-w-6xl space-y-10 px-4 py-8">
       <header className="max-w-3xl space-y-2">
-        <h1 className="figure text-4xl font-bold">농장이 연결될수록 판정이 정확해집니다</h1>
+        <h1 className="text-2xl font-semibold">농장 데이터</h1>
         <p className="text-[var(--ink-2)]">
-          농장에는 필지 예보와 작업 판단을 주고, 동의를 받아 필지 실측과 수확량을 받습니다. 공개 데이터에는 없는 이 기록이 쌓일수록 오차와 요율 범위가 줄어듭니다.
+          필지 센서 {last.connectedFields}곳을 연결하면 최저기온 추정 오차가 {first.maeF.toFixed(1)}°F에서 {last.maeF.toFixed(1)}°F로 줄어듭니다. 농장에는 필지 예보와 방제 판단을 주고, 동의를 받아 실측과 수확량을 받습니다.
         </p>
       </header>
 

@@ -55,9 +55,11 @@ export default function TimeMachine() {
   return (
     <main className="mx-auto max-w-6xl space-y-10 px-4 py-8">
       <header className="max-w-3xl space-y-2">
-        <h1 className="figure text-4xl font-bold">어제 오후의 예보로 판단하고, 오늘 아침 관측으로 채점합니다</h1>
+        <h1 className="text-2xl font-semibold">하루 재생</h1>
         <p className="text-[var(--ink-2)]">
-          판단은 발행 시점에 알 수 있던 예보만 씁니다. 하루를 재생하면 농장 센서 관측이 시간 순서대로 도착하고, 끝나면 방제 결정의 손익이 확정됩니다.
+          {data && data.fields.some((f) => f.observedFrost)
+            ? `${data.label}, 필지 ${data.fields.length}곳 중 ${data.fields.filter((f) => f.observedFrost).length}곳에 서리가 왔습니다. 공개 예보는 모든 필지의 서리 확률을 ${Math.round(Math.max(...data.fields.map((f) => f.rawPFrost)) * 100)}% 이하로 봤습니다.`
+            : '전날 오후에 나온 예보로 방제 여부를 정하고, 다음 날 아침 농장 센서 관측으로 그 결정을 채점합니다.'}
         </p>
         <div className="flex gap-2 pt-2">
           {SCENARIOS.map((s) => <Button key={s.id} active={s.id === scenario} onClick={() => setScenario(s.id)}>{s.label}</Button>)}

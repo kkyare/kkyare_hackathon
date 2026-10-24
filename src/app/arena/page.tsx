@@ -47,10 +47,10 @@ export default function ArenaPage() {
   const [meta, setMeta] = useState<TasksResponse>()
   const [result, setResult] = useState<RunResponse>()
   const [audit, setAudit] = useState<AuditResponse>()
-  const [phase, setPhase] = useState<Phase>({ kind: 'loading', label: '과제를 불러오는 중' })
+  const [phase, setPhase] = useState<Phase>({ kind: 'loading', label: '과제를 불러오는 중입니다' })
 
   const run = useCallback(async (tasks: Task[], models: string[], live: boolean) => {
-    setPhase({ kind: 'loading', label: live ? 'Claude 3모델을 실행하는 중 (1-2분)' : '저장 응답을 재생하는 중' })
+    setPhase({ kind: 'loading', label: live ? '세 모델을 실행하는 중입니다 (1-2분)' : '저장된 응답을 불러오는 중입니다' })
     setAudit(undefined)
     try {
       const r = await post<RunResponse>(`/api/arena/run${live ? '' : '?mock=1'}`, { tasks, models })
@@ -75,7 +75,7 @@ export default function ArenaPage() {
 
   const runRationaleAudit = async () => {
     if (!meta || !result) return
-    setPhase({ kind: 'loading', label: 'Claude가 근거를 감사하는 중' })
+    setPhase({ kind: 'loading', label: 'Claude가 답의 근거를 검토하는 중입니다' })
     try {
       setAudit(await post<AuditResponse>('/api/arena/audit', { tasks: meta.tasks, runs: runsOf(result) }))
       setPhase({ kind: 'idle' })
@@ -90,16 +90,16 @@ export default function ArenaPage() {
     <main className="mx-auto max-w-6xl space-y-10 px-4 py-8">
       <header className="space-y-2">
         <div className="flex flex-wrap items-baseline gap-3">
-          <h1 className="figure text-4xl font-bold">최고 모델도 틀린다</h1>
+          <h1 className="text-2xl font-semibold">모델 비교</h1>
           {result && (result.live
-            ? <Badge tone="canopy">Claude 응답 LIVE</Badge>
-            : <Badge>Claude 응답 재생 {result.replayed}건</Badge>)}
+            ? <Badge tone="canopy">방금 실행한 결과</Badge>
+            : <Badge>저장된 응답 {result.replayed}건</Badge>)}
         </div>
         <p className="max-w-3xl text-[var(--ink-2)]">
-          Claude Haiku·Sonnet·Opus가 t0 시점의 예보와 관측만 도구로 조회해 확률과 결정을 내고, t0 이후 실제 관측으로 자동 채점됩니다. 채점자는 사람이 아니라 실제 날씨입니다.
+          Claude Haiku, Sonnet, Opus에게 같은 과제 8개를 줬습니다. 모델은 과제를 낸 시점까지의 예보와 관측만 볼 수 있고, 답은 그 뒤 실제 관측으로 채점합니다.
         </p>
         <div className="flex flex-wrap gap-2 pt-2">
-          <Button disabled={busy || !meta?.replayable} onClick={() => meta && run(meta.tasks, meta.models, false)}>저장 응답 재생</Button>
+          <Button disabled={busy || !meta?.replayable} onClick={() => meta && run(meta.tasks, meta.models, false)}>저장된 응답 보기</Button>
           <Button variant="solid" disabled={busy || !meta?.liveAvailable} onClick={() => meta && run(meta.tasks, meta.models, true)}
             title={meta?.liveAvailable ? '서버가 Claude 3모델을 실제로 호출합니다' : '서버에 ANTHROPIC_API_KEY가 없습니다'}>
             실제로 실행
@@ -132,10 +132,9 @@ function Results({ meta, result, audit, onRationaleAudit, busy }: { meta: TasksR
     <>
       <Section>
         <div className="grid gap-x-12 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
-          <Figure size="lg" tone="loam" label={miss ? `1위 ${modelLabel(miss.model)}도 틀린 비율 (판정 과제 ${miss.n}개)` : '1위 모델도 틀린 비율'} value={miss ? pct(miss.missRate) : '—'} />
-          <Figure size="lg" label="1위 skill (0 = 원천 예보를 그대로 쓴 수준)" value={ranks[0] ? signed(ranks[0].skill) : '—'} />
-          <Figure size="lg" label={`과제 × 모델, 채점 ${result.scores.length}건`} value={`${meta.tasks.length} × ${meta.models.length}`} />
-          <Figure size="lg" tone="canopy" label="사람 라벨 (정답은 t0 이후 실측)" value="0명" />
+          <Figure size="lg" tone="loam" label={miss ? `1위 ${modelLabel(miss.model)}의 오답률 (정답이 있는 과제 ${miss.n}개)` : '1위 모델의 오답률'} value={miss ? pct(miss.missRate) : '—'} />
+          <Figure size="lg" label="1위 모델의 공개 예보 대비 개선도 (0이면 같은 수준)" value={ranks[0] ? signed(ranks[0].skill) : '—'} />
+          <Figure size="lg" label={`과제 수 × 모델 수, 채점 ${result.scores.length}건`} value={`${meta.tasks.length} × ${meta.models.length}`} />
         </div>
       </Section>
 

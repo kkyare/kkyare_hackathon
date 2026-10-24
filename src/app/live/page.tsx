@@ -32,16 +32,16 @@ type ArenaResult = {
 type ArenaState = { kind: 'idle' } | { kind: 'loading' } | { kind: 'ok'; data: ArenaResult } | { kind: 'error'; message: string }
 
 const SCENARIOS = [
-  { id: 'forecast-miss', label: 'forecast-miss · 예보가 빗나간 날' },
-  { id: 'gust-block', label: 'gust-block · 돌풍이 창을 막는 날' },
-  { id: 'calm-go', label: 'calm-go · 잔잔한 날' },
+  { id: 'forecast-miss', label: '예보가 빗나간 날' },
+  { id: 'gust-block', label: '돌풍으로 살포가 막힌 날' },
+  { id: 'calm-go', label: '바람이 잔잔한 날' },
 ] as const
 const DEFAULT_SCENARIO = 'forecast-miss'
 const STEP_MS = 600
 const SCALE_TOP_MPH = 25
 const THRESHOLD_MPH = [10, 15]
-const ASSUMPTION_BADGE = '가정: 연기 $7/acre · 재살포 $31/acre'
-const SKILL_HINT = '1=완벽, 0=기준 예보와 같음, 음수=더 나쁨'
+const ASSUMPTION_BADGE = '가정값: 살포를 미루는 비용 $7/acre, 다시 살포하는 비용 $31/acre'
+const SKILL_HINT = '1이면 완벽, 0이면 공개 예보와 같음, 음수면 더 나쁨'
 // Arena 비교 모델 (src/core/agent.ts ARENA_MODELS 와 같은 순서). agent.ts 는 SDK를 import 하므로 여기서 따로 적는다.
 const ARENA_MODELS = [
   { id: 'claude-haiku-5-5', label: 'Haiku' },
@@ -50,12 +50,12 @@ const ARENA_MODELS = [
 ] as const
 
 const UI = {
-  card: 'flex min-w-0 flex-col gap-4 rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm',
-  badge: 'inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-0.5 text-xs font-medium ring-1 ring-inset',
-  label: 'text-xs font-medium tracking-wide text-zinc-500',
-  mono: 'font-mono tabular-nums',
+  card: 'flex min-w-0 flex-col gap-4 border-t border-[var(--ink)] pt-3',
+  badge: 'inline-flex items-center gap-1 whitespace-nowrap rounded-sm px-1.5 py-0.5 text-xs font-medium ring-1 ring-inset',
+  label: 'text-xs text-[var(--ink-2)]',
+  mono: 'tnum',
   button:
-    'inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-lg bg-zinc-900 px-3 py-1.5 text-sm font-medium text-white hover:bg-zinc-700 disabled:cursor-not-allowed disabled:opacity-40',
+    'inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-sm bg-[var(--ink)] px-3 py-1.5 text-sm font-medium text-[var(--paper-2)] hover:bg-[var(--ink-2)] disabled:cursor-not-allowed disabled:opacity-40',
 }
 const TONE = {
   neutral: 'bg-zinc-100 text-zinc-700 ring-zinc-200',
@@ -83,7 +83,7 @@ const REASON_LABEL: Record<string, string> = {
   RAIN_WITHIN_RAINFAST: '내건 시간 내 강우',
   MISSING_DATA: '결측',
 }
-const DECISION_LABEL: Record<string, string> = { spray: '살포 (spray)', delay: '연기 (delay)' }
+const DECISION_LABEL: Record<string, string> = { spray: '지금 살포', delay: '3시간 연기' }
 
 const hhZ = (iso: string) => `${iso.slice(11, 13)}Z`
 const hhmmZ = (iso: string) => `${iso.slice(11, 16)}Z`
@@ -209,7 +209,7 @@ function HourChart({ frames, shown }: { frames: Frame[]; shown: number }) {
           )
         })}
       </div>
-      <p className="mt-2 text-xs text-zinc-500">진한 막대·위 숫자 = 풍속, 연한 막대·아래 숫자 = 돌풍 (mph). 점선은 풍속 상한 10, 돌풍 위반 15.</p>
+      <p className="mt-2 text-xs text-zinc-500">진한 막대와 위 숫자는 풍속, 연한 막대와 아래 숫자는 돌풍입니다(mph). 점선은 풍속 상한 10, 돌풍 기준 15입니다.</p>
     </div>
   )
 }
@@ -258,23 +258,23 @@ function ArenaPanel({ task }: { task: Task }) {
     <div className="flex flex-col gap-3 border-t border-zinc-100 pt-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div className="flex flex-wrap items-center gap-2">
-          <span className={UI.label}>Arena 비교</span>
+          <span className={UI.label}>모델 비교</span>
           {result && result.answers.length > 0 && <Badge tone={result.live ? TONE.live : TONE.demo}>{result.live ? 'LIVE' : 'SAVED'}</Badge>}
           {result && result.errors.length > 0 && <Badge tone={TONE.error}>오류 {result.errors.length}건</Badge>}
         </div>
         <button type="button" onClick={run} disabled={state.kind === 'loading'} className={UI.button}>
-          Arena로 실행 (Haiku·Sonnet·Opus)
+          세 모델로 실행 (Haiku, Sonnet, Opus)
         </button>
       </div>
       {state.kind === 'loading' && (
         <>
-          <p className="text-xs text-zinc-500">세 모델을 실행하는 중…</p>
+          <p className="text-xs text-zinc-500">세 모델을 실행하는 중입니다</p>
           <Skeleton lines={3} />
         </>
       )}
       {state.kind === 'error' && (
         <div role="alert" className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800">
-          <span className="font-semibold">Arena 실행 실패.</span> <span className={`text-red-600 ${UI.mono}`}>{state.message}</span>
+          <span className="font-semibold">모델 실행에 실패했습니다.</span> <span className={`text-red-600 ${UI.mono}`}>{state.message}</span>
         </div>
       )}
       {result && (
@@ -287,7 +287,7 @@ function ArenaPanel({ task }: { task: Task }) {
                   <th className={`py-1.5 pr-2 text-right ${UI.label}`}>확률</th>
                   <th className={`py-1.5 pr-2 ${UI.label}`}>결정</th>
                   <th className={`py-1.5 pr-2 text-right ${UI.label}`}>Brier</th>
-                  <th className={`py-1.5 pr-2 text-right ${UI.label}`}>후회</th>
+                  <th className={`py-1.5 pr-2 text-right ${UI.label}`}>손해</th>
                   <th className={`py-1.5 text-right ${UI.label}`}>Skill</th>
                 </tr>
               </thead>
@@ -316,8 +316,8 @@ function ArenaPanel({ task }: { task: Task }) {
             </table>
           </div>
           <p className="text-xs text-zinc-500">
-            {result.replayed > 0 && `저장 응답 ${result.replayed}건 · `}
-            Brier 낮을수록 좋음 · 후회 $/acre · Skill {SKILL_HINT}
+            {result.replayed > 0 && `저장된 응답 ${result.replayed}건. `}
+            Brier는 낮을수록 좋고, 손해는 acre당 달러입니다. 개선도는 {SKILL_HINT}.
           </p>
         </>
       )}
@@ -392,10 +392,10 @@ function ReplayPanel({ scenario }: { scenario: string }) {
             <>
               <dl className="grid grid-cols-2 gap-x-3 gap-y-2 text-sm">
                 <div>
-                  <dt className={UI.label}>t0 (발행 시각)</dt>
+                  <dt className={UI.label}>과제를 낸 시각</dt>
                   <dd className={`whitespace-nowrap ${UI.mono}`}>{hhmmZ(data.task.t0)}</dd>
                   <dd className="text-xs text-zinc-500">
-                    {data.task.t0.slice(0, 10)} · 현지 {cdt(data.task.t0)}
+                    {data.task.t0.slice(0, 10)}, 현지 {cdt(data.task.t0)}
                   </dd>
                 </div>
                 <div>
@@ -406,13 +406,13 @@ function ReplayPanel({ scenario }: { scenario: string }) {
                 <div className="col-span-2">
                   <dt className={UI.label}>필지</dt>
                   <dd>
-                    {data.task.field.name} · {data.task.field.acres} acre · {data.task.field.crop}
+                    {data.task.field.name}, {data.task.field.acres} acre, {data.task.field.crop}
                   </dd>
                 </div>
               </dl>
               <p className="rounded-lg bg-zinc-50 p-3 text-sm leading-relaxed text-zinc-700">{data.task.prompt}</p>
               <div>
-                <div className={`mb-1 ${UI.label}`}>t0 시점 모델별 예보 · 4시간 창 최대 (mph)</div>
+                <div className={`mb-1 ${UI.label}`}>과제 시점의 모델별 예보, 4시간 중 최댓값 (mph)</div>
                 <div className="overflow-x-auto">
                   <ModelTable models={data.snapshotSummary.models} />
                 </div>
@@ -428,7 +428,7 @@ function ReplayPanel({ scenario }: { scenario: string }) {
             <>
               <div className="flex items-end gap-4">
                 <div>
-                  <div className={UI.label}>조건이 깨질 확률</div>
+                  <div className={UI.label}>살포 조건을 벗어날 확률</div>
                   <div className={`text-5xl font-semibold tracking-tight ${UI.mono}`}>{pct(p)}</div>
                 </div>
                 <div className="pb-1">
@@ -503,16 +503,16 @@ function ReplayPanel({ scenario }: { scenario: string }) {
                 <Stat label="Skill" value={signed(data.score.skill)} hint={SKILL_HINT} />
               </div>
               <dl className="grid grid-cols-2 gap-x-3 gap-y-1 text-xs text-zinc-500">
-                <dt>비용 / oracle</dt>
+                <dt>비용 / 최선의 비용</dt>
                 <dd className={UI.mono}>
                   {usd(data.score.costUsd ?? 0)} / {usd(data.score.oracleCostUsd ?? 0)} per acre
                 </dd>
                 <dt>가정값</dt>
                 <dd className={UI.mono}>
-                  연기 {usd(data.assumptions.costUsdPerAcre)} · 재살포 {usd(data.assumptions.lossUsdPerAcre)}
+                  미루기 {usd(data.assumptions.costUsdPerAcre)}, 재살포 {usd(data.assumptions.lossUsdPerAcre)}
                 </dd>
-                <dt>누수 검사</dt>
-                <dd>{data.score.leakFlags.length === 0 ? '통과 (t0 이후 데이터 없음)' : `${data.score.leakFlags.length}건`}</dd>
+                <dt>미래 정보 차단</dt>
+                <dd>{data.score.leakFlags.length === 0 ? '통과 (과제 이후 데이터를 쓰지 않음)' : `${data.score.leakFlags.length}건`}</dd>
                 <dt>채점 근거</dt>
                 <dd className={UI.mono}>{data.score.resolvedWith ? `${data.score.resolvedWith.stationId} @ ${hhmmZ(data.score.resolvedWith.at)}` : '—'}</dd>
               </dl>
@@ -541,17 +541,16 @@ export default function LivePage() {
   const known = SCENARIOS.some((s) => s.id === scenario)
 
   return (
-    <main className="min-h-screen break-keep bg-zinc-50 text-zinc-900">
-      <div className="mx-auto flex max-w-screen-2xl flex-col gap-5 px-4 py-6 sm:px-6">
+    <main className="break-keep">
+      <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-8">
         <header className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div className="flex flex-wrap items-center gap-3">
-            <h1 className="text-2xl font-semibold tracking-tight">채점 과정 재생</h1>
-            <Badge tone={TONE.demo}>DEMO DATA</Badge>
+            <h1 className="text-2xl font-semibold">채점 과정</h1>
             <Badge tone={TONE.neutral}>{ASSUMPTION_BADGE}</Badge>
           </div>
           <label className="flex items-center gap-2 text-sm">
-            <span className="text-zinc-500">시나리오</span>
-            <select value={scenario} onChange={(e) => choose(e.target.value)} className="rounded-lg border border-zinc-300 bg-white px-3 py-1.5 text-sm">
+            <span className="text-[var(--ink-2)]">상황</span>
+            <select value={scenario} onChange={(e) => choose(e.target.value)} className="rounded-sm border border-[var(--rule)] bg-[var(--paper-2)] px-3 py-1.5 text-sm">
               {SCENARIOS.map((s) => (
                 <option key={s.id} value={s.id}>
                   {s.label}
@@ -562,7 +561,7 @@ export default function LivePage() {
           </label>
         </header>
         <p className="max-w-3xl text-sm text-zinc-600">
-          에이전트는 t0 시점에 알 수 있던 예보만 보고 답하고, 4시간 뒤 도착한 실측으로 자동 채점됩니다. 과제 하나를 단계별로 재생합니다.
+          농약 살포 판단 과제 하나를 처음부터 채점까지 따라갑니다. 모델은 과제를 낸 시점의 예보만 보고 답하고, 이후 4시간 관측이 들어오면 자동으로 채점됩니다.
         </p>
         <ReplayPanel key={scenario} scenario={scenario} />
       </div>

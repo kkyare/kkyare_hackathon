@@ -16,7 +16,7 @@ export function Section({ title, note, children, className = '' }: { title?: str
 export function Figure({ label, value, tone, size = 'md' }: { label: string; value: string; tone?: 'canopy' | 'corn' | 'loam' | 'frost'; size?: 'md' | 'lg' }) {
   return (
     <div>
-      <p className={`figure font-semibold leading-none ${size === 'lg' ? 'text-5xl' : 'text-3xl'}`} style={tone ? { color: `var(--${tone})` } : undefined}>
+      <p className={`figure font-semibold leading-none ${size === 'lg' ? 'text-3xl' : 'text-2xl'}`} style={tone ? { color: `var(--${tone})` } : undefined}>
         {value}
       </p>
       <p className="mt-1 text-xs text-[var(--ink-2)]">{label}</p>

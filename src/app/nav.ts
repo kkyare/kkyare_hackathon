@@ -2,10 +2,11 @@
 export interface NavItem { href: string; label: string }
 
 export const nav: NavItem[] = [
-  { href: '/', label: '대시보드' },
-  { href: '/insurance', label: '보험사 콘솔' },
-  { href: '/timemachine', label: 'Time Machine' },
-  { href: '/farm', label: '농장 연결' },
-  { href: '/arena', label: 'Arena' },
-  { href: '/export', label: '납품' },
+  { href: '/', label: '농장 지도' },
+  { href: '/insurance', label: '요율 검증' },
+  { href: '/timemachine', label: '하루 재생' },
+  { href: '/live', label: '채점 과정' },
+  { href: '/arena', label: '모델 비교' },
+  { href: '/export', label: '데이터 납품' },
+  { href: '/farm', label: '농장 데이터' },
 ]

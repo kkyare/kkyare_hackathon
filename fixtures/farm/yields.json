@@ -1,0 +1,2848 @@
+{
+  "demo": true,
+  "note": "필지별 시즌 기상 지표와 실제 생산량(평년 기대 대비 %). 2026은 5월까지의 기상 지표만 있음. 필지 고유 효과는 정답 확인용",
+  "seasons": [
+    "2022",
+    "2023",
+    "2024",
+    "2025"
+  ],
+  "yields": [
+    {
+      "fieldId": "field-ia-01",
+      "season": "2022",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 174,
+      "pctOfExpected": 89
+    },
+    {
+      "fieldId": "field-ia-02",
+      "season": "2022",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 2
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 173,
+      "pctOfExpected": 88.9
+    },
+    {
+      "fieldId": "field-ia-03",
+      "season": "2022",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 3,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 54,
+      "pctOfExpected": 93
+    },
+    {
+      "fieldId": "field-ia-04",
+      "season": "2022",
+      "weather": {
+        "frostNights": 2,
+        "heavyRainDays": 1,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 58,
+      "pctOfExpected": 100.3
+    },
+    {
+      "fieldId": "field-ia-05",
+      "season": "2022",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 52,
+      "pctOfExpected": 89.4
+    },
+    {
+      "fieldId": "field-ia-06",
+      "season": "2022",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 169,
+      "pctOfExpected": 86.6
+    },
+    {
+      "fieldId": "field-ia-07",
+      "season": "2022",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 208,
+      "pctOfExpected": 106.7
+    },
+    {
+      "fieldId": "field-ia-08",
+      "season": "2022",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 3,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 57,
+      "pctOfExpected": 98.7
+    },
+    {
+      "fieldId": "field-ia-09",
+      "season": "2022",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 3,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 50,
+      "pctOfExpected": 85.4
+    },
+    {
+      "fieldId": "field-ia-10",
+      "season": "2022",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 3,
+        "dryWeeks": 2
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 50,
+      "pctOfExpected": 86.5
+    },
+    {
+      "fieldId": "field-ia-11",
+      "season": "2022",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 192,
+      "pctOfExpected": 98.7
+    },
+    {
+      "fieldId": "field-ia-12",
+      "season": "2022",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 202,
+      "pctOfExpected": 103.8
+    },
+    {
+      "fieldId": "field-ia-13",
+      "season": "2022",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 58,
+      "pctOfExpected": 100.5
+    },
+    {
+      "fieldId": "field-ia-14",
+      "season": "2022",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 193,
+      "pctOfExpected": 99.1
+    },
+    {
+      "fieldId": "field-ia-15",
+      "season": "2022",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 200,
+      "pctOfExpected": 102.5
+    },
+    {
+      "fieldId": "field-ia-16",
+      "season": "2022",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 3,
+        "dryWeeks": 2
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 184,
+      "pctOfExpected": 94.5
+    },
+    {
+      "fieldId": "field-ia-17",
+      "season": "2022",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 2
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 179,
+      "pctOfExpected": 91.8
+    },
+    {
+      "fieldId": "field-ia-18",
+      "season": "2022",
+      "weather": {
+        "frostNights": 2,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 172,
+      "pctOfExpected": 88.3
+    },
+    {
+      "fieldId": "field-ia-19",
+      "season": "2022",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 2,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 181,
+      "pctOfExpected": 92.9
+    },
+    {
+      "fieldId": "field-ia-20",
+      "season": "2022",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 60,
+      "pctOfExpected": 102.8
+    },
+    {
+      "fieldId": "field-ia-21",
+      "season": "2022",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 3
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 215,
+      "pctOfExpected": 110.1
+    },
+    {
+      "fieldId": "field-ia-22",
+      "season": "2022",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 2,
+        "dryWeeks": 3
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 173,
+      "pctOfExpected": 88.8
+    },
+    {
+      "fieldId": "field-ia-23",
+      "season": "2022",
+      "weather": {
+        "frostNights": 2,
+        "heavyRainDays": 0,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 161,
+      "pctOfExpected": 82.5
+    },
+    {
+      "fieldId": "field-ia-24",
+      "season": "2022",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 203,
+      "pctOfExpected": 104.3
+    },
+    {
+      "fieldId": "field-ia-25",
+      "season": "2022",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 53,
+      "pctOfExpected": 92
+    },
+    {
+      "fieldId": "field-ia-26",
+      "season": "2022",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 188,
+      "pctOfExpected": 96.3
+    },
+    {
+      "fieldId": "field-ia-27",
+      "season": "2022",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 191,
+      "pctOfExpected": 97.7
+    },
+    {
+      "fieldId": "field-ia-28",
+      "season": "2022",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 62,
+      "pctOfExpected": 106.4
+    },
+    {
+      "fieldId": "field-ia-29",
+      "season": "2022",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 63,
+      "pctOfExpected": 108.2
+    },
+    {
+      "fieldId": "field-ia-30",
+      "season": "2022",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 2,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 62,
+      "pctOfExpected": 106.3
+    },
+    {
+      "fieldId": "field-ia-31",
+      "season": "2022",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 53,
+      "pctOfExpected": 91.2
+    },
+    {
+      "fieldId": "field-ia-32",
+      "season": "2022",
+      "weather": {
+        "frostNights": 3,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 54,
+      "pctOfExpected": 93.8
+    },
+    {
+      "fieldId": "field-ia-33",
+      "season": "2022",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 54,
+      "pctOfExpected": 93.5
+    },
+    {
+      "fieldId": "field-ia-34",
+      "season": "2022",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 2,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 57,
+      "pctOfExpected": 97.7
+    },
+    {
+      "fieldId": "field-ia-35",
+      "season": "2022",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 3
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 53,
+      "pctOfExpected": 92
+    },
+    {
+      "fieldId": "field-ia-36",
+      "season": "2022",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 189,
+      "pctOfExpected": 97.1
+    },
+    {
+      "fieldId": "field-ia-37",
+      "season": "2022",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 60,
+      "pctOfExpected": 102.6
+    },
+    {
+      "fieldId": "field-ia-38",
+      "season": "2022",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 58,
+      "pctOfExpected": 99.7
+    },
+    {
+      "fieldId": "field-ia-39",
+      "season": "2022",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 1,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 173,
+      "pctOfExpected": 88.5
+    },
+    {
+      "fieldId": "field-ia-40",
+      "season": "2022",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 2
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 203,
+      "pctOfExpected": 104.3
+    },
+    {
+      "fieldId": "field-ia-41",
+      "season": "2022",
+      "weather": {
+        "frostNights": 2,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 48,
+      "pctOfExpected": 83.2
+    },
+    {
+      "fieldId": "field-ia-42",
+      "season": "2022",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 58,
+      "pctOfExpected": 99.8
+    },
+    {
+      "fieldId": "field-ia-43",
+      "season": "2022",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 4
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 182,
+      "pctOfExpected": 93.5
+    },
+    {
+      "fieldId": "field-ia-44",
+      "season": "2022",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 200,
+      "pctOfExpected": 102.6
+    },
+    {
+      "fieldId": "field-ia-45",
+      "season": "2022",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 61,
+      "pctOfExpected": 104.9
+    },
+    {
+      "fieldId": "field-ia-46",
+      "season": "2022",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 203,
+      "pctOfExpected": 104.1
+    },
+    {
+      "fieldId": "field-ia-47",
+      "season": "2022",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 3,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 189,
+      "pctOfExpected": 96.9
+    },
+    {
+      "fieldId": "field-ia-48",
+      "season": "2022",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 0,
+        "dryWeeks": 4
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 58,
+      "pctOfExpected": 100
+    },
+    {
+      "fieldId": "field-ia-01",
+      "season": "2023",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 167,
+      "pctOfExpected": 85.6
+    },
+    {
+      "fieldId": "field-ia-02",
+      "season": "2023",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 183,
+      "pctOfExpected": 93.9
+    },
+    {
+      "fieldId": "field-ia-03",
+      "season": "2023",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 2,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 51,
+      "pctOfExpected": 87.7
+    },
+    {
+      "fieldId": "field-ia-04",
+      "season": "2023",
+      "weather": {
+        "frostNights": 3,
+        "heavyRainDays": 2,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 54,
+      "pctOfExpected": 93.6
+    },
+    {
+      "fieldId": "field-ia-05",
+      "season": "2023",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 3,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 54,
+      "pctOfExpected": 93.6
+    },
+    {
+      "fieldId": "field-ia-06",
+      "season": "2023",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 2
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 166,
+      "pctOfExpected": 84.9
+    },
+    {
+      "fieldId": "field-ia-07",
+      "season": "2023",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 2,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 194,
+      "pctOfExpected": 99.4
+    },
+    {
+      "fieldId": "field-ia-08",
+      "season": "2023",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 3,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 55,
+      "pctOfExpected": 95.2
+    },
+    {
+      "fieldId": "field-ia-09",
+      "season": "2023",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 50,
+      "pctOfExpected": 87
+    },
+    {
+      "fieldId": "field-ia-10",
+      "season": "2023",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 52,
+      "pctOfExpected": 89.4
+    },
+    {
+      "fieldId": "field-ia-11",
+      "season": "2023",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 189,
+      "pctOfExpected": 96.8
+    },
+    {
+      "fieldId": "field-ia-12",
+      "season": "2023",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 185,
+      "pctOfExpected": 94.8
+    },
+    {
+      "fieldId": "field-ia-13",
+      "season": "2023",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 58,
+      "pctOfExpected": 99.8
+    },
+    {
+      "fieldId": "field-ia-14",
+      "season": "2023",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 2,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 181,
+      "pctOfExpected": 92.8
+    },
+    {
+      "fieldId": "field-ia-15",
+      "season": "2023",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 193,
+      "pctOfExpected": 99.1
+    },
+    {
+      "fieldId": "field-ia-16",
+      "season": "2023",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 2,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 186,
+      "pctOfExpected": 95.5
+    },
+    {
+      "fieldId": "field-ia-17",
+      "season": "2023",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 2
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 181,
+      "pctOfExpected": 93
+    },
+    {
+      "fieldId": "field-ia-18",
+      "season": "2023",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 2,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 199,
+      "pctOfExpected": 102.1
+    },
+    {
+      "fieldId": "field-ia-19",
+      "season": "2023",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 181,
+      "pctOfExpected": 93
+    },
+    {
+      "fieldId": "field-ia-20",
+      "season": "2023",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 59,
+      "pctOfExpected": 102.5
+    },
+    {
+      "fieldId": "field-ia-21",
+      "season": "2023",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 0,
+        "dryWeeks": 3
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 194,
+      "pctOfExpected": 99.5
+    },
+    {
+      "fieldId": "field-ia-22",
+      "season": "2023",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 2
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 191,
+      "pctOfExpected": 97.9
+    },
+    {
+      "fieldId": "field-ia-23",
+      "season": "2023",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 5,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 165,
+      "pctOfExpected": 84.6
+    },
+    {
+      "fieldId": "field-ia-24",
+      "season": "2023",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 214,
+      "pctOfExpected": 109.6
+    },
+    {
+      "fieldId": "field-ia-25",
+      "season": "2023",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 49,
+      "pctOfExpected": 83.7
+    },
+    {
+      "fieldId": "field-ia-26",
+      "season": "2023",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 183,
+      "pctOfExpected": 93.8
+    },
+    {
+      "fieldId": "field-ia-27",
+      "season": "2023",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 3,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 183,
+      "pctOfExpected": 93.8
+    },
+    {
+      "fieldId": "field-ia-28",
+      "season": "2023",
+      "weather": {
+        "frostNights": 2,
+        "heavyRainDays": 0,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 57,
+      "pctOfExpected": 98.1
+    },
+    {
+      "fieldId": "field-ia-29",
+      "season": "2023",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 4,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 63,
+      "pctOfExpected": 108.2
+    },
+    {
+      "fieldId": "field-ia-30",
+      "season": "2023",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 59,
+      "pctOfExpected": 101.8
+    },
+    {
+      "fieldId": "field-ia-31",
+      "season": "2023",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 51,
+      "pctOfExpected": 88.5
+    },
+    {
+      "fieldId": "field-ia-32",
+      "season": "2023",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 2,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 59,
+      "pctOfExpected": 101
+    },
+    {
+      "fieldId": "field-ia-33",
+      "season": "2023",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 55,
+      "pctOfExpected": 94.6
+    },
+    {
+      "fieldId": "field-ia-34",
+      "season": "2023",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 57,
+      "pctOfExpected": 98.8
+    },
+    {
+      "fieldId": "field-ia-35",
+      "season": "2023",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 3,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 56,
+      "pctOfExpected": 95.9
+    },
+    {
+      "fieldId": "field-ia-36",
+      "season": "2023",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 2
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 184,
+      "pctOfExpected": 94.2
+    },
+    {
+      "fieldId": "field-ia-37",
+      "season": "2023",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 2
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 60,
+      "pctOfExpected": 103.2
+    },
+    {
+      "fieldId": "field-ia-38",
+      "season": "2023",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 3
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 57,
+      "pctOfExpected": 98.7
+    },
+    {
+      "fieldId": "field-ia-39",
+      "season": "2023",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 1,
+        "dryWeeks": 3
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 170,
+      "pctOfExpected": 87.4
+    },
+    {
+      "fieldId": "field-ia-40",
+      "season": "2023",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 3,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 199,
+      "pctOfExpected": 102
+    },
+    {
+      "fieldId": "field-ia-41",
+      "season": "2023",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 49,
+      "pctOfExpected": 84.7
+    },
+    {
+      "fieldId": "field-ia-42",
+      "season": "2023",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 2,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 56,
+      "pctOfExpected": 96.7
+    },
+    {
+      "fieldId": "field-ia-43",
+      "season": "2023",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 196,
+      "pctOfExpected": 100.7
+    },
+    {
+      "fieldId": "field-ia-44",
+      "season": "2023",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 2,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 190,
+      "pctOfExpected": 97.5
+    },
+    {
+      "fieldId": "field-ia-45",
+      "season": "2023",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 60,
+      "pctOfExpected": 104.1
+    },
+    {
+      "fieldId": "field-ia-46",
+      "season": "2023",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 200,
+      "pctOfExpected": 102.4
+    },
+    {
+      "fieldId": "field-ia-47",
+      "season": "2023",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 183,
+      "pctOfExpected": 93.7
+    },
+    {
+      "fieldId": "field-ia-48",
+      "season": "2023",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 1,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 59,
+      "pctOfExpected": 101.8
+    },
+    {
+      "fieldId": "field-ia-01",
+      "season": "2024",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 162,
+      "pctOfExpected": 83.3
+    },
+    {
+      "fieldId": "field-ia-02",
+      "season": "2024",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 176,
+      "pctOfExpected": 90.1
+    },
+    {
+      "fieldId": "field-ia-03",
+      "season": "2024",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 53,
+      "pctOfExpected": 91.5
+    },
+    {
+      "fieldId": "field-ia-04",
+      "season": "2024",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 2,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 60,
+      "pctOfExpected": 103.9
+    },
+    {
+      "fieldId": "field-ia-05",
+      "season": "2024",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 58,
+      "pctOfExpected": 99.4
+    },
+    {
+      "fieldId": "field-ia-06",
+      "season": "2024",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 181,
+      "pctOfExpected": 93
+    },
+    {
+      "fieldId": "field-ia-07",
+      "season": "2024",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 2,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 193,
+      "pctOfExpected": 99
+    },
+    {
+      "fieldId": "field-ia-08",
+      "season": "2024",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 58,
+      "pctOfExpected": 100.5
+    },
+    {
+      "fieldId": "field-ia-09",
+      "season": "2024",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 2,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 48,
+      "pctOfExpected": 82.2
+    },
+    {
+      "fieldId": "field-ia-10",
+      "season": "2024",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 2
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 50,
+      "pctOfExpected": 86.6
+    },
+    {
+      "fieldId": "field-ia-11",
+      "season": "2024",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 194,
+      "pctOfExpected": 99.6
+    },
+    {
+      "fieldId": "field-ia-12",
+      "season": "2024",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 192,
+      "pctOfExpected": 98.4
+    },
+    {
+      "fieldId": "field-ia-13",
+      "season": "2024",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 61,
+      "pctOfExpected": 105.3
+    },
+    {
+      "fieldId": "field-ia-14",
+      "season": "2024",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 2,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 191,
+      "pctOfExpected": 97.8
+    },
+    {
+      "fieldId": "field-ia-15",
+      "season": "2024",
+      "weather": {
+        "frostNights": 3,
+        "heavyRainDays": 1,
+        "dryWeeks": 2
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 171,
+      "pctOfExpected": 87.5
+    },
+    {
+      "fieldId": "field-ia-16",
+      "season": "2024",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 185,
+      "pctOfExpected": 94.8
+    },
+    {
+      "fieldId": "field-ia-17",
+      "season": "2024",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 178,
+      "pctOfExpected": 91.3
+    },
+    {
+      "fieldId": "field-ia-18",
+      "season": "2024",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 198,
+      "pctOfExpected": 101.3
+    },
+    {
+      "fieldId": "field-ia-19",
+      "season": "2024",
+      "weather": {
+        "frostNights": 2,
+        "heavyRainDays": 2,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 172,
+      "pctOfExpected": 88.3
+    },
+    {
+      "fieldId": "field-ia-20",
+      "season": "2024",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 62,
+      "pctOfExpected": 107.5
+    },
+    {
+      "fieldId": "field-ia-21",
+      "season": "2024",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 205,
+      "pctOfExpected": 105
+    },
+    {
+      "fieldId": "field-ia-22",
+      "season": "2024",
+      "weather": {
+        "frostNights": 2,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 176,
+      "pctOfExpected": 90.4
+    },
+    {
+      "fieldId": "field-ia-23",
+      "season": "2024",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 1,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 169,
+      "pctOfExpected": 86.5
+    },
+    {
+      "fieldId": "field-ia-24",
+      "season": "2024",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 208,
+      "pctOfExpected": 106.6
+    },
+    {
+      "fieldId": "field-ia-25",
+      "season": "2024",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 50,
+      "pctOfExpected": 85.9
+    },
+    {
+      "fieldId": "field-ia-26",
+      "season": "2024",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 2
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 188,
+      "pctOfExpected": 96.2
+    },
+    {
+      "fieldId": "field-ia-27",
+      "season": "2024",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 2
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 187,
+      "pctOfExpected": 95.8
+    },
+    {
+      "fieldId": "field-ia-28",
+      "season": "2024",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 59,
+      "pctOfExpected": 101.9
+    },
+    {
+      "fieldId": "field-ia-29",
+      "season": "2024",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 3,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 61,
+      "pctOfExpected": 104.8
+    },
+    {
+      "fieldId": "field-ia-30",
+      "season": "2024",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 3,
+        "dryWeeks": 2
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 56,
+      "pctOfExpected": 96.9
+    },
+    {
+      "fieldId": "field-ia-31",
+      "season": "2024",
+      "weather": {
+        "frostNights": 2,
+        "heavyRainDays": 2,
+        "dryWeeks": 2
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 43,
+      "pctOfExpected": 74.9
+    },
+    {
+      "fieldId": "field-ia-32",
+      "season": "2024",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 57,
+      "pctOfExpected": 98.9
+    },
+    {
+      "fieldId": "field-ia-33",
+      "season": "2024",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 3
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 51,
+      "pctOfExpected": 87.7
+    },
+    {
+      "fieldId": "field-ia-34",
+      "season": "2024",
+      "weather": {
+        "frostNights": 2,
+        "heavyRainDays": 2,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 54,
+      "pctOfExpected": 93
+    },
+    {
+      "fieldId": "field-ia-35",
+      "season": "2024",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 57,
+      "pctOfExpected": 98.2
+    },
+    {
+      "fieldId": "field-ia-36",
+      "season": "2024",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 185,
+      "pctOfExpected": 95.1
+    },
+    {
+      "fieldId": "field-ia-37",
+      "season": "2024",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 56,
+      "pctOfExpected": 97.2
+    },
+    {
+      "fieldId": "field-ia-38",
+      "season": "2024",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 56,
+      "pctOfExpected": 96.8
+    },
+    {
+      "fieldId": "field-ia-39",
+      "season": "2024",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 191,
+      "pctOfExpected": 98
+    },
+    {
+      "fieldId": "field-ia-40",
+      "season": "2024",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 217,
+      "pctOfExpected": 111.2
+    },
+    {
+      "fieldId": "field-ia-41",
+      "season": "2024",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 49,
+      "pctOfExpected": 84.4
+    },
+    {
+      "fieldId": "field-ia-42",
+      "season": "2024",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 53,
+      "pctOfExpected": 91.7
+    },
+    {
+      "fieldId": "field-ia-43",
+      "season": "2024",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 2
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 175,
+      "pctOfExpected": 89.8
+    },
+    {
+      "fieldId": "field-ia-44",
+      "season": "2024",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 3,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 182,
+      "pctOfExpected": 93.3
+    },
+    {
+      "fieldId": "field-ia-45",
+      "season": "2024",
+      "weather": {
+        "frostNights": 2,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 58,
+      "pctOfExpected": 99.8
+    },
+    {
+      "fieldId": "field-ia-46",
+      "season": "2024",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 190,
+      "pctOfExpected": 97.5
+    },
+    {
+      "fieldId": "field-ia-47",
+      "season": "2024",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 191,
+      "pctOfExpected": 97.7
+    },
+    {
+      "fieldId": "field-ia-48",
+      "season": "2024",
+      "weather": {
+        "frostNights": 2,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 57,
+      "pctOfExpected": 99
+    },
+    {
+      "fieldId": "field-ia-01",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 162,
+      "pctOfExpected": 82.9
+    },
+    {
+      "fieldId": "field-ia-02",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 178,
+      "pctOfExpected": 91.1
+    },
+    {
+      "fieldId": "field-ia-03",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 56,
+      "pctOfExpected": 96.3
+    },
+    {
+      "fieldId": "field-ia-04",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 61,
+      "pctOfExpected": 104.8
+    },
+    {
+      "fieldId": "field-ia-05",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 56,
+      "pctOfExpected": 96.7
+    },
+    {
+      "fieldId": "field-ia-06",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 186,
+      "pctOfExpected": 95.6
+    },
+    {
+      "fieldId": "field-ia-07",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 211,
+      "pctOfExpected": 108.2
+    },
+    {
+      "fieldId": "field-ia-08",
+      "season": "2025",
+      "weather": {
+        "frostNights": 2,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 54,
+      "pctOfExpected": 93.5
+    },
+    {
+      "fieldId": "field-ia-09",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 52,
+      "pctOfExpected": 89.6
+    },
+    {
+      "fieldId": "field-ia-10",
+      "season": "2025",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 50,
+      "pctOfExpected": 85.5
+    },
+    {
+      "fieldId": "field-ia-11",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 189,
+      "pctOfExpected": 96.8
+    },
+    {
+      "fieldId": "field-ia-12",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 197,
+      "pctOfExpected": 100.8
+    },
+    {
+      "fieldId": "field-ia-13",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 60,
+      "pctOfExpected": 102.9
+    },
+    {
+      "fieldId": "field-ia-14",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 203,
+      "pctOfExpected": 104.2
+    },
+    {
+      "fieldId": "field-ia-15",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 206,
+      "pctOfExpected": 105.5
+    },
+    {
+      "fieldId": "field-ia-16",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 194,
+      "pctOfExpected": 99.5
+    },
+    {
+      "fieldId": "field-ia-17",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 2,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 182,
+      "pctOfExpected": 93.1
+    },
+    {
+      "fieldId": "field-ia-18",
+      "season": "2025",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 2,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 196,
+      "pctOfExpected": 100.4
+    },
+    {
+      "fieldId": "field-ia-19",
+      "season": "2025",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 171,
+      "pctOfExpected": 87.8
+    },
+    {
+      "fieldId": "field-ia-20",
+      "season": "2025",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 1,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 58,
+      "pctOfExpected": 100.8
+    },
+    {
+      "fieldId": "field-ia-21",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 214,
+      "pctOfExpected": 109.9
+    },
+    {
+      "fieldId": "field-ia-22",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 191,
+      "pctOfExpected": 97.7
+    },
+    {
+      "fieldId": "field-ia-23",
+      "season": "2025",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 0,
+        "dryWeeks": 2
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 176,
+      "pctOfExpected": 90.2
+    },
+    {
+      "fieldId": "field-ia-24",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 204,
+      "pctOfExpected": 104.5
+    },
+    {
+      "fieldId": "field-ia-25",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 3
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 48,
+      "pctOfExpected": 82.9
+    },
+    {
+      "fieldId": "field-ia-26",
+      "season": "2025",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 0,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 183,
+      "pctOfExpected": 94
+    },
+    {
+      "fieldId": "field-ia-27",
+      "season": "2025",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 174,
+      "pctOfExpected": 89.3
+    },
+    {
+      "fieldId": "field-ia-28",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 62,
+      "pctOfExpected": 106.8
+    },
+    {
+      "fieldId": "field-ia-29",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 3
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 62,
+      "pctOfExpected": 107.5
+    },
+    {
+      "fieldId": "field-ia-30",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 3,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 60,
+      "pctOfExpected": 102.7
+    },
+    {
+      "fieldId": "field-ia-31",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 52,
+      "pctOfExpected": 89.7
+    },
+    {
+      "fieldId": "field-ia-32",
+      "season": "2025",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 2,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 56,
+      "pctOfExpected": 96.7
+    },
+    {
+      "fieldId": "field-ia-33",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 53,
+      "pctOfExpected": 92
+    },
+    {
+      "fieldId": "field-ia-34",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 60,
+      "pctOfExpected": 102.7
+    },
+    {
+      "fieldId": "field-ia-35",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 3
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 53,
+      "pctOfExpected": 90.9
+    },
+    {
+      "fieldId": "field-ia-36",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 183,
+      "pctOfExpected": 93.8
+    },
+    {
+      "fieldId": "field-ia-37",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 60,
+      "pctOfExpected": 103.6
+    },
+    {
+      "fieldId": "field-ia-38",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 56,
+      "pctOfExpected": 97.1
+    },
+    {
+      "fieldId": "field-ia-39",
+      "season": "2025",
+      "weather": {
+        "frostNights": 2,
+        "heavyRainDays": 1,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 178,
+      "pctOfExpected": 91.5
+    },
+    {
+      "fieldId": "field-ia-40",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 2,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 208,
+      "pctOfExpected": 106.7
+    },
+    {
+      "fieldId": "field-ia-41",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 51,
+      "pctOfExpected": 87.9
+    },
+    {
+      "fieldId": "field-ia-42",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 6,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 54,
+      "pctOfExpected": 92.6
+    },
+    {
+      "fieldId": "field-ia-43",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 2
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 191,
+      "pctOfExpected": 98.2
+    },
+    {
+      "fieldId": "field-ia-44",
+      "season": "2025",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 196,
+      "pctOfExpected": 100.4
+    },
+    {
+      "fieldId": "field-ia-45",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 60,
+      "pctOfExpected": 104
+    },
+    {
+      "fieldId": "field-ia-46",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 206,
+      "pctOfExpected": 105.4
+    },
+    {
+      "fieldId": "field-ia-47",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 1
+      },
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 190,
+      "pctOfExpected": 97.2
+    },
+    {
+      "fieldId": "field-ia-48",
+      "season": "2025",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      },
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 62,
+      "pctOfExpected": 106.7
+    }
+  ],
+  "current": [
+    {
+      "fieldId": "field-ia-01",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-02",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-03",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-04",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 2,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-05",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 2,
+        "heavyRainDays": 0,
+        "dryWeeks": 5
+      }
+    },
+    {
+      "fieldId": "field-ia-06",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-07",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 1
+      }
+    },
+    {
+      "fieldId": "field-ia-08",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 2,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-09",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-10",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-11",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-12",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-13",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 1
+      }
+    },
+    {
+      "fieldId": "field-ia-14",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-15",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-16",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-17",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-18",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 1
+      }
+    },
+    {
+      "fieldId": "field-ia-19",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-20",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 0,
+        "dryWeeks": 1
+      }
+    },
+    {
+      "fieldId": "field-ia-21",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-22",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 2
+      }
+    },
+    {
+      "fieldId": "field-ia-23",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-24",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 1
+      }
+    },
+    {
+      "fieldId": "field-ia-25",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-26",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 2,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-27",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-28",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-29",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-30",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 2,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-31",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-32",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-33",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-34",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-35",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-36",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-37",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 1
+      }
+    },
+    {
+      "fieldId": "field-ia-38",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-39",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-40",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 1
+      }
+    },
+    {
+      "fieldId": "field-ia-41",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-42",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-43",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-44",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 1,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-45",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-46",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 2
+      }
+    },
+    {
+      "fieldId": "field-ia-47",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 0,
+        "dryWeeks": 0
+      }
+    },
+    {
+      "fieldId": "field-ia-48",
+      "season": "2026",
+      "asOf": "2026-05-31",
+      "weather": {
+        "frostNights": 0,
+        "heavyRainDays": 1,
+        "dryWeeks": 0
+      }
+    }
+  ],
+  "hiddenFieldEffect": {
+    "field-ia-01": -13.1,
+    "field-ia-02": -7.9,
+    "field-ia-03": -2.2,
+    "field-ia-04": 9.2,
+    "field-ia-05": -4.4,
+    "field-ia-06": -8.4,
+    "field-ia-07": 5.5,
+    "field-ia-08": 2.9,
+    "field-ia-09": -9.6,
+    "field-ia-10": -9.2,
+    "field-ia-11": 0.1,
+    "field-ia-12": 0.9,
+    "field-ia-13": 2.9,
+    "field-ia-14": 2.2,
+    "field-ia-15": 5.2,
+    "field-ia-16": 0.6,
+    "field-ia-17": -6.7,
+    "field-ia-18": 3.4,
+    "field-ia-19": -2.6,
+    "field-ia-20": 5.4,
+    "field-ia-21": 9.4,
+    "field-ia-22": -1.3,
+    "field-ia-23": -5.9,
+    "field-ia-24": 6.6,
+    "field-ia-25": -11.1,
+    "field-ia-26": -0.3,
+    "field-ia-27": -2.8,
+    "field-ia-28": 7,
+    "field-ia-29": 10.6,
+    "field-ia-30": 7.3,
+    "field-ia-31": -12.2,
+    "field-ia-32": 4.3,
+    "field-ia-33": -5.7,
+    "field-ia-34": 2.1,
+    "field-ia-35": -3.1,
+    "field-ia-36": -1.6,
+    "field-ia-37": 2.8,
+    "field-ia-38": -0.6,
+    "field-ia-39": -1,
+    "field-ia-40": 10,
+    "field-ia-41": -12.3,
+    "field-ia-42": -0.3,
+    "field-ia-43": -3,
+    "field-ia-44": 2.4,
+    "field-ia-45": 6,
+    "field-ia-46": 3.7,
+    "field-ia-47": 0.3,
+    "field-ia-48": 8.1
+  }
+}

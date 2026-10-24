@@ -18,3 +18,8 @@ __pycache__/
 # 로컬 도구
 .claude/settings.local.json
 .bridge/
+
+# 로컬 에이전트 스킬 (taste-skill 등)
+.agents/
+skills-lock.json
+.claude/skills/

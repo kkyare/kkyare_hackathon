@@ -175,7 +175,39 @@ for (const season of ['2023', '2024', '2025']) {
   }
 }
 
+// 시즌별 기상 지표와 실제 생산량 (모든 필지).
+// 생산량 % = 100 - 날씨 피해(필지 기상 지표에서 결정) + 필지 고유 효과(토양·관리, 수확 기록이 쌓여야 보임) + 잡음
+let yseed = 23
+const yrand = () => ((yseed = (yseed * 16807) % 2147483647) / 2147483647)
+const gauss = () => (yrand() + yrand() + yrand() - 1.5) * 2 // 표준편차 약 1
+const poisson = (lam) => { let k = 0, p = Math.exp(-lam), c = p; const u = yrand(); while (u > c && k < 30) { k++; p *= lam / k; c += p } return k }
+const fieldEffect = Object.fromEntries(portfolioFields.map((f) => [f.id, Math.round(gauss() * 6 * 10) / 10]))
+const SENS = { corn: { frost: 4.5, rain: 0.9, dry: 1.4 }, soybean: { frost: 4.0, rain: 1.1, dry: 1.1 }, orchard: { frost: 7.0, rain: 0.5, dry: 0.8 } } // 서리 한 밤의 피해는 싹이 난 뒤 늦서리 기준
+const seasonWeather = (f, c, scale = 1) => ({
+  frostNights: poisson((c.frostNightsMay10y / 10) * 0.5 * scale),
+  heavyRainDays: poisson((c.heavyRainDaysJun10y / 10) * 1.5 * scale),
+  dryWeeks: poisson((c.dryWeeksJul10y / 10) * 1.2 * scale),
+})
+const lossPct = (f, w) => { const s = SENS[f.crop]; return s.frost * w.frostNights + s.rain * w.heavyRainDays + s.dry * w.dryWeeks }
+const yields = []
+for (const season of ['2022', '2023', '2024', '2025']) {
+  for (const f of portfolioFields) {
+    const c = climatology.find((x) => x.fieldId === f.id)
+    const weather = seasonWeather(f, c)
+    const pctOfExpected = Math.round((100 - lossPct(f, weather) + fieldEffect[f.id] + gauss() * 2) * 10) / 10
+    yields.push({ fieldId: f.id, season, weather, expectedYieldBuAc: EXPECTED[f.crop], actualYieldBuAc: Math.round((EXPECTED[f.crop] * pctOfExpected) / 100), pctOfExpected })
+  }
+}
+// 2026 시즌: 5월까지의 기상 지표(시즌 진행 중). 5/12 늦서리를 반영해 골짜기 필지에 서리 밤 +1
+const current = portfolioFields.map((f) => {
+  const c = climatology.find((x) => x.fieldId === f.id)
+  const w = seasonWeather(f, c, 0.4)
+  if (f.terrain === 'valley' && f.id <= 'field-ia-08') w.frostNights += 2 // 5/12 늦서리와 그 전 주 서리
+  return { fieldId: f.id, season: '2026', asOf: '2026-05-31', weather: w }
+})
+
 write('downscaling/fields.json', { demo: true, note: '필지는 fixtures/common/fields.json과 같음', station, fields })
+write('farm/yields.json', { demo: true, note: '필지별 시즌 기상 지표와 실제 생산량(평년 기대 대비 %). 2026은 5월까지의 기상 지표만 있음. 필지 고유 효과는 정답 확인용', seasons: ['2022', '2023', '2024', '2025'], yields, current, hiddenFieldEffect: fieldEffect })
 write('downscaling/snapshots.json', { demo: true, snapshots })
 write('downscaling/station-observations.json', { demo: true, observations: [stationObs] })
 write('downscaling/field-observations.json', { demo: true, note: '농장 센서 목업 (연결된 농장의 필지 실측)', observations: fieldObs })
