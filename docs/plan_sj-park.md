@@ -54,18 +54,21 @@
 - [ ] **2:00 1차 합치기**: 실제 패밀리 1개가 generate → run → score 한 바퀴
 
 ### 4. 보정 곡선·리더보드·누출 감사 (2:00-3:30)
-- [ ] `src/arena/calibration.ts`: 10구간 binning, 모델별 (예측 확률, 실제 빈도, 개수)
+- [x] `src/arena/calibration.ts`: 10구간 binning, 모델별 (예측 확률, 실제 빈도, 개수) + Brier 분해(reliability·resolution·uncertainty)
+  - 실제 결과는 `Score.outcome`(types.ts에 추가), 없으면 brier에서 역산
 - [ ] 보정 곡선(Recharts) + 대각선
 - [x] 리더보드 집계: `leaderboard()`(패밀리별 평균 skill을 다시 평균), `topModelMissRate()`
 - [ ] 리더보드 화면: "최고 모델도 틀린 과제 비율" 강조
 - [ ] 누출 감사: 도구 기록 집계 + Claude로 rationale 검사(t0 이후 사실을 아는 듯 말하는가) → 적발 카드
 
 ### 5. 납품 (2:00-3:30)
-- [ ] `src/arena/export.ts`: `buildTaskPack(tasks, { snapshots, resolutions?, holdout })` — `meta.marketValueUsd = 과제 수 × $100`(9-4 가정), `demo: true`
+- [x] `src/arena/export.ts`: `buildTaskPack(tasks, { snapshots, resolutions?, holdout })` — `meta.marketValueUsd = 과제 수 × $100`(9-4 가정), `demo: true`
   - 과제가 참조하는 `snapshots`를 반드시 포함 (묶음만으로 재현)
   - 공개 피드는 `resolutions` 포함·`includesResolution: true`, 비공개 평가셋(holdout)은 빼고 `false`
+- [x] JSONL `toJsonl(pack)`: 한 줄 = 과제 + 스냅샷 (+ t0~resolveAt 관측)
 - [ ] `POST /api/export` → `TaskPack` JSON, JSONL 다운로드
-- [ ] 데이터 카드: 출처(Open-Meteo·IEM ASOS·NOAA CPC), 기간·지역, 패밀리별 개수, 누출 방지 방식, Arena baseline 점수, "가정" 표시
+- [x] 데이터 카드 `dataCard(pack, baseline)` (Markdown)
+- [ ] 데이터 카드 화면: 출처(Open-Meteo·IEM ASOS·NOAA CPC), 기간·지역, 패밀리별 개수, 누출 방지 방식, Arena baseline 점수, "가정" 표시
 
 ### 6. P1 verifiers (3:30-4:00)
 - [ ] `py/verifiers_env/`: TaskPack JSONL 로드, Brier/CRPS/regret reward, `load_environment()`
