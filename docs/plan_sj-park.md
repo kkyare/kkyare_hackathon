@@ -75,7 +75,11 @@
 - [ ] 데이터 카드 화면: 출처(Open-Meteo·IEM ASOS·NOAA CPC), 기간·지역, 패밀리별 개수, 누출 방지 방식, Arena baseline 점수, "가정" 표시
 
 ### 6. P1 verifiers (3:30-4:00)
-- [ ] `py/verifiers_env/`: TaskPack JSONL 로드, Brier/CRPS/regret reward, `load_environment()`
+- [x] `py/verifiers_env/`: TaskPack JSONL 로드, Brier/regret reward, `load_environment()` (`SingleTurnEnv`, 보상 = 결정 + 0.5·Brier + 0.1·형식)
+  - 정답은 내보내기 JSONL의 `label.outcome`(TS 패밀리 `score()`로 판정, holdout이면 빠짐)을 쓴다 — Python이 패밀리 규칙을 다시 구현하지 않게
+  - 샘플 `data/sample.jsonl`: 나우캐스팅 데모 12개 (위반 6·정상 6)
+- [ ] CRPS 보상 (다운스케일링 패밀리 main 머지 후)
+- [ ] `prime env push`
 - [ ] 안 되면 JSON 내보내기로 충분
 
 ## 검증

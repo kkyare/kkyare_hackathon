@@ -1,3 +1,4 @@
+import { families } from '../../../families/index'
 import { BadRequest, handleExport, type ExportRequest } from '../../../arena/api'
 
 const json = (body: unknown, status = 200) =>
@@ -14,7 +15,7 @@ export async function POST(req: Request): Promise<Response> {
   }
   const q = new URL(req.url).searchParams
   try {
-    const r = handleExport(body, { format: q.get('format') ?? undefined, holdout: q.get('holdout') === '1' })
+    const r = handleExport(body, { format: q.get('format') ?? undefined, holdout: q.get('holdout') === '1', families })
     const headers: Record<string, string> = { 'content-type': r.contentType }
     if (q.get('download') === '1') headers['content-disposition'] = `attachment; filename="${r.filename}"`
     return new Response(r.body, { headers })

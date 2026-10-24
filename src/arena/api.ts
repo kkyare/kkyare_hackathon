@@ -2,7 +2,7 @@
 import { ARENA_MODELS, runAgent } from '../core/agent'
 import type { Answer, Family, FamilyId, Score, Task } from '../core/types'
 import { taskData } from './data'
-import { buildTaskPack, dataCard, toJsonl } from './export'
+import { buildTaskPack, dataCard, labelOf, toJsonl, type Label } from './export'
 import { replayRunner, runArena, type AgentRunner, type ArenaError, type ArenaRun } from './run'
 import { scoreboard } from './scoreboard'
 
@@ -63,7 +63,7 @@ export interface ExportRequest { tasks?: Task[]; scores?: Score[] }   // scoresê
 
 export interface ExportResult { body: string; contentType: string; filename: string }
 
-export function handleExport(body: ExportRequest, opts: { format?: string; holdout?: boolean } = {}): ExportResult {
+export function handleExport(body: ExportRequest, opts: { format?: string; holdout?: boolean; families?: Partial<Record<FamilyId, Family>> } = {}): ExportResult {
   if (!Array.isArray(body.tasks) || body.tasks.length === 0) throw new BadRequest('tasks must be a non-empty array')
   const format = (opts.format ?? 'json') as ExportFormat
   if (!['json', 'jsonl', 'card'].includes(format)) throw new BadRequest('format must be json | jsonl | card')
@@ -76,7 +76,15 @@ export function handleExport(body: ExportRequest, opts: { format?: string; holdo
     throw new BadRequest((e as Error).message)
   }
   const name = `${pack.id}${opts.holdout ? '-holdout' : ''}`
-  if (format === 'jsonl') return { body: toJsonl(pack), contentType: 'application/x-ndjson', filename: `${name}.jsonl` }
+  if (format === 'jsonl') {
+    const labels = new Map<string, Label>()
+    for (const task of opts.holdout ? [] : body.tasks) {
+      const family = opts.families?.[task.family], obs = data.getObservation(task), snap = data.getSnapshot(task.snapshotId)
+      const label = family && obs && snap ? labelOf(family, task, obs, snap) : undefined
+      if (label) labels.set(task.id, label)
+    }
+    return { body: toJsonl(pack, labels), contentType: 'application/x-ndjson', filename: `${name}.jsonl` }
+  }
   if (format === 'card') return { body: dataCard(pack, scoreboard(body.scores ?? [])), contentType: 'text/markdown; charset=utf-8', filename: `${name}.md` }
   return { body: JSON.stringify(pack), contentType: 'application/json', filename: `${name}.json` }
 }

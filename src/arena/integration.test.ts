@@ -83,7 +83,9 @@ describe('1차 합치기: 나우캐스팅 × Arena', () => {
 
 describe('납품: 나우캐스팅 과제 내보내기', () => {
   // 시나리오가 다른 과제 (같은 관측소 DSM)
-  const mixed = buildDemoTasks(Number.MAX_SAFE_INTEGER).tasks.filter(t => t.field.id === 'field-ia-01').slice(0, 3)
+  // 16Z 시작: gust-block은 위반, calm-go는 정상 (fixtures/README.md)
+  const mixed = buildDemoTasks(Number.MAX_SAFE_INTEGER).tasks
+    .filter(t => t.field.id === 'field-ia-01' && t.t0 === '2026-06-10T16:00:00.000Z')
 
   it('TaskPack: 스냅샷 포함, 정답은 과제마다 자기 시나리오 관측', () => {
     expect(new Set(mixed.map(t => t.snapshotId.split('@')[1])).size).toBe(3)
@@ -99,13 +101,20 @@ describe('납품: 나우캐스팅 과제 내보내기', () => {
   })
 
   it('JSONL·holdout·데이터 카드', async () => {
-    const lines = handleExport({ tasks: mixed }, { format: 'jsonl' }).body.trim().split('\n').map(l => JSON.parse(l))
+    const lines = handleExport({ tasks: mixed }, { format: 'jsonl', families }).body.trim().split('\n').map(l => JSON.parse(l))
     expect(lines.map(l => l.id)).toEqual(mixed.map(t => t.id))
     expect(lines[0].snapshot.id).toBe(mixed[0].snapshotId)
     expect(lines[0].resolution.hourly.length).toBeGreaterThan(0)
+    // 라벨은 패밀리 채점과 같은 결과: p = 1로 채점해 brier 0이면 사건 발생
+    for (const [i, t] of mixed.entries()) {
+      const s = families.nowcasting!.score(t, { taskId: t.id, model: 'x', probability: 1, rationale: '', toolCalls: [] }, loadObservationForTask(t), loadSnapshotForTask(t))
+      expect(lines[i].label.outcome).toBe(s.brier === 0 ? 1 : 0)
+    }
+    expect(new Set(lines.map(l => l.label.outcome)).size).toBe(2)   // 시나리오 3개에 위반·정상이 섞여 있음
 
-    const holdout = handleExport({ tasks: mixed }, { format: 'jsonl', holdout: true })
+    const holdout = handleExport({ tasks: mixed }, { format: 'jsonl', holdout: true, families })
     expect(holdout.body).not.toContain('"resolution"')
+    expect(holdout.body).not.toContain('"label"')
     expect(holdout.filename).toMatch(/-holdout\.jsonl$/)
 
     const { scores } = await handleArenaRun({ tasks: mixed, models: ['claude-opus-5-5'] }, { families, saved: [], mock: false, live: copyForecast })

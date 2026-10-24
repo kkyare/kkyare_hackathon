@@ -1,0 +1,13 @@
+[project]
+name = "weather-decision-gym"
+version = "0.1.0"
+description = "Weather Decision Gym: forecast decisions scored by real weather (Brier + regret). DEMO DATA sample included."
+requires-python = ">=3.11"
+dependencies = ["verifiers==0.3.1", "datasets"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build]
+include = ["weather_decision_gym.py", "data/*.jsonl"]

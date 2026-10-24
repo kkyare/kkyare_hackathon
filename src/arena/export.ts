@@ -1,5 +1,5 @@
 // 납품: TaskPack(JSON), RL 파이프라인용 JSONL, 데이터 카드(Markdown)
-import type { FamilyId, Observation, Snapshot, Task, TaskPack } from '../core/types'
+import type { Family, FamilyId, Observation, Snapshot, Task, TaskPack } from '../core/types'
 import type { Cell } from './scoreboard'
 
 export const PRICE_PER_TASK_USD = 100      // PLAN 9-4 가정값 (시장 하단)
@@ -53,15 +53,28 @@ function resolutionSlice(task: Task, obs: Observation | undefined): Observation 
   }
 }
 
-// 한 줄 = 과제 하나. 입력(t0 스냅샷)을 같이 넣어 줄 단위로 독립 실행되게 하고, 정답이 있으면 붙인다.
-export function toJsonl(pack: TaskPack): string {
+// 정답 라벨: 패밀리 score()로 판정한 이진 사건 결과. Python 쪽(verifiers)이 규칙을 다시 구현하지 않게 미리 붙인다
+export interface Label { outcome: 0 | 1 }
+
+export function labelOf(family: Family, task: Task, obs: Observation, snapshot: Snapshot): Label | undefined {
+  // p = 0으로 채점하면 brier = (0 - y)² = y
+  const s = family.score(task, { taskId: task.id, model: 'label', probability: 0, rationale: '', toolCalls: [] }, obs, snapshot)
+  if (s.outcome === 0 || s.outcome === 1) return { outcome: s.outcome }
+  if (typeof s.brier === 'number') return { outcome: s.brier > 0.5 ? 1 : 0 }
+  return undefined
+}
+
+// 한 줄 = 과제 하나. 입력(t0 스냅샷)을 같이 넣어 줄 단위로 독립 실행되게 하고, 정답(관측·라벨)이 있으면 붙인다.
+export function toJsonl(pack: TaskPack, labels: Map<string, Label> = new Map()): string {
   const snaps = new Map(pack.snapshots.map(s => [s.id, s]))
   return pack.tasks.map((t, i) => {
     const resolution = pack.resolutions?.[i]
+    const label = labels.get(t.id)
     return JSON.stringify({
       id: t.id, family: t.family, prompt: t.prompt, t0: t.t0, resolveAt: t.resolveAt,
       field: t.field, context: t.context, snapshot: snaps.get(t.snapshotId),
       ...(pack.meta.includesResolution && resolution && { resolution }),
+      ...(pack.meta.includesResolution && label && { label }),
     })
   }).join('\n') + '\n'
 }
