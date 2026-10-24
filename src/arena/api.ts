@@ -1,8 +1,10 @@
-// POST /api/arena/run 본체. route.ts는 요청·응답 변환만 한다.
+// POST /api/arena/run, POST /api/export 본체. route.ts는 요청·응답 변환만 한다.
 import { ARENA_MODELS, runAgent } from '../core/agent'
 import type { Answer, Family, FamilyId, Score, Task } from '../core/types'
 import { taskData } from './data'
+import { buildTaskPack, dataCard, toJsonl } from './export'
 import { replayRunner, runArena, type AgentRunner, type ArenaError, type ArenaRun } from './run'
+import { scoreboard } from './scoreboard'
 
 export interface ArenaRunRequest { tasks?: Task[]; taskIds?: string[]; models?: string[] }
 
@@ -51,4 +53,30 @@ export async function handleArenaRun(body: ArenaRunRequest, deps: ArenaRunDeps):
 
   const { answers, scores, errors } = await runArena({ tasks, models, families: deps.families, runner, ...taskData(tasks) })
   return { answers, scores, errors, live: liveCount > 0 && replayed === 0, replayed }
+}
+
+// ---- POST /api/export ----------------------------------------------------------
+
+export type ExportFormat = 'json' | 'jsonl' | 'card'
+
+export interface ExportRequest { tasks?: Task[]; scores?: Score[] }   // scores가 있으면 데이터 카드에 Arena baseline으로 넣는다
+
+export interface ExportResult { body: string; contentType: string; filename: string }
+
+export function handleExport(body: ExportRequest, opts: { format?: string; holdout?: boolean } = {}): ExportResult {
+  if (!Array.isArray(body.tasks) || body.tasks.length === 0) throw new BadRequest('tasks must be a non-empty array')
+  const format = (opts.format ?? 'json') as ExportFormat
+  if (!['json', 'jsonl', 'card'].includes(format)) throw new BadRequest('format must be json | jsonl | card')
+
+  const data = taskData(body.tasks)
+  let pack
+  try {
+    pack = buildTaskPack(body.tasks, { snapshots: data.snapshots, resolutionFor: data.getObservation, holdout: opts.holdout })
+  } catch (e) {
+    throw new BadRequest((e as Error).message)
+  }
+  const name = `${pack.id}${opts.holdout ? '-holdout' : ''}`
+  if (format === 'jsonl') return { body: toJsonl(pack), contentType: 'application/x-ndjson', filename: `${name}.jsonl` }
+  if (format === 'card') return { body: dataCard(pack, scoreboard(body.scores ?? [])), contentType: 'text/markdown; charset=utf-8', filename: `${name}.md` }
+  return { body: JSON.stringify(pack), contentType: 'application/json', filename: `${name}.json` }
 }

@@ -26,6 +26,7 @@ export function taskData(tasks: Task[]) {
     }
   }
   return {
+    snapshots: [...snapshots.values()],
     getSnapshot: (id: string) => snapshots.get(id),
     getObservation: (task: Task) => observations.get(task.id),
   }

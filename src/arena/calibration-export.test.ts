@@ -50,21 +50,29 @@ describe('export', () => {
     stationId: 'DSM',
     hourly: ['2026-05-11T23:00:00Z', '2026-05-12T06:00:00Z', '2026-05-12T20:00:00Z'].map(time => ({ time, tempF: 31, windMph: 3, gustMph: null, precipIn: 0 })),
   }
-  const otherObs: Observation = { stationId: 'AMW', hourly: [] }
+  const t2Obs: Observation = { stationId: 'DSM', hourly: [{ time: '2026-05-14T05:00:00Z', tempF: 40, windMph: 3, gustMph: null, precipIn: 0 }] }
+  // 같은 관측소(DSM)라도 과제마다 다른 관측
+  const resolutionFor = (t: Task) => (t.id === task.id ? obs : t2Obs)
 
-  it('참조하는 스냅샷만 담고 메타를 채운다', () => {
-    const pack = buildTaskPack([task, t2], { snapshots: [snapshot, otherSnap], resolutions: [obs, otherObs] })
+  it('참조하는 스냅샷만 담고, 정답은 과제 순서대로 t0~resolveAt 구간', () => {
+    const pack = buildTaskPack([task, t2], { snapshots: [snapshot, otherSnap], resolutionFor })
     expect(pack.snapshots.map(s => s.id)).toEqual([snapshot.id])
-    expect(pack.resolutions!.map(o => o.stationId)).toEqual(['DSM'])
+    expect(pack.resolutions!.map(o => o.hourly.map(h => h.time))).toEqual([['2026-05-12T06:00:00Z'], ['2026-05-14T05:00:00Z']])
     expect(pack.families).toEqual(['decision', 'downscaling'])
     expect(pack.meta).toMatchObject({ count: 2, marketValueUsd: 200, period: '2026-05-12 ~ 2026-05-14', demo: true, includesResolution: true })
   })
 
   it('비공개 평가셋은 정답을 뺀다', () => {
-    const pack = buildTaskPack([task], { snapshots: [snapshot], resolutions: [obs], holdout: true })
+    const pack = buildTaskPack([task], { snapshots: [snapshot], resolutionFor, holdout: true })
     expect(pack.resolutions).toBeUndefined()
     expect(pack.meta.includesResolution).toBe(false)
     expect(toJsonl(pack)).not.toContain('"resolution"')
+  })
+
+  it('정답을 하나도 못 찾으면 includesResolution false', () => {
+    const pack = buildTaskPack([task], { snapshots: [snapshot], resolutionFor: () => undefined })
+    expect(pack.meta.includesResolution).toBe(false)
+    expect(pack.resolutions).toBeUndefined()
   })
 
   it('스냅샷이 없으면 실패', () => {
@@ -73,7 +81,7 @@ describe('export', () => {
   })
 
   it('JSONL: 한 줄에 과제 하나, 스냅샷 포함, 정답은 t0~resolveAt 구간만', () => {
-    const pack = buildTaskPack([task], { snapshots: [snapshot], resolutions: [obs] })
+    const pack = buildTaskPack([task], { snapshots: [snapshot], resolutionFor })
     const lines = toJsonl(pack).trim().split('\n').map(l => JSON.parse(l))
     expect(lines).toHaveLength(1)
     expect(lines[0].snapshot.id).toBe(snapshot.id)

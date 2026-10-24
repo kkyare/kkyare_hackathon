@@ -68,8 +68,9 @@
 - [x] `src/arena/export.ts`: `buildTaskPack(tasks, { snapshots, resolutions?, holdout })` — `meta.marketValueUsd = 과제 수 × $100`(9-4 가정), `demo: true`
   - 과제가 참조하는 `snapshots`를 반드시 포함 (묶음만으로 재현)
   - 공개 피드는 `resolutions` 포함·`includesResolution: true`, 비공개 평가셋(holdout)은 빼고 `false`
+  - `resolutions[i]` = `tasks[i]`의 t0~resolveAt 관측 (같은 관측소라도 시나리오마다 달라 과제 단위로 담음)
 - [x] JSONL `toJsonl(pack)`: 한 줄 = 과제 + 스냅샷 (+ t0~resolveAt 관측)
-- [ ] `POST /api/export` → `TaskPack` JSON, JSONL 다운로드
+- [x] `POST /api/export?format=json|jsonl|card&holdout=1&download=1` `{ tasks, scores? }` → TaskPack JSON / JSONL / 데이터 카드
 - [x] 데이터 카드 `dataCard(pack, baseline)` (Markdown)
 - [ ] 데이터 카드 화면: 출처(Open-Meteo·IEM ASOS·NOAA CPC), 기간·지역, 패밀리별 개수, 누출 방지 방식, Arena baseline 점수, "가정" 표시
 

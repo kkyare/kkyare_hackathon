@@ -4,8 +4,8 @@ import { describe, expect, it } from 'vitest'
 import { runAgent, type MessagesClient } from '../core/agent'
 import type { Task } from '../core/types'
 import { families } from '../families/index'
-import { buildDemoTasks, loadSnapshotForTask, referenceProbability } from '../families/nowcasting/index'
-import { BadRequest, handleArenaRun } from './api'
+import { buildDemoTasks, loadObservationForTask, loadSnapshotForTask, referenceProbability } from '../families/nowcasting/index'
+import { BadRequest, handleArenaRun, handleExport } from './api'
 import type { AgentRunner, ArenaRun } from './run'
 import { scoreboard } from './scoreboard'
 
@@ -78,5 +78,45 @@ describe('1차 합치기: 나우캐스팅 × Arena', () => {
     await expect(handleArenaRun({}, deps)).rejects.toBeInstanceOf(BadRequest)
     await expect(handleArenaRun({ taskIds: ['x'] }, deps)).rejects.toBeInstanceOf(BadRequest)
     await expect(handleArenaRun({ tasks, models: [] }, deps)).rejects.toBeInstanceOf(BadRequest)
+  })
+})
+
+describe('납품: 나우캐스팅 과제 내보내기', () => {
+  // 시나리오가 다른 과제 (같은 관측소 DSM)
+  const mixed = buildDemoTasks(Number.MAX_SAFE_INTEGER).tasks.filter(t => t.field.id === 'field-ia-01').slice(0, 3)
+
+  it('TaskPack: 스냅샷 포함, 정답은 과제마다 자기 시나리오 관측', () => {
+    expect(new Set(mixed.map(t => t.snapshotId.split('@')[1])).size).toBe(3)
+    const r = handleExport({ tasks: mixed })
+    const pack = JSON.parse(r.body)
+    expect(r.contentType).toBe('application/json')
+    expect(pack.snapshots).toHaveLength(3)
+    expect(pack.meta).toMatchObject({ count: 3, marketValueUsd: 300, demo: true, includesResolution: true })
+    mixed.forEach((t, i) => {
+      const own = loadObservationForTask(t).hourly.filter(h => Date.parse(h.time) >= Date.parse(t.t0) && Date.parse(h.time) <= Date.parse(t.resolveAt))
+      expect(pack.resolutions[i].hourly).toEqual(own)
+    })
+  })
+
+  it('JSONL·holdout·데이터 카드', async () => {
+    const lines = handleExport({ tasks: mixed }, { format: 'jsonl' }).body.trim().split('\n').map(l => JSON.parse(l))
+    expect(lines.map(l => l.id)).toEqual(mixed.map(t => t.id))
+    expect(lines[0].snapshot.id).toBe(mixed[0].snapshotId)
+    expect(lines[0].resolution.hourly.length).toBeGreaterThan(0)
+
+    const holdout = handleExport({ tasks: mixed }, { format: 'jsonl', holdout: true })
+    expect(holdout.body).not.toContain('"resolution"')
+    expect(holdout.filename).toMatch(/-holdout\.jsonl$/)
+
+    const { scores } = await handleArenaRun({ tasks: mixed, models: ['claude-opus-5-5'] }, { families, saved: [], mock: false, live: copyForecast })
+    const card = handleExport({ tasks: mixed, scores }, { format: 'card' }).body
+    expect(card).toContain('나우캐스팅')
+    expect(card).toContain('| claude-opus-5-5 | nowcasting | 3 |')
+  })
+
+  it('잘못된 요청', () => {
+    expect(() => handleExport({})).toThrow(BadRequest)
+    expect(() => handleExport({ tasks: mixed }, { format: 'csv' })).toThrow(BadRequest)
+    expect(() => handleExport({ tasks: [{ ...mixed[0], family: 's2s' }] })).toThrow(BadRequest)
   })
 })
