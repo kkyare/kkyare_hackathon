@@ -1,9 +1,11 @@
 'use client'
-// TODO(shadcn): components/ui 가 생기면 StepCard -> Card, Badge -> Badge, <select> -> Select, <button> -> Button 으로 교체.
 // TODO(next): ?scenario= 읽기는 next/navigation useSearchParams(+Suspense) 로 교체 가능. 지금은 Next 의존 없이 window 로 읽는다.
-import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type ComponentProps, type ReactNode } from 'react'
 // 공통 계약 타입만 type-only 로 가져온다 (런타임 import 없음). 서버 전용 replay.ts·arena/api.ts(node:fs, SDK)는 끌어오지 않는다.
-import type { Answer, Score, Task } from '../../core/types'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Section } from '@/components/ui/card'
+import type { Answer, Score, Task } from '@/core/types'
 
 type Status = 'GO' | 'CAUTION' | 'NO_GO'
 type Frame = { time: string; windMph: number | null; gustMph: number | null; precipIn: number | null; status: Status; reasons: string[] }
@@ -49,25 +51,22 @@ const ARENA_MODELS = [
   { id: 'claude-opus-5-5', label: 'Opus' },
 ] as const
 
+type BadgeTone = NonNullable<ComponentProps<typeof Badge>['tone']>
 const UI = {
-  card: 'flex min-w-0 flex-col gap-4 border-t border-[var(--ink)] pt-3',
-  badge: 'inline-flex items-center gap-1 whitespace-nowrap rounded-sm px-1.5 py-0.5 text-xs font-medium ring-1 ring-inset',
   label: 'text-xs text-[var(--ink-2)]',
   mono: 'tnum',
-  button:
-    'inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-sm bg-[var(--ink)] px-3 py-1.5 text-sm font-medium text-[var(--paper-2)] hover:bg-[var(--ink-2)] disabled:cursor-not-allowed disabled:opacity-40',
 }
-const TONE = {
-  neutral: 'bg-zinc-100 text-zinc-700 ring-zinc-200',
-  demo: 'bg-amber-50 text-amber-800 ring-amber-200',
-  info: 'bg-sky-50 text-sky-700 ring-sky-200',
-  live: 'bg-emerald-50 text-emerald-700 ring-emerald-200',
-  error: 'bg-red-50 text-red-700 ring-red-200',
+const TONE: Record<'neutral' | 'demo' | 'info' | 'live' | 'error', BadgeTone> = {
+  neutral: 'plain',
+  demo: 'corn',
+  info: 'frost',
+  live: 'canopy',
+  error: 'loam',
 }
-const STATUS_STYLE: Record<Status, { chip: string; text: string; bar: string; barSoft: string }> = {
-  GO: { chip: 'bg-emerald-50 text-emerald-700 ring-emerald-200', text: 'text-emerald-700', bar: 'bg-emerald-500', barSoft: 'bg-emerald-300' },
-  CAUTION: { chip: 'bg-amber-50 text-amber-700 ring-amber-200', text: 'text-amber-700', bar: 'bg-amber-500', barSoft: 'bg-amber-300' },
-  NO_GO: { chip: 'bg-red-50 text-red-700 ring-red-200', text: 'text-red-700', bar: 'bg-red-500', barSoft: 'bg-red-300' },
+const STATUS_STYLE: Record<Status, { chip: BadgeTone; text: string; bar: string; barSoft: string }> = {
+  GO: { chip: 'canopy', text: 'text-emerald-700', bar: 'bg-emerald-500', barSoft: 'bg-emerald-300' },
+  CAUTION: { chip: 'corn', text: 'text-amber-700', bar: 'bg-amber-500', barSoft: 'bg-amber-300' },
+  NO_GO: { chip: 'loam', text: 'text-red-700', bar: 'bg-red-500', barSoft: 'bg-red-300' },
 }
 const MODEL_LABEL: Record<string, string> = {
   ncep_hrrr_conus: 'HRRR',
@@ -94,13 +93,9 @@ const pct = (v: number | null | undefined) => (v == null ? '—' : `${Math.round
 const usd = (v: number) => `$${v.toLocaleString('en-US', { maximumFractionDigits: 0 })}`
 const signed = (v: number) => `${v > 0 ? '+' : ''}${v.toFixed(2)}`
 
-function Badge({ tone, children }: { tone: string; children: ReactNode }) {
-  return <span className={`${UI.badge} ${tone}`}>{children}</span>
-}
-
 function StepCard({ step, title, aside, className = '', children }: { step: string; title: string; aside?: ReactNode; className?: string; children: ReactNode }) {
   return (
-    <section className={`${UI.card} ${className}`}>
+    <Section className={`flex min-w-0 flex-col gap-4 ${className}`}>
       <header className="flex flex-wrap items-center justify-between gap-2">
         <h2 className="flex shrink-0 items-center gap-2 text-base font-semibold">
           <span className="text-xl leading-none text-zinc-400">{step}</span>
@@ -109,7 +104,7 @@ function StepCard({ step, title, aside, className = '', children }: { step: stri
         {aside}
       </header>
       {children}
-    </section>
+    </Section>
   )
 }
 
@@ -262,13 +257,13 @@ function ArenaPanel({ task }: { task: Task }) {
           {result && result.answers.length > 0 && <Badge tone={result.live ? TONE.live : TONE.demo}>{result.live ? 'LIVE' : 'SAVED'}</Badge>}
           {result && result.errors.length > 0 && <Badge tone={TONE.error}>오류 {result.errors.length}건</Badge>}
         </div>
-        <button type="button" onClick={run} disabled={state.kind === 'loading'} className={UI.button}>
+        <Button type="button" variant="solid" onClick={run} disabled={state.kind === 'loading'} className="shrink-0 whitespace-nowrap">
           세 모델로 실행 (Haiku, Sonnet, Opus)
-        </button>
+        </Button>
       </div>
       {state.kind === 'loading' && (
         <>
-          <p className="text-xs text-zinc-500">세 모델을 실행하는 중입니다</p>
+          <p className="text-xs text-zinc-500">세 모델을 실행하는 중…</p>
           <Skeleton lines={3} />
         </>
       )}
@@ -453,9 +448,9 @@ function ReplayPanel({ scenario }: { scenario: string }) {
           {data && (
             <>
               <div className="flex items-center gap-3">
-                <button type="button" onClick={onPlay} className={UI.button} aria-pressed={playing}>
+                <Button type="button" variant="solid" onClick={onPlay} className="shrink-0 whitespace-nowrap" aria-pressed={playing}>
                   {done ? '↺ 다시 재생' : playing ? '❚❚ 일시정지' : '▶ 재생'}
-                </button>
+                </Button>
                 <input
                   type="range"
                   min={0}
@@ -498,7 +493,7 @@ function ReplayPanel({ scenario }: { scenario: string }) {
               </div>
               <div className="grid grid-cols-2 gap-2">
                 <Stat label="정답 여부" value={correct == null ? '—' : correct ? '✓ 맞음' : '✗ 틀림'} tone={correct ? 'text-emerald-700' : 'text-red-700'} hint={`결정 ${data.answer.decision ?? '—'}`} />
-                <Stat label="후회 (regret)" value={`${usd(regret)}/acre`} tone={regret > 0 ? 'text-red-700' : 'text-emerald-700'} hint={`필지 전체 ≈ ${usd(regret * data.task.field.acres)}`} />
+                <Stat label="최선 대비 손해" value={`${usd(regret)}/acre`} tone={regret > 0 ? 'text-red-700' : 'text-emerald-700'} hint={`필지 전체 ≈ ${usd(regret * data.task.field.acres)}`} />
                 <Stat label="Brier" value={num(data.score.brier, 3)} hint="낮을수록 좋음 (0~1)" />
                 <Stat label="Skill" value={signed(data.score.skill)} hint={SKILL_HINT} />
               </div>
@@ -560,7 +555,7 @@ export default function LivePage() {
             </select>
           </label>
         </header>
-        <p className="max-w-3xl text-sm text-zinc-600">
+        <p className="max-w-3xl text-sm text-[var(--ink-2)]">
           농약 살포 판단 과제 하나를 처음부터 채점까지 따라갑니다. 모델은 과제를 낸 시점의 예보만 보고 답하고, 이후 4시간 관측이 들어오면 자동으로 채점됩니다.
         </p>
         <ReplayPanel key={scenario} scenario={scenario} />
