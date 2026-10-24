@@ -15,9 +15,10 @@ export async function askClaude(system: string, user: string): Promise<string> {
     output_config: { effort: 'low' },
     betas: ['server-side-fallback-2026-07-01'],
     fallbacks: 'default',
-    system,
+    system: `${system}
+마크다운 기호(**, #, - 목록) 없이 평문 문장으로만 답한다.`,
     messages: [{ role: 'user', content: user }],
   })
   if (res.stop_reason === 'refusal') return ''
-  return res.content.map((b) => (b.type === 'text' ? b.text : '')).join('').trim()
+  return res.content.map((b) => (b.type === 'text' ? b.text : '')).join('').replace(/\*\*|__|^#+\s*/gm, '').trim()
 }
