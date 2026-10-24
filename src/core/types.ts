@@ -65,14 +65,19 @@ export interface TaskPack {
   meta: { count: number; marketValueUsd: number; period: string; region: string; demo: boolean; includesResolution: boolean }
 }
 
-export type Peril = 'frost' | 'hail' | 'excess_rain' | 'drought'
+export type Peril = 'frost' | 'excess_rain' | 'drought'   // 우박(hail)은 P2
 
-export interface Claim { id: string; fieldId: string; peril: Peril; date: string; claimedLossUsd: number }
+export interface Claim {
+  id: string; fieldId: string; peril: Peril; date: string
+  claimedLossUsd: number; paidLossUsd?: number
+  expectedYieldBuAc: number; actualYieldBuAc: number
+}
 
 export interface ClaimReport {
   claimId: string; peril: Peril
   conditionProbability: number              // 피해 조건이 실제로 있었을 확률
-  verdict: 'supported' | 'unclear' | 'not_supported'
+  indemnityRange: [number, number]          // 이 피해 조건에서 예상 피해보상액 (USD, 필지 전체)
+  verdict: 'within_range' | 'unclear' | 'outside_range'
   evidence: {
     fieldEstimate: { variable: string; value: number; sigma: number; unit: string }
     nearbyObs: { stationId: string; value: number | null; unit: string }
@@ -82,6 +87,21 @@ export interface ClaimReport {
 }
 
 export interface RiskScore { fieldId: string; peril: Peril; season: string; score: number /* 0-100 */; drivers: string[] }
+
+/** 검증된 날씨-생산량 데이터: 위험점수 구간별 실제 손해 */
+export interface LossCurve {
+  id: string; peril: Peril
+  bins: { scoreFrom: number; scoreTo: number; n: number; lossRatio: number; avgLossUsdAc: number }[]
+}
+
+export interface RateRange {
+  fieldId: string; peril: Peril
+  premiumUsdAc: [number, number]
+  indemnityUsdAc: [number, number]
+  renewalRateChangePct: [number, number]
+  expectedLossRatio: number
+  basis: { nClaims: number; lossCurveId: string }
+}
 
 export interface Family {
   id: FamilyId
