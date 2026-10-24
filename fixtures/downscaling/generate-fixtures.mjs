@@ -1,7 +1,7 @@
 // 유진 영역 목업 데이터 생성기 (downscaling / decision / insurance).
 // 실행: node fixtures/downscaling/generate-fixtures.mjs
 // 결과는 모두 "demo": true. 실제 API 응답 형식(Open-Meteo 시간별, IEM ASOS)에 맞춘 목업이다.
-import { mkdirSync, writeFileSync } from 'node:fs'
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -14,16 +14,8 @@ const write = (rel, data) => {
 
 // 아이오와 중부, DSM(Des Moines 공항, 고도 292m) 주변 필지
 const station = { id: 'DSM', name: 'Des Moines Intl', lat: 41.534, lon: -93.653, elevationM: 292 }
-const fields = [
-  { id: 'field-ia-01', name: 'Miller North 160', farmId: 'farm-miller', lat: 41.62, lon: -93.71, elevationM: 298, acres: 160, crop: 'corn', terrain: 'flat' },
-  { id: 'field-ia-02', name: 'Miller South 80', farmId: 'farm-miller', lat: 41.6, lon: -93.7, elevationM: 285, acres: 80, crop: 'soybean', terrain: 'flat' },
-  { id: 'field-ia-03', name: 'Raccoon Bottom 120', farmId: 'farm-johnson', lat: 41.55, lon: -93.82, elevationM: 262, acres: 120, crop: 'orchard', terrain: 'valley' },
-  { id: 'field-ia-04', name: 'Johnson East 240', farmId: 'farm-johnson', lat: 41.57, lon: -93.78, elevationM: 290, acres: 240, crop: 'corn', terrain: 'flat' },
-  { id: 'field-ia-05', name: 'Walnut Creek 90', farmId: 'farm-olsen', lat: 41.48, lon: -93.86, elevationM: 268, acres: 90, crop: 'orchard', terrain: 'valley' },
-  { id: 'field-ia-06', name: 'Olsen Ridge 200', farmId: 'farm-olsen', lat: 41.46, lon: -93.9, elevationM: 326, acres: 200, crop: 'corn', terrain: 'ridge' },
-  { id: 'field-ia-07', name: 'Ankeny West 300', farmId: 'farm-hansen', lat: 41.72, lon: -93.65, elevationM: 305, acres: 300, crop: 'soybean', terrain: 'flat' },
-  { id: 'field-ia-08', name: 'Hansen Hill 150', farmId: 'farm-hansen', lat: 41.75, lon: -93.6, elevationM: 318, acres: 150, crop: 'corn', terrain: 'ridge' },
-].map((f) => ({ ...f, stationId: station.id }))
+// 필지는 성호님 공통 fixtures(fixtures/common/fields.json)를 그대로 쓴다 (같은 ID = 같은 필지)
+const fields = JSON.parse(readFileSync(join(root, 'common/fields.json'), 'utf8')).fields
 
 const iso = (d) => d.toISOString().replace('.000Z', 'Z')
 const hours = (startIso, n) => Array.from({ length: n }, (_, i) => new Date(Date.parse(startIso) + i * 3600e3))
@@ -114,11 +106,11 @@ stationObs.hourly.push(...rainHourly)
 
 // 데모 청구 (화면에서 직접 검증해 보는 청구). 수확량은 bu/acre (사과도 bushel 단위)
 const claims = [
-  { id: 'claim-0001', fieldId: 'field-ia-03', peril: 'frost', date: '2026-05-12', claimedLossUsd: 96000, expectedYieldBuAc: 750, actualYieldBuAc: 670 },
-  { id: 'claim-0002', fieldId: 'field-ia-06', peril: 'frost', date: '2026-05-12', claimedLossUsd: 150000, expectedYieldBuAc: 195, actualYieldBuAc: 120 },
-  { id: 'claim-0003', fieldId: 'field-ia-02', peril: 'excess_rain', date: '2026-06-18', claimedLossUsd: 6300, expectedYieldBuAc: 58, actualYieldBuAc: 40 },
-  { id: 'claim-0004', fieldId: 'field-ia-05', peril: 'frost', date: '2026-05-20', claimedLossUsd: 60000, expectedYieldBuAc: 750, actualYieldBuAc: 700 },
-  { id: 'claim-0005', fieldId: 'field-ia-04', peril: 'excess_rain', date: '2026-06-18', claimedLossUsd: 250000, expectedYieldBuAc: 195, actualYieldBuAc: 170 },
+  { id: 'claim-0001', fieldId: 'field-ia-04', peril: 'frost', date: '2026-05-12', claimedLossUsd: 25000, expectedYieldBuAc: 58, actualYieldBuAc: 46 },
+  { id: 'claim-0002', fieldId: 'field-ia-02', peril: 'frost', date: '2026-05-12', claimedLossUsd: 150000, expectedYieldBuAc: 195, actualYieldBuAc: 120 },
+  { id: 'claim-0003', fieldId: 'field-ia-03', peril: 'excess_rain', date: '2026-06-18', claimedLossUsd: 8000, expectedYieldBuAc: 58, actualYieldBuAc: 45 },
+  { id: 'claim-0004', fieldId: 'field-ia-05', peril: 'frost', date: '2026-05-20', claimedLossUsd: 30000, expectedYieldBuAc: 58, actualYieldBuAc: 52 },
+  { id: 'claim-0005', fieldId: 'field-ia-07', peril: 'excess_rain', date: '2026-06-18', claimedLossUsd: 250000, expectedYieldBuAc: 195, actualYieldBuAc: 170 },
 ]
 
 // 지난 10년 기후값 (목업)
@@ -183,7 +175,7 @@ for (const season of ['2023', '2024', '2025']) {
   }
 }
 
-write('downscaling/fields.json', { demo: true, station, fields })
+write('downscaling/fields.json', { demo: true, note: '필지는 fixtures/common/fields.json과 같음', station, fields })
 write('downscaling/snapshots.json', { demo: true, snapshots })
 write('downscaling/station-observations.json', { demo: true, observations: [stationObs] })
 write('downscaling/field-observations.json', { demo: true, note: '농장 센서 목업 (연결된 농장의 필지 실측)', observations: fieldObs })

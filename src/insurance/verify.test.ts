@@ -8,7 +8,7 @@ import * as decision from '../families/decision'
 const claim = (id: string) => claims.find((c) => c.id === id)!
 
 describe('verifyClaim (목업 시나리오)', () => {
-  it('골짜기 과수원 5/12 서리 청구: 조건 있음 + 청구액이 range 안 → within_range', () => {
+  it('골짜기 필지 5/12 서리 청구: 조건 있음 + 청구액이 range 안 → within_range', () => {
     const r = verifyClaim(claim('claim-0001'), verifyContext)
     expect(r.verdict).toBe('within_range')
     expect(r.evidence.forecastAtT0?.length).toBe(3)
@@ -37,9 +37,9 @@ describe('verifyClaim (목업 시나리오)', () => {
 })
 
 describe('riskScore', () => {
-  it('골짜기 과수원이 능선 옥수수보다 서리 위험이 높다', () => {
-    const valley = fields.find((f) => f.id === 'field-ia-03')!
-    const ridge = fields.find((f) => f.id === 'field-ia-06')!
+  it('골짜기 필지가 능선 필지보다 서리 위험이 높다', () => {
+    const valley = fields.find((f) => f.id === 'field-ia-04')!
+    const ridge = fields.find((f) => f.id === 'field-ia-02')!
     const c = (id: string) => climatology.find((x) => x.fieldId === id)
     expect(riskScore(valley, 'frost', station.elevationM, c(valley.id)).score)
       .toBeGreaterThan(riskScore(ridge, 'frost', station.elevationM, c(ridge.id)).score)
@@ -85,15 +85,15 @@ describe('요율 range (PLAN 11절)', () => {
     expect(bins.at(-1)!.lossRatio).toBeGreaterThan(bins[0].lossRatio)
   })
   it('위험이 높은 필지가 보험수가 range도 높다', () => {
-    expect(rateFor('field-ia-03', 'frost')!.premiumUsdAc[0]).toBeGreaterThan(rateFor('field-ia-06', 'frost')!.premiumUsdAc[1])
+    expect(rateFor('field-ia-04', 'frost')!.premiumUsdAc[0]).toBeGreaterThan(rateFor('field-ia-02', 'frost')!.premiumUsdAc[1])
   })
   it('손해가 없던 필지는 갱신 요율이 내려간다', () => {
-    expect(rateFor('field-ia-06', 'frost')!.renewalRateChangePct[1]).toBeLessThanOrEqual(0)
+    expect(rateFor('field-ia-02', 'frost')!.renewalRateChangePct[1]).toBeLessThanOrEqual(0)
   })
   it('표본이 적으면 range가 넓어진다', () => {
-    const f = portfolio.fields.find((x) => x.id === 'field-ia-03')!
-    const full = rateRange(f, 'frost', 98, portfolio, riskScores)
-    const thin = rateRange(f, 'frost', 98, { ...portfolio, history: portfolio.history.filter((c) => c.peril !== 'frost').concat(portfolio.history.filter((c) => c.peril === 'frost').slice(0, 3)), seasons: 1 }, riskScores)
+    const f = portfolio.fields.find((x) => x.id === 'field-ia-04')!
+    const full = rateRange(f, 'frost', 100, portfolio, riskScores)
+    const thin = rateRange(f, 'frost', 100, { ...portfolio, history: portfolio.history.filter((c) => c.peril !== 'frost').concat(portfolio.history.filter((c) => c.peril === 'frost').slice(0, 3)), seasons: 1 }, riskScores)
     expect(thin.renewalRateChangePct[1] - thin.renewalRateChangePct[0]).toBeGreaterThanOrEqual(full.renewalRateChangePct[1] - full.renewalRateChangePct[0])
   })
   it('lossCurve는 구간 5개', () => {

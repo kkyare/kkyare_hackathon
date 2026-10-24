@@ -9,45 +9,45 @@
     },
     {
       "fieldId": "field-ia-02",
-      "frostNightsMay10y": 3,
-      "heavyRainDaysJun10y": 8,
-      "dryWeeksJul10y": 5
+      "frostNightsMay10y": 0,
+      "heavyRainDaysJun10y": 6,
+      "dryWeeksJul10y": 8
     },
     {
       "fieldId": "field-ia-03",
-      "frostNightsMay10y": 15,
-      "heavyRainDaysJun10y": 9,
-      "dryWeeksJul10y": 3
+      "frostNightsMay10y": 6,
+      "heavyRainDaysJun10y": 6,
+      "dryWeeksJul10y": 6
     },
     {
       "fieldId": "field-ia-04",
-      "frostNightsMay10y": 5,
-      "heavyRainDaysJun10y": 4,
-      "dryWeeksJul10y": 7
+      "frostNightsMay10y": 15,
+      "heavyRainDaysJun10y": 7,
+      "dryWeeksJul10y": 4
     },
     {
       "fieldId": "field-ia-05",
-      "frostNightsMay10y": 13,
+      "frostNightsMay10y": 11,
       "heavyRainDaysJun10y": 8,
       "dryWeeksJul10y": 4
     },
     {
       "fieldId": "field-ia-06",
-      "frostNightsMay10y": 4,
-      "heavyRainDaysJun10y": 3,
-      "dryWeeksJul10y": 7
+      "frostNightsMay10y": 7,
+      "heavyRainDaysJun10y": 5,
+      "dryWeeksJul10y": 4
     },
     {
       "fieldId": "field-ia-07",
-      "frostNightsMay10y": 3,
+      "frostNightsMay10y": 4,
       "heavyRainDaysJun10y": 7,
       "dryWeeksJul10y": 7
     },
     {
       "fieldId": "field-ia-08",
-      "frostNightsMay10y": 2,
-      "heavyRainDaysJun10y": 4,
-      "dryWeeksJul10y": 7
+      "frostNightsMay10y": 13,
+      "heavyRainDaysJun10y": 9,
+      "dryWeeksJul10y": 1
     },
     {
       "fieldId": "field-ia-09",

@@ -17,8 +17,8 @@ describe('learningCurve', () => {
 
 describe('rangeNarrowing', () => {
   it('검증 청구가 늘면 보험수가 range(상대 폭)가 좁아진다', () => {
-    const f = portfolio.fields.find((x) => x.id === 'field-ia-03')!
-    const pts = rangeNarrowing(f, 'frost', 98, portfolio, riskScores)
+    const f = portfolio.fields.find((x) => x.id === 'field-ia-04')!
+    const pts = rangeNarrowing(f, 'frost', 100, portfolio, riskScores)
     expect(pts.at(-1)!.premiumRelativeWidthPct).toBeLessThan(pts[0].premiumRelativeWidthPct)
   })
 })

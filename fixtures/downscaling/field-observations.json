@@ -259,8 +259,8 @@
         },
         {
           "time": "2026-05-11T20:00:00Z",
-          "tempF": 53.3,
-          "dewF": 47.3,
+          "tempF": 53.5,
+          "dewF": 47.5,
           "windMph": 7.2,
           "gustMph": 13.9,
           "windDirDeg": 320,
@@ -268,8 +268,8 @@
         },
         {
           "time": "2026-05-11T21:00:00Z",
-          "tempF": 51,
-          "dewF": 45,
+          "tempF": 51.3,
+          "dewF": 45.3,
           "windMph": 7.7,
           "gustMph": 14.5,
           "windDirDeg": 320,
@@ -277,8 +277,8 @@
         },
         {
           "time": "2026-05-11T22:00:00Z",
-          "tempF": 48.8,
-          "dewF": 42.8,
+          "tempF": 49.2,
+          "dewF": 43.2,
           "windMph": 7.9,
           "gustMph": 14.9,
           "windDirDeg": 320,
@@ -286,8 +286,8 @@
         },
         {
           "time": "2026-05-11T23:00:00Z",
-          "tempF": 46.7,
-          "dewF": 40.7,
+          "tempF": 47.1,
+          "dewF": 41.1,
           "windMph": 8,
           "gustMph": 15,
           "windDirDeg": 320,
@@ -295,8 +295,8 @@
         },
         {
           "time": "2026-05-12T00:00:00Z",
-          "tempF": 44.6,
-          "dewF": 38.6,
+          "tempF": 45.2,
+          "dewF": 39.2,
           "windMph": 7.8,
           "gustMph": 14.7,
           "windDirDeg": 320,
@@ -304,8 +304,8 @@
         },
         {
           "time": "2026-05-12T01:00:00Z",
-          "tempF": 42.7,
-          "dewF": 36.7,
+          "tempF": 43.3,
+          "dewF": 37.3,
           "windMph": 7.4,
           "gustMph": 14.2,
           "windDirDeg": 320,
@@ -313,8 +313,8 @@
         },
         {
           "time": "2026-05-12T02:00:00Z",
-          "tempF": 40.9,
-          "dewF": 34.9,
+          "tempF": 41.6,
+          "dewF": 35.6,
           "windMph": 6.9,
           "gustMph": 13.4,
           "windDirDeg": 320,
@@ -322,8 +322,8 @@
         },
         {
           "time": "2026-05-12T03:00:00Z",
-          "tempF": 39.2,
-          "dewF": 33.2,
+          "tempF": 40,
+          "dewF": 34,
           "windMph": 6.3,
           "gustMph": 12.4,
           "windDirDeg": 320,
@@ -331,8 +331,8 @@
         },
         {
           "time": "2026-05-12T04:00:00Z",
-          "tempF": 37.7,
-          "dewF": 31.7,
+          "tempF": 38.5,
+          "dewF": 32.5,
           "windMph": 5.6,
           "gustMph": 11.4,
           "windDirDeg": 320,
@@ -340,8 +340,8 @@
         },
         {
           "time": "2026-05-12T05:00:00Z",
-          "tempF": 36.4,
-          "dewF": 30.4,
+          "tempF": 37.3,
+          "dewF": 31.3,
           "windMph": 5,
           "gustMph": 10.5,
           "windDirDeg": 320,
@@ -349,8 +349,8 @@
         },
         {
           "time": "2026-05-12T06:00:00Z",
-          "tempF": 35.3,
-          "dewF": 29.3,
+          "tempF": 36.2,
+          "dewF": 30.2,
           "windMph": 4.5,
           "gustMph": 9.7,
           "windDirDeg": 320,
@@ -358,8 +358,8 @@
         },
         {
           "time": "2026-05-12T07:00:00Z",
-          "tempF": 34.3,
-          "dewF": 28.3,
+          "tempF": 35.2,
+          "dewF": 29.2,
           "windMph": 4.1,
           "gustMph": 9.2,
           "windDirDeg": 320,
@@ -367,8 +367,8 @@
         },
         {
           "time": "2026-05-12T08:00:00Z",
-          "tempF": 33.6,
-          "dewF": 27.6,
+          "tempF": 34.5,
+          "dewF": 28.5,
           "windMph": 4,
           "gustMph": 9,
           "windDirDeg": 320,
@@ -376,8 +376,8 @@
         },
         {
           "time": "2026-05-12T09:00:00Z",
-          "tempF": 33,
-          "dewF": 27,
+          "tempF": 34,
+          "dewF": 28,
           "windMph": 4.1,
           "gustMph": 9.1,
           "windDirDeg": 320,
@@ -385,8 +385,8 @@
         },
         {
           "time": "2026-05-12T10:00:00Z",
-          "tempF": 32.7,
-          "dewF": 26.7,
+          "tempF": 33.7,
+          "dewF": 27.7,
           "windMph": 4.4,
           "gustMph": 9.6,
           "windDirDeg": 320,
@@ -394,8 +394,8 @@
         },
         {
           "time": "2026-05-12T11:00:00Z",
-          "tempF": 32.6,
-          "dewF": 26.6,
+          "tempF": 33.6,
+          "dewF": 27.6,
           "windMph": 4.8,
           "gustMph": 10.3,
           "windDirDeg": 320,
@@ -403,8 +403,8 @@
         },
         {
           "time": "2026-05-12T12:00:00Z",
-          "tempF": 36.2,
-          "dewF": 30.2,
+          "tempF": 37.1,
+          "dewF": 31.1,
           "windMph": 5.4,
           "gustMph": 11.2,
           "windDirDeg": 320,
@@ -412,8 +412,8 @@
         },
         {
           "time": "2026-05-12T13:00:00Z",
-          "tempF": 39.9,
-          "dewF": 33.9,
+          "tempF": 40.6,
+          "dewF": 34.6,
           "windMph": 6.1,
           "gustMph": 12.2,
           "windDirDeg": 320,
@@ -421,8 +421,8 @@
         },
         {
           "time": "2026-05-12T14:00:00Z",
-          "tempF": 43.5,
-          "dewF": 37.5,
+          "tempF": 44.1,
+          "dewF": 38.1,
           "windMph": 6.7,
           "gustMph": 13.1,
           "windDirDeg": 320,
@@ -430,8 +430,8 @@
         },
         {
           "time": "2026-05-12T15:00:00Z",
-          "tempF": 47.1,
-          "dewF": 41.1,
+          "tempF": 47.5,
+          "dewF": 41.5,
           "windMph": 7.3,
           "gustMph": 14,
           "windDirDeg": 320,
@@ -439,8 +439,8 @@
         },
         {
           "time": "2026-05-12T16:00:00Z",
-          "tempF": 50.7,
-          "dewF": 44.7,
+          "tempF": 51,
+          "dewF": 45,
           "windMph": 7.7,
           "gustMph": 14.6,
           "windDirDeg": 320,
@@ -448,8 +448,8 @@
         },
         {
           "time": "2026-05-12T17:00:00Z",
-          "tempF": 54.4,
-          "dewF": 48.4,
+          "tempF": 54.5,
+          "dewF": 48.5,
           "windMph": 8,
           "gustMph": 14.9,
           "windDirDeg": 320,
@@ -482,8 +482,8 @@
         },
         {
           "time": "2026-05-11T19:00:00Z",
-          "tempF": 55.5,
-          "dewF": 49.5,
+          "tempF": 55.7,
+          "dewF": 49.7,
           "windMph": 6.7,
           "gustMph": 13,
           "windDirDeg": 320,
@@ -491,8 +491,8 @@
         },
         {
           "time": "2026-05-11T20:00:00Z",
-          "tempF": 53.1,
-          "dewF": 47.1,
+          "tempF": 53.5,
+          "dewF": 47.5,
           "windMph": 7.2,
           "gustMph": 13.9,
           "windDirDeg": 320,
@@ -500,8 +500,8 @@
         },
         {
           "time": "2026-05-11T21:00:00Z",
-          "tempF": 50.6,
-          "dewF": 44.6,
+          "tempF": 51.2,
+          "dewF": 45.2,
           "windMph": 7.7,
           "gustMph": 14.5,
           "windDirDeg": 320,
@@ -509,8 +509,8 @@
         },
         {
           "time": "2026-05-11T22:00:00Z",
-          "tempF": 48.3,
-          "dewF": 42.3,
+          "tempF": 49.1,
+          "dewF": 43.1,
           "windMph": 7.9,
           "gustMph": 14.9,
           "windDirDeg": 320,
@@ -518,8 +518,8 @@
         },
         {
           "time": "2026-05-11T23:00:00Z",
-          "tempF": 46,
-          "dewF": 40,
+          "tempF": 47,
+          "dewF": 41,
           "windMph": 8,
           "gustMph": 15,
           "windDirDeg": 320,
@@ -527,8 +527,8 @@
         },
         {
           "time": "2026-05-12T00:00:00Z",
-          "tempF": 43.8,
-          "dewF": 37.8,
+          "tempF": 45,
+          "dewF": 39,
           "windMph": 7.8,
           "gustMph": 14.7,
           "windDirDeg": 320,
@@ -536,8 +536,8 @@
         },
         {
           "time": "2026-05-12T01:00:00Z",
-          "tempF": 41.8,
-          "dewF": 35.8,
+          "tempF": 43.1,
+          "dewF": 37.1,
           "windMph": 7.4,
           "gustMph": 14.2,
           "windDirDeg": 320,
@@ -545,8 +545,8 @@
         },
         {
           "time": "2026-05-12T02:00:00Z",
-          "tempF": 39.9,
-          "dewF": 33.9,
+          "tempF": 41.4,
+          "dewF": 35.4,
           "windMph": 6.9,
           "gustMph": 13.4,
           "windDirDeg": 320,
@@ -554,8 +554,8 @@
         },
         {
           "time": "2026-05-12T03:00:00Z",
-          "tempF": 38.1,
-          "dewF": 32.1,
+          "tempF": 39.7,
+          "dewF": 33.7,
           "windMph": 6.3,
           "gustMph": 12.4,
           "windDirDeg": 320,
@@ -563,8 +563,8 @@
         },
         {
           "time": "2026-05-12T04:00:00Z",
-          "tempF": 36.5,
-          "dewF": 30.5,
+          "tempF": 38.3,
+          "dewF": 32.3,
           "windMph": 5.6,
           "gustMph": 11.4,
           "windDirDeg": 320,
@@ -572,8 +572,8 @@
         },
         {
           "time": "2026-05-12T05:00:00Z",
-          "tempF": 35.1,
-          "dewF": 29.1,
+          "tempF": 37,
+          "dewF": 31,
           "windMph": 5,
           "gustMph": 10.5,
           "windDirDeg": 320,
@@ -581,8 +581,8 @@
         },
         {
           "time": "2026-05-12T06:00:00Z",
-          "tempF": 33.9,
-          "dewF": 27.9,
+          "tempF": 35.9,
+          "dewF": 29.9,
           "windMph": 4.5,
           "gustMph": 9.7,
           "windDirDeg": 320,
@@ -590,8 +590,8 @@
         },
         {
           "time": "2026-05-12T07:00:00Z",
-          "tempF": 32.9,
-          "dewF": 26.9,
+          "tempF": 35,
+          "dewF": 29,
           "windMph": 4.1,
           "gustMph": 9.2,
           "windDirDeg": 320,
@@ -599,8 +599,8 @@
         },
         {
           "time": "2026-05-12T08:00:00Z",
-          "tempF": 32.1,
-          "dewF": 26.1,
+          "tempF": 34.2,
+          "dewF": 28.2,
           "windMph": 4,
           "gustMph": 9,
           "windDirDeg": 320,
@@ -608,8 +608,8 @@
         },
         {
           "time": "2026-05-12T09:00:00Z",
-          "tempF": 31.6,
-          "dewF": 25.6,
+          "tempF": 33.7,
+          "dewF": 27.7,
           "windMph": 4.1,
           "gustMph": 9.1,
           "windDirDeg": 320,
@@ -617,8 +617,8 @@
         },
         {
           "time": "2026-05-12T10:00:00Z",
-          "tempF": 31.2,
-          "dewF": 25.2,
+          "tempF": 33.4,
+          "dewF": 27.4,
           "windMph": 4.4,
           "gustMph": 9.6,
           "windDirDeg": 320,
@@ -626,8 +626,8 @@
         },
         {
           "time": "2026-05-12T11:00:00Z",
-          "tempF": 31.1,
-          "dewF": 25.1,
+          "tempF": 33.3,
+          "dewF": 27.3,
           "windMph": 4.8,
           "gustMph": 10.3,
           "windDirDeg": 320,
@@ -635,8 +635,8 @@
         },
         {
           "time": "2026-05-12T12:00:00Z",
-          "tempF": 34.9,
-          "dewF": 28.9,
+          "tempF": 36.8,
+          "dewF": 30.8,
           "windMph": 5.4,
           "gustMph": 11.2,
           "windDirDeg": 320,
@@ -644,8 +644,8 @@
         },
         {
           "time": "2026-05-12T13:00:00Z",
-          "tempF": 38.8,
-          "dewF": 32.8,
+          "tempF": 40.4,
+          "dewF": 34.4,
           "windMph": 6.1,
           "gustMph": 12.2,
           "windDirDeg": 320,
@@ -653,8 +653,8 @@
         },
         {
           "time": "2026-05-12T14:00:00Z",
-          "tempF": 42.6,
-          "dewF": 36.6,
+          "tempF": 43.9,
+          "dewF": 37.9,
           "windMph": 6.7,
           "gustMph": 13.1,
           "windDirDeg": 320,
@@ -662,8 +662,8 @@
         },
         {
           "time": "2026-05-12T15:00:00Z",
-          "tempF": 46.5,
-          "dewF": 40.5,
+          "tempF": 47.4,
+          "dewF": 41.4,
           "windMph": 7.3,
           "gustMph": 14,
           "windDirDeg": 320,
@@ -671,8 +671,8 @@
         },
         {
           "time": "2026-05-12T16:00:00Z",
-          "tempF": 50.3,
-          "dewF": 44.3,
+          "tempF": 50.9,
+          "dewF": 44.9,
           "windMph": 7.7,
           "gustMph": 14.6,
           "windDirDeg": 320,
@@ -680,8 +680,8 @@
         },
         {
           "time": "2026-05-12T17:00:00Z",
-          "tempF": 54.2,
-          "dewF": 48.2,
+          "tempF": 54.5,
+          "dewF": 48.5,
           "windMph": 8,
           "gustMph": 14.9,
           "windDirDeg": 320,
@@ -714,8 +714,8 @@
         },
         {
           "time": "2026-05-11T19:00:00Z",
-          "tempF": 55.7,
-          "dewF": 49.7,
+          "tempF": 55.5,
+          "dewF": 49.5,
           "windMph": 6.7,
           "gustMph": 13,
           "windDirDeg": 320,
@@ -723,8 +723,8 @@
         },
         {
           "time": "2026-05-11T20:00:00Z",
-          "tempF": 53.4,
-          "dewF": 47.4,
+          "tempF": 53,
+          "dewF": 47,
           "windMph": 7.2,
           "gustMph": 13.9,
           "windDirDeg": 320,
@@ -732,8 +732,8 @@
         },
         {
           "time": "2026-05-11T21:00:00Z",
-          "tempF": 51.1,
-          "dewF": 45.1,
+          "tempF": 50.6,
+          "dewF": 44.6,
           "windMph": 7.7,
           "gustMph": 14.5,
           "windDirDeg": 320,
@@ -741,8 +741,8 @@
         },
         {
           "time": "2026-05-11T22:00:00Z",
-          "tempF": 48.9,
-          "dewF": 42.9,
+          "tempF": 48.2,
+          "dewF": 42.2,
           "windMph": 7.9,
           "gustMph": 14.9,
           "windDirDeg": 320,
@@ -750,8 +750,8 @@
         },
         {
           "time": "2026-05-11T23:00:00Z",
-          "tempF": 46.8,
-          "dewF": 40.8,
+          "tempF": 45.9,
+          "dewF": 39.9,
           "windMph": 8,
           "gustMph": 15,
           "windDirDeg": 320,
@@ -759,8 +759,8 @@
         },
         {
           "time": "2026-05-12T00:00:00Z",
-          "tempF": 44.8,
-          "dewF": 38.8,
+          "tempF": 43.7,
+          "dewF": 37.7,
           "windMph": 7.8,
           "gustMph": 14.7,
           "windDirDeg": 320,
@@ -768,8 +768,8 @@
         },
         {
           "time": "2026-05-12T01:00:00Z",
-          "tempF": 42.9,
-          "dewF": 36.9,
+          "tempF": 41.7,
+          "dewF": 35.7,
           "windMph": 7.4,
           "gustMph": 14.2,
           "windDirDeg": 320,
@@ -777,8 +777,8 @@
         },
         {
           "time": "2026-05-12T02:00:00Z",
-          "tempF": 41.1,
-          "dewF": 35.1,
+          "tempF": 39.7,
+          "dewF": 33.7,
           "windMph": 6.9,
           "gustMph": 13.4,
           "windDirDeg": 320,
@@ -786,8 +786,8 @@
         },
         {
           "time": "2026-05-12T03:00:00Z",
-          "tempF": 39.5,
-          "dewF": 33.5,
+          "tempF": 38,
+          "dewF": 32,
           "windMph": 6.3,
           "gustMph": 12.4,
           "windDirDeg": 320,
@@ -795,8 +795,8 @@
         },
         {
           "time": "2026-05-12T04:00:00Z",
-          "tempF": 38,
-          "dewF": 32,
+          "tempF": 36.4,
+          "dewF": 30.4,
           "windMph": 5.6,
           "gustMph": 11.4,
           "windDirDeg": 320,
@@ -804,8 +804,8 @@
         },
         {
           "time": "2026-05-12T05:00:00Z",
-          "tempF": 36.7,
-          "dewF": 30.7,
+          "tempF": 35,
+          "dewF": 29,
           "windMph": 5,
           "gustMph": 10.5,
           "windDirDeg": 320,
@@ -813,8 +813,8 @@
         },
         {
           "time": "2026-05-12T06:00:00Z",
-          "tempF": 35.5,
-          "dewF": 29.5,
+          "tempF": 33.7,
+          "dewF": 27.7,
           "windMph": 4.5,
           "gustMph": 9.7,
           "windDirDeg": 320,
@@ -822,8 +822,8 @@
         },
         {
           "time": "2026-05-12T07:00:00Z",
-          "tempF": 34.6,
-          "dewF": 28.6,
+          "tempF": 32.7,
+          "dewF": 26.7,
           "windMph": 4.1,
           "gustMph": 9.2,
           "windDirDeg": 320,
@@ -831,8 +831,8 @@
         },
         {
           "time": "2026-05-12T08:00:00Z",
-          "tempF": 33.9,
-          "dewF": 27.9,
+          "tempF": 31.9,
+          "dewF": 25.9,
           "windMph": 4,
           "gustMph": 9,
           "windDirDeg": 320,
@@ -840,8 +840,8 @@
         },
         {
           "time": "2026-05-12T09:00:00Z",
-          "tempF": 33.3,
-          "dewF": 27.3,
+          "tempF": 31.4,
+          "dewF": 25.4,
           "windMph": 4.1,
           "gustMph": 9.1,
           "windDirDeg": 320,
@@ -849,8 +849,8 @@
         },
         {
           "time": "2026-05-12T10:00:00Z",
-          "tempF": 33,
-          "dewF": 27,
+          "tempF": 31,
+          "dewF": 25,
           "windMph": 4.4,
           "gustMph": 9.6,
           "windDirDeg": 320,
@@ -858,8 +858,8 @@
         },
         {
           "time": "2026-05-12T11:00:00Z",
-          "tempF": 32.9,
-          "dewF": 26.9,
+          "tempF": 30.9,
+          "dewF": 24.9,
           "windMph": 4.8,
           "gustMph": 10.3,
           "windDirDeg": 320,
@@ -867,8 +867,8 @@
         },
         {
           "time": "2026-05-12T12:00:00Z",
-          "tempF": 36.5,
-          "dewF": 30.5,
+          "tempF": 34.8,
+          "dewF": 28.8,
           "windMph": 5.4,
           "gustMph": 11.2,
           "windDirDeg": 320,
@@ -876,8 +876,8 @@
         },
         {
           "time": "2026-05-12T13:00:00Z",
-          "tempF": 40.1,
-          "dewF": 34.1,
+          "tempF": 38.6,
+          "dewF": 32.6,
           "windMph": 6.1,
           "gustMph": 12.2,
           "windDirDeg": 320,
@@ -885,8 +885,8 @@
         },
         {
           "time": "2026-05-12T14:00:00Z",
-          "tempF": 43.7,
-          "dewF": 37.7,
+          "tempF": 42.5,
+          "dewF": 36.5,
           "windMph": 6.7,
           "gustMph": 13.1,
           "windDirDeg": 320,
@@ -894,8 +894,8 @@
         },
         {
           "time": "2026-05-12T15:00:00Z",
-          "tempF": 47.2,
-          "dewF": 41.2,
+          "tempF": 46.4,
+          "dewF": 40.4,
           "windMph": 7.3,
           "gustMph": 14,
           "windDirDeg": 320,
@@ -903,8 +903,8 @@
         },
         {
           "time": "2026-05-12T16:00:00Z",
-          "tempF": 50.8,
-          "dewF": 44.8,
+          "tempF": 50.3,
+          "dewF": 44.3,
           "windMph": 7.7,
           "gustMph": 14.6,
           "windDirDeg": 320,
@@ -912,8 +912,8 @@
         },
         {
           "time": "2026-05-12T17:00:00Z",
-          "tempF": 54.4,
-          "dewF": 48.4,
+          "tempF": 54.1,
+          "dewF": 48.1,
           "windMph": 8,
           "gustMph": 14.9,
           "windDirDeg": 320,
@@ -946,8 +946,8 @@
         },
         {
           "time": "2026-05-11T19:00:00Z",
-          "tempF": 55.5,
-          "dewF": 49.5,
+          "tempF": 55.4,
+          "dewF": 49.4,
           "windMph": 6.7,
           "gustMph": 13,
           "windDirDeg": 320,
@@ -955,8 +955,8 @@
         },
         {
           "time": "2026-05-11T20:00:00Z",
-          "tempF": 52.9,
-          "dewF": 46.9,
+          "tempF": 52.8,
+          "dewF": 46.8,
           "windMph": 7.2,
           "gustMph": 13.9,
           "windDirDeg": 320,
@@ -964,8 +964,8 @@
         },
         {
           "time": "2026-05-11T21:00:00Z",
-          "tempF": 50.4,
-          "dewF": 44.4,
+          "tempF": 50.3,
+          "dewF": 44.3,
           "windMph": 7.7,
           "gustMph": 14.5,
           "windDirDeg": 320,
@@ -973,8 +973,8 @@
         },
         {
           "time": "2026-05-11T22:00:00Z",
-          "tempF": 48,
-          "dewF": 42,
+          "tempF": 47.8,
+          "dewF": 41.8,
           "windMph": 7.9,
           "gustMph": 14.9,
           "windDirDeg": 320,
@@ -982,8 +982,8 @@
         },
         {
           "time": "2026-05-11T23:00:00Z",
-          "tempF": 45.7,
-          "dewF": 39.7,
+          "tempF": 45.5,
+          "dewF": 39.5,
           "windMph": 8,
           "gustMph": 15,
           "windDirDeg": 320,
@@ -991,8 +991,8 @@
         },
         {
           "time": "2026-05-12T00:00:00Z",
-          "tempF": 43.5,
-          "dewF": 37.5,
+          "tempF": 43.2,
+          "dewF": 37.2,
           "windMph": 7.8,
           "gustMph": 14.7,
           "windDirDeg": 320,
@@ -1000,8 +1000,8 @@
         },
         {
           "time": "2026-05-12T01:00:00Z",
-          "tempF": 41.4,
-          "dewF": 35.4,
+          "tempF": 41.1,
+          "dewF": 35.1,
           "windMph": 7.4,
           "gustMph": 14.2,
           "windDirDeg": 320,
@@ -1009,8 +1009,8 @@
         },
         {
           "time": "2026-05-12T02:00:00Z",
-          "tempF": 39.4,
-          "dewF": 33.4,
+          "tempF": 39.1,
+          "dewF": 33.1,
           "windMph": 6.9,
           "gustMph": 13.4,
           "windDirDeg": 320,
@@ -1018,8 +1018,8 @@
         },
         {
           "time": "2026-05-12T03:00:00Z",
-          "tempF": 37.6,
-          "dewF": 31.6,
+          "tempF": 37.2,
+          "dewF": 31.2,
           "windMph": 6.3,
           "gustMph": 12.4,
           "windDirDeg": 320,
@@ -1027,8 +1027,8 @@
         },
         {
           "time": "2026-05-12T04:00:00Z",
-          "tempF": 36,
-          "dewF": 30,
+          "tempF": 35.6,
+          "dewF": 29.6,
           "windMph": 5.6,
           "gustMph": 11.4,
           "windDirDeg": 320,
@@ -1036,8 +1036,8 @@
         },
         {
           "time": "2026-05-12T05:00:00Z",
-          "tempF": 34.5,
-          "dewF": 28.5,
+          "tempF": 34.1,
+          "dewF": 28.1,
           "windMph": 5,
           "gustMph": 10.5,
           "windDirDeg": 320,
@@ -1045,8 +1045,8 @@
         },
         {
           "time": "2026-05-12T06:00:00Z",
-          "tempF": 33.3,
-          "dewF": 27.3,
+          "tempF": 32.8,
+          "dewF": 26.8,
           "windMph": 4.5,
           "gustMph": 9.7,
           "windDirDeg": 320,
@@ -1054,8 +1054,8 @@
         },
         {
           "time": "2026-05-12T07:00:00Z",
-          "tempF": 32.3,
-          "dewF": 26.3,
+          "tempF": 31.8,
+          "dewF": 25.8,
           "windMph": 4.1,
           "gustMph": 9.2,
           "windDirDeg": 320,
@@ -1063,8 +1063,8 @@
         },
         {
           "time": "2026-05-12T08:00:00Z",
-          "tempF": 31.5,
-          "dewF": 25.5,
+          "tempF": 31,
+          "dewF": 25,
           "windMph": 4,
           "gustMph": 9,
           "windDirDeg": 320,
@@ -1072,8 +1072,8 @@
         },
         {
           "time": "2026-05-12T09:00:00Z",
-          "tempF": 30.9,
-          "dewF": 24.9,
+          "tempF": 30.4,
+          "dewF": 24.4,
           "windMph": 4.1,
           "gustMph": 9.1,
           "windDirDeg": 320,
@@ -1081,8 +1081,8 @@
         },
         {
           "time": "2026-05-12T10:00:00Z",
-          "tempF": 30.5,
-          "dewF": 24.5,
+          "tempF": 30,
+          "dewF": 24,
           "windMph": 4.4,
           "gustMph": 9.6,
           "windDirDeg": 320,
@@ -1090,8 +1090,8 @@
         },
         {
           "time": "2026-05-12T11:00:00Z",
-          "tempF": 30.4,
-          "dewF": 24.4,
+          "tempF": 29.9,
+          "dewF": 23.9,
           "windMph": 4.8,
           "gustMph": 10.3,
           "windDirDeg": 320,
@@ -1099,8 +1099,8 @@
         },
         {
           "time": "2026-05-12T12:00:00Z",
-          "tempF": 34.3,
-          "dewF": 28.3,
+          "tempF": 33.9,
+          "dewF": 27.9,
           "windMph": 5.4,
           "gustMph": 11.2,
           "windDirDeg": 320,
@@ -1108,8 +1108,8 @@
         },
         {
           "time": "2026-05-12T13:00:00Z",
-          "tempF": 38.3,
-          "dewF": 32.3,
+          "tempF": 37.9,
+          "dewF": 31.9,
           "windMph": 6.1,
           "gustMph": 12.2,
           "windDirDeg": 320,
@@ -1117,8 +1117,8 @@
         },
         {
           "time": "2026-05-12T14:00:00Z",
-          "tempF": 42.2,
-          "dewF": 36.2,
+          "tempF": 41.9,
+          "dewF": 35.9,
           "windMph": 6.7,
           "gustMph": 13.1,
           "windDirDeg": 320,
@@ -1126,8 +1126,8 @@
         },
         {
           "time": "2026-05-12T15:00:00Z",
-          "tempF": 46.2,
-          "dewF": 40.2,
+          "tempF": 46,
+          "dewF": 40,
           "windMph": 7.3,
           "gustMph": 14,
           "windDirDeg": 320,
@@ -1135,8 +1135,8 @@
         },
         {
           "time": "2026-05-12T16:00:00Z",
-          "tempF": 50.1,
-          "dewF": 44.1,
+          "tempF": 50,
+          "dewF": 44,
           "windMph": 7.7,
           "gustMph": 14.6,
           "windDirDeg": 320,
@@ -1144,8 +1144,8 @@
         },
         {
           "time": "2026-05-12T17:00:00Z",
-          "tempF": 54.1,
-          "dewF": 48.1,
+          "tempF": 54,
+          "dewF": 48,
           "windMph": 8,
           "gustMph": 14.9,
           "windDirDeg": 320,
@@ -1178,8 +1178,8 @@
         },
         {
           "time": "2026-05-11T19:00:00Z",
-          "tempF": 55.8,
-          "dewF": 49.8,
+          "tempF": 55.7,
+          "dewF": 49.7,
           "windMph": 6.7,
           "gustMph": 13,
           "windDirDeg": 320,
@@ -1187,8 +1187,8 @@
         },
         {
           "time": "2026-05-11T20:00:00Z",
-          "tempF": 53.6,
-          "dewF": 47.6,
+          "tempF": 53.4,
+          "dewF": 47.4,
           "windMph": 7.2,
           "gustMph": 13.9,
           "windDirDeg": 320,
@@ -1196,8 +1196,8 @@
         },
         {
           "time": "2026-05-11T21:00:00Z",
-          "tempF": 51.4,
-          "dewF": 45.4,
+          "tempF": 51.2,
+          "dewF": 45.2,
           "windMph": 7.7,
           "gustMph": 14.5,
           "windDirDeg": 320,
@@ -1205,8 +1205,8 @@
         },
         {
           "time": "2026-05-11T22:00:00Z",
-          "tempF": 49.3,
-          "dewF": 43.3,
+          "tempF": 49,
+          "dewF": 43,
           "windMph": 7.9,
           "gustMph": 14.9,
           "windDirDeg": 320,
@@ -1214,8 +1214,8 @@
         },
         {
           "time": "2026-05-11T23:00:00Z",
-          "tempF": 47.3,
-          "dewF": 41.3,
+          "tempF": 46.9,
+          "dewF": 40.9,
           "windMph": 8,
           "gustMph": 15,
           "windDirDeg": 320,
@@ -1223,8 +1223,8 @@
         },
         {
           "time": "2026-05-12T00:00:00Z",
-          "tempF": 45.3,
-          "dewF": 39.3,
+          "tempF": 44.9,
+          "dewF": 38.9,
           "windMph": 7.8,
           "gustMph": 14.7,
           "windDirDeg": 320,
@@ -1232,8 +1232,8 @@
         },
         {
           "time": "2026-05-12T01:00:00Z",
-          "tempF": 43.5,
-          "dewF": 37.5,
+          "tempF": 43,
+          "dewF": 37,
           "windMph": 7.4,
           "gustMph": 14.2,
           "windDirDeg": 320,
@@ -1241,8 +1241,8 @@
         },
         {
           "time": "2026-05-12T02:00:00Z",
-          "tempF": 41.8,
-          "dewF": 35.8,
+          "tempF": 41.2,
+          "dewF": 35.2,
           "windMph": 6.9,
           "gustMph": 13.4,
           "windDirDeg": 320,
@@ -1250,8 +1250,8 @@
         },
         {
           "time": "2026-05-12T03:00:00Z",
-          "tempF": 40.2,
-          "dewF": 34.2,
+          "tempF": 39.6,
+          "dewF": 33.6,
           "windMph": 6.3,
           "gustMph": 12.4,
           "windDirDeg": 320,
@@ -1259,8 +1259,8 @@
         },
         {
           "time": "2026-05-12T04:00:00Z",
-          "tempF": 38.8,
-          "dewF": 32.8,
+          "tempF": 38.1,
+          "dewF": 32.1,
           "windMph": 5.6,
           "gustMph": 11.4,
           "windDirDeg": 320,
@@ -1268,8 +1268,8 @@
         },
         {
           "time": "2026-05-12T05:00:00Z",
-          "tempF": 37.5,
-          "dewF": 31.5,
+          "tempF": 36.8,
+          "dewF": 30.8,
           "windMph": 5,
           "gustMph": 10.5,
           "windDirDeg": 320,
@@ -1277,8 +1277,8 @@
         },
         {
           "time": "2026-05-12T06:00:00Z",
-          "tempF": 36.4,
-          "dewF": 30.4,
+          "tempF": 35.7,
+          "dewF": 29.7,
           "windMph": 4.5,
           "gustMph": 9.7,
           "windDirDeg": 320,
@@ -1286,8 +1286,8 @@
         },
         {
           "time": "2026-05-12T07:00:00Z",
-          "tempF": 35.5,
-          "dewF": 29.5,
+          "tempF": 34.8,
+          "dewF": 28.8,
           "windMph": 4.1,
           "gustMph": 9.2,
           "windDirDeg": 320,
@@ -1295,8 +1295,8 @@
         },
         {
           "time": "2026-05-12T08:00:00Z",
-          "tempF": 34.8,
-          "dewF": 28.8,
+          "tempF": 34.1,
+          "dewF": 28.1,
           "windMph": 4,
           "gustMph": 9,
           "windDirDeg": 320,
@@ -1304,8 +1304,8 @@
         },
         {
           "time": "2026-05-12T09:00:00Z",
-          "tempF": 34.3,
-          "dewF": 28.3,
+          "tempF": 33.5,
+          "dewF": 27.5,
           "windMph": 4.1,
           "gustMph": 9.1,
           "windDirDeg": 320,
@@ -1313,8 +1313,8 @@
         },
         {
           "time": "2026-05-12T10:00:00Z",
-          "tempF": 34,
-          "dewF": 28,
+          "tempF": 33.2,
+          "dewF": 27.2,
           "windMph": 4.4,
           "gustMph": 9.6,
           "windDirDeg": 320,
@@ -1322,8 +1322,8 @@
         },
         {
           "time": "2026-05-12T11:00:00Z",
-          "tempF": 33.9,
-          "dewF": 27.9,
+          "tempF": 33.1,
+          "dewF": 27.1,
           "windMph": 4.8,
           "gustMph": 10.3,
           "windDirDeg": 320,
@@ -1331,8 +1331,8 @@
         },
         {
           "time": "2026-05-12T12:00:00Z",
-          "tempF": 37.3,
-          "dewF": 31.3,
+          "tempF": 36.7,
+          "dewF": 30.7,
           "windMph": 5.4,
           "gustMph": 11.2,
           "windDirDeg": 320,
@@ -1340,8 +1340,8 @@
         },
         {
           "time": "2026-05-12T13:00:00Z",
-          "tempF": 40.8,
-          "dewF": 34.8,
+          "tempF": 40.2,
+          "dewF": 34.2,
           "windMph": 6.1,
           "gustMph": 12.2,
           "windDirDeg": 320,
@@ -1349,8 +1349,8 @@
         },
         {
           "time": "2026-05-12T14:00:00Z",
-          "tempF": 44.2,
-          "dewF": 38.2,
+          "tempF": 43.8,
+          "dewF": 37.8,
           "windMph": 6.7,
           "gustMph": 13.1,
           "windDirDeg": 320,
@@ -1358,8 +1358,8 @@
         },
         {
           "time": "2026-05-12T15:00:00Z",
-          "tempF": 47.7,
-          "dewF": 41.7,
+          "tempF": 47.3,
+          "dewF": 41.3,
           "windMph": 7.3,
           "gustMph": 14,
           "windDirDeg": 320,
@@ -1367,8 +1367,8 @@
         },
         {
           "time": "2026-05-12T16:00:00Z",
-          "tempF": 51.1,
-          "dewF": 45.1,
+          "tempF": 50.9,
+          "dewF": 44.9,
           "windMph": 7.7,
           "gustMph": 14.6,
           "windDirDeg": 320,
@@ -1376,8 +1376,8 @@
         },
         {
           "time": "2026-05-12T17:00:00Z",
-          "tempF": 54.6,
-          "dewF": 48.6,
+          "tempF": 54.4,
+          "dewF": 48.4,
           "windMph": 8,
           "gustMph": 14.9,
           "windDirDeg": 320,
@@ -1428,8 +1428,8 @@
         },
         {
           "time": "2026-05-11T21:00:00Z",
-          "tempF": 51.1,
-          "dewF": 45.1,
+          "tempF": 51.2,
+          "dewF": 45.2,
           "windMph": 7.7,
           "gustMph": 14.5,
           "windDirDeg": 320,
@@ -1437,8 +1437,8 @@
         },
         {
           "time": "2026-05-11T22:00:00Z",
-          "tempF": 48.9,
-          "dewF": 42.9,
+          "tempF": 49,
+          "dewF": 43,
           "windMph": 7.9,
           "gustMph": 14.9,
           "windDirDeg": 320,
@@ -1446,8 +1446,8 @@
         },
         {
           "time": "2026-05-11T23:00:00Z",
-          "tempF": 46.8,
-          "dewF": 40.8,
+          "tempF": 46.9,
+          "dewF": 40.9,
           "windMph": 8,
           "gustMph": 15,
           "windDirDeg": 320,
@@ -1455,8 +1455,8 @@
         },
         {
           "time": "2026-05-12T00:00:00Z",
-          "tempF": 44.7,
-          "dewF": 38.7,
+          "tempF": 44.8,
+          "dewF": 38.8,
           "windMph": 7.8,
           "gustMph": 14.7,
           "windDirDeg": 320,
@@ -1464,8 +1464,8 @@
         },
         {
           "time": "2026-05-12T01:00:00Z",
-          "tempF": 42.8,
-          "dewF": 36.8,
+          "tempF": 42.9,
+          "dewF": 36.9,
           "windMph": 7.4,
           "gustMph": 14.2,
           "windDirDeg": 320,
@@ -1473,8 +1473,8 @@
         },
         {
           "time": "2026-05-12T02:00:00Z",
-          "tempF": 41,
-          "dewF": 35,
+          "tempF": 41.2,
+          "dewF": 35.2,
           "windMph": 6.9,
           "gustMph": 13.4,
           "windDirDeg": 320,
@@ -1482,8 +1482,8 @@
         },
         {
           "time": "2026-05-12T03:00:00Z",
-          "tempF": 39.4,
-          "dewF": 33.4,
+          "tempF": 39.5,
+          "dewF": 33.5,
           "windMph": 6.3,
           "gustMph": 12.4,
           "windDirDeg": 320,
@@ -1491,8 +1491,8 @@
         },
         {
           "time": "2026-05-12T04:00:00Z",
-          "tempF": 37.9,
-          "dewF": 31.9,
+          "tempF": 38,
+          "dewF": 32,
           "windMph": 5.6,
           "gustMph": 11.4,
           "windDirDeg": 320,
@@ -1500,8 +1500,8 @@
         },
         {
           "time": "2026-05-12T05:00:00Z",
-          "tempF": 36.6,
-          "dewF": 30.6,
+          "tempF": 36.7,
+          "dewF": 30.7,
           "windMph": 5,
           "gustMph": 10.5,
           "windDirDeg": 320,
@@ -1509,8 +1509,8 @@
         },
         {
           "time": "2026-05-12T06:00:00Z",
-          "tempF": 35.4,
-          "dewF": 29.4,
+          "tempF": 35.6,
+          "dewF": 29.6,
           "windMph": 4.5,
           "gustMph": 9.7,
           "windDirDeg": 320,
@@ -1518,8 +1518,8 @@
         },
         {
           "time": "2026-05-12T07:00:00Z",
-          "tempF": 34.5,
-          "dewF": 28.5,
+          "tempF": 34.7,
+          "dewF": 28.7,
           "windMph": 4.1,
           "gustMph": 9.2,
           "windDirDeg": 320,
@@ -1527,8 +1527,8 @@
         },
         {
           "time": "2026-05-12T08:00:00Z",
-          "tempF": 33.8,
-          "dewF": 27.8,
+          "tempF": 34,
+          "dewF": 28,
           "windMph": 4,
           "gustMph": 9,
           "windDirDeg": 320,
@@ -1536,8 +1536,8 @@
         },
         {
           "time": "2026-05-12T09:00:00Z",
-          "tempF": 33.2,
-          "dewF": 27.2,
+          "tempF": 33.4,
+          "dewF": 27.4,
           "windMph": 4.1,
           "gustMph": 9.1,
           "windDirDeg": 320,
@@ -1545,8 +1545,8 @@
         },
         {
           "time": "2026-05-12T10:00:00Z",
-          "tempF": 32.9,
-          "dewF": 26.9,
+          "tempF": 33.1,
+          "dewF": 27.1,
           "windMph": 4.4,
           "gustMph": 9.6,
           "windDirDeg": 320,
@@ -1554,8 +1554,8 @@
         },
         {
           "time": "2026-05-12T11:00:00Z",
-          "tempF": 32.8,
-          "dewF": 26.8,
+          "tempF": 33,
+          "dewF": 27,
           "windMph": 4.8,
           "gustMph": 10.3,
           "windDirDeg": 320,
@@ -1563,8 +1563,8 @@
         },
         {
           "time": "2026-05-12T12:00:00Z",
-          "tempF": 36.4,
-          "dewF": 30.4,
+          "tempF": 36.6,
+          "dewF": 30.6,
           "windMph": 5.4,
           "gustMph": 11.2,
           "windDirDeg": 320,
@@ -1572,8 +1572,8 @@
         },
         {
           "time": "2026-05-12T13:00:00Z",
-          "tempF": 40,
-          "dewF": 34,
+          "tempF": 40.1,
+          "dewF": 34.1,
           "windMph": 6.1,
           "gustMph": 12.2,
           "windDirDeg": 320,
@@ -1581,8 +1581,8 @@
         },
         {
           "time": "2026-05-12T14:00:00Z",
-          "tempF": 43.6,
-          "dewF": 37.6,
+          "tempF": 43.7,
+          "dewF": 37.7,
           "windMph": 6.7,
           "gustMph": 13.1,
           "windDirDeg": 320,
@@ -1590,8 +1590,8 @@
         },
         {
           "time": "2026-05-12T15:00:00Z",
-          "tempF": 47.2,
-          "dewF": 41.2,
+          "tempF": 47.3,
+          "dewF": 41.3,
           "windMph": 7.3,
           "gustMph": 14,
           "windDirDeg": 320,
@@ -1599,8 +1599,8 @@
         },
         {
           "time": "2026-05-12T16:00:00Z",
-          "tempF": 50.8,
-          "dewF": 44.8,
+          "tempF": 50.9,
+          "dewF": 44.9,
           "windMph": 7.7,
           "gustMph": 14.6,
           "windDirDeg": 320,
@@ -1642,8 +1642,8 @@
         },
         {
           "time": "2026-05-11T19:00:00Z",
-          "tempF": 55.7,
-          "dewF": 49.7,
+          "tempF": 55.4,
+          "dewF": 49.4,
           "windMph": 6.7,
           "gustMph": 13,
           "windDirDeg": 320,
@@ -1651,8 +1651,8 @@
         },
         {
           "time": "2026-05-11T20:00:00Z",
-          "tempF": 53.5,
-          "dewF": 47.5,
+          "tempF": 52.9,
+          "dewF": 46.9,
           "windMph": 7.2,
           "gustMph": 13.9,
           "windDirDeg": 320,
@@ -1660,8 +1660,8 @@
         },
         {
           "time": "2026-05-11T21:00:00Z",
-          "tempF": 51.3,
-          "dewF": 45.3,
+          "tempF": 50.3,
+          "dewF": 44.3,
           "windMph": 7.7,
           "gustMph": 14.5,
           "windDirDeg": 320,
@@ -1669,8 +1669,8 @@
         },
         {
           "time": "2026-05-11T22:00:00Z",
-          "tempF": 49.1,
-          "dewF": 43.1,
+          "tempF": 47.9,
+          "dewF": 41.9,
           "windMph": 7.9,
           "gustMph": 14.9,
           "windDirDeg": 320,
@@ -1678,8 +1678,8 @@
         },
         {
           "time": "2026-05-11T23:00:00Z",
-          "tempF": 47,
-          "dewF": 41,
+          "tempF": 45.5,
+          "dewF": 39.5,
           "windMph": 8,
           "gustMph": 15,
           "windDirDeg": 320,
@@ -1687,8 +1687,8 @@
         },
         {
           "time": "2026-05-12T00:00:00Z",
-          "tempF": 45,
-          "dewF": 39,
+          "tempF": 43.3,
+          "dewF": 37.3,
           "windMph": 7.8,
           "gustMph": 14.7,
           "windDirDeg": 320,
@@ -1696,8 +1696,8 @@
         },
         {
           "time": "2026-05-12T01:00:00Z",
-          "tempF": 43.2,
-          "dewF": 37.2,
+          "tempF": 41.1,
+          "dewF": 35.1,
           "windMph": 7.4,
           "gustMph": 14.2,
           "windDirDeg": 320,
@@ -1705,8 +1705,8 @@
         },
         {
           "time": "2026-05-12T02:00:00Z",
-          "tempF": 41.4,
-          "dewF": 35.4,
+          "tempF": 39.1,
+          "dewF": 33.1,
           "windMph": 6.9,
           "gustMph": 13.4,
           "windDirDeg": 320,
@@ -1714,8 +1714,8 @@
         },
         {
           "time": "2026-05-12T03:00:00Z",
-          "tempF": 39.8,
-          "dewF": 33.8,
+          "tempF": 37.3,
+          "dewF": 31.3,
           "windMph": 6.3,
           "gustMph": 12.4,
           "windDirDeg": 320,
@@ -1723,8 +1723,8 @@
         },
         {
           "time": "2026-05-12T04:00:00Z",
-          "tempF": 38.4,
-          "dewF": 32.4,
+          "tempF": 35.7,
+          "dewF": 29.7,
           "windMph": 5.6,
           "gustMph": 11.4,
           "windDirDeg": 320,
@@ -1732,8 +1732,8 @@
         },
         {
           "time": "2026-05-12T05:00:00Z",
-          "tempF": 37.1,
-          "dewF": 31.1,
+          "tempF": 34.2,
+          "dewF": 28.2,
           "windMph": 5,
           "gustMph": 10.5,
           "windDirDeg": 320,
@@ -1741,8 +1741,8 @@
         },
         {
           "time": "2026-05-12T06:00:00Z",
-          "tempF": 36,
-          "dewF": 30,
+          "tempF": 32.9,
+          "dewF": 26.9,
           "windMph": 4.5,
           "gustMph": 9.7,
           "windDirDeg": 320,
@@ -1750,8 +1750,8 @@
         },
         {
           "time": "2026-05-12T07:00:00Z",
-          "tempF": 35.1,
-          "dewF": 29.1,
+          "tempF": 31.9,
+          "dewF": 25.9,
           "windMph": 4.1,
           "gustMph": 9.2,
           "windDirDeg": 320,
@@ -1759,8 +1759,8 @@
         },
         {
           "time": "2026-05-12T08:00:00Z",
-          "tempF": 34.3,
-          "dewF": 28.3,
+          "tempF": 31.1,
+          "dewF": 25.1,
           "windMph": 4,
           "gustMph": 9,
           "windDirDeg": 320,
@@ -1768,8 +1768,8 @@
         },
         {
           "time": "2026-05-12T09:00:00Z",
-          "tempF": 33.8,
-          "dewF": 27.8,
+          "tempF": 30.5,
+          "dewF": 24.5,
           "windMph": 4.1,
           "gustMph": 9.1,
           "windDirDeg": 320,
@@ -1777,8 +1777,8 @@
         },
         {
           "time": "2026-05-12T10:00:00Z",
-          "tempF": 33.5,
-          "dewF": 27.5,
+          "tempF": 30.1,
+          "dewF": 24.1,
           "windMph": 4.4,
           "gustMph": 9.6,
           "windDirDeg": 320,
@@ -1786,8 +1786,8 @@
         },
         {
           "time": "2026-05-12T11:00:00Z",
-          "tempF": 33.4,
-          "dewF": 27.4,
+          "tempF": 30,
+          "dewF": 24,
           "windMph": 4.8,
           "gustMph": 10.3,
           "windDirDeg": 320,
@@ -1795,8 +1795,8 @@
         },
         {
           "time": "2026-05-12T12:00:00Z",
-          "tempF": 36.9,
-          "dewF": 30.9,
+          "tempF": 34,
+          "dewF": 28,
           "windMph": 5.4,
           "gustMph": 11.2,
           "windDirDeg": 320,
@@ -1804,8 +1804,8 @@
         },
         {
           "time": "2026-05-12T13:00:00Z",
-          "tempF": 40.4,
-          "dewF": 34.4,
+          "tempF": 38,
+          "dewF": 32,
           "windMph": 6.1,
           "gustMph": 12.2,
           "windDirDeg": 320,
@@ -1813,8 +1813,8 @@
         },
         {
           "time": "2026-05-12T14:00:00Z",
-          "tempF": 43.9,
-          "dewF": 37.9,
+          "tempF": 42,
+          "dewF": 36,
           "windMph": 6.7,
           "gustMph": 13.1,
           "windDirDeg": 320,
@@ -1822,8 +1822,8 @@
         },
         {
           "time": "2026-05-12T15:00:00Z",
-          "tempF": 47.5,
-          "dewF": 41.5,
+          "tempF": 46,
+          "dewF": 40,
           "windMph": 7.3,
           "gustMph": 14,
           "windDirDeg": 320,
@@ -1831,8 +1831,8 @@
         },
         {
           "time": "2026-05-12T16:00:00Z",
-          "tempF": 51,
-          "dewF": 45,
+          "tempF": 50,
+          "dewF": 44,
           "windMph": 7.7,
           "gustMph": 14.6,
           "windDirDeg": 320,
@@ -1840,8 +1840,8 @@
         },
         {
           "time": "2026-05-12T17:00:00Z",
-          "tempF": 54.5,
-          "dewF": 48.5,
+          "tempF": 54,
+          "dewF": 48,
           "windMph": 8,
           "gustMph": 14.9,
           "windDirDeg": 320,
@@ -2106,8 +2106,8 @@
         },
         {
           "time": "2026-05-19T19:00:00Z",
-          "tempF": 69.6,
-          "dewF": 63.6,
+          "tempF": 69.7,
+          "dewF": 63.7,
           "windMph": 6.7,
           "gustMph": 13,
           "windDirDeg": 320,
@@ -2115,8 +2115,8 @@
         },
         {
           "time": "2026-05-19T20:00:00Z",
-          "tempF": 67.1,
-          "dewF": 61.1,
+          "tempF": 67.3,
+          "dewF": 61.3,
           "windMph": 7.2,
           "gustMph": 13.9,
           "windDirDeg": 320,
@@ -2124,8 +2124,8 @@
         },
         {
           "time": "2026-05-19T21:00:00Z",
-          "tempF": 64.8,
-          "dewF": 58.8,
+          "tempF": 65,
+          "dewF": 59,
           "windMph": 7.7,
           "gustMph": 14.5,
           "windDirDeg": 320,
@@ -2133,8 +2133,8 @@
         },
         {
           "time": "2026-05-19T22:00:00Z",
-          "tempF": 62.5,
-          "dewF": 56.5,
+          "tempF": 62.8,
+          "dewF": 56.8,
           "windMph": 7.9,
           "gustMph": 14.9,
           "windDirDeg": 320,
@@ -2142,8 +2142,8 @@
         },
         {
           "time": "2026-05-19T23:00:00Z",
-          "tempF": 60.2,
-          "dewF": 54.2,
+          "tempF": 60.7,
+          "dewF": 54.7,
           "windMph": 8,
           "gustMph": 15,
           "windDirDeg": 320,
@@ -2151,8 +2151,8 @@
         },
         {
           "time": "2026-05-20T00:00:00Z",
-          "tempF": 58.1,
-          "dewF": 52.1,
+          "tempF": 58.6,
+          "dewF": 52.6,
           "windMph": 7.8,
           "gustMph": 14.7,
           "windDirDeg": 320,
@@ -2160,8 +2160,8 @@
         },
         {
           "time": "2026-05-20T01:00:00Z",
-          "tempF": 56.1,
-          "dewF": 50.1,
+          "tempF": 56.7,
+          "dewF": 50.7,
           "windMph": 7.4,
           "gustMph": 14.2,
           "windDirDeg": 320,
@@ -2169,8 +2169,8 @@
         },
         {
           "time": "2026-05-20T02:00:00Z",
-          "tempF": 54.2,
-          "dewF": 48.2,
+          "tempF": 54.9,
+          "dewF": 48.9,
           "windMph": 6.9,
           "gustMph": 13.4,
           "windDirDeg": 320,
@@ -2178,8 +2178,8 @@
         },
         {
           "time": "2026-05-20T03:00:00Z",
-          "tempF": 52.5,
-          "dewF": 46.5,
+          "tempF": 53.2,
+          "dewF": 47.2,
           "windMph": 6.3,
           "gustMph": 12.4,
           "windDirDeg": 320,
@@ -2187,8 +2187,8 @@
         },
         {
           "time": "2026-05-20T04:00:00Z",
-          "tempF": 50.9,
-          "dewF": 44.9,
+          "tempF": 51.7,
+          "dewF": 45.7,
           "windMph": 5.6,
           "gustMph": 11.4,
           "windDirDeg": 320,
@@ -2196,8 +2196,8 @@
         },
         {
           "time": "2026-05-20T05:00:00Z",
-          "tempF": 49.6,
-          "dewF": 43.6,
+          "tempF": 50.4,
+          "dewF": 44.4,
           "windMph": 5,
           "gustMph": 10.5,
           "windDirDeg": 320,
@@ -2205,8 +2205,8 @@
         },
         {
           "time": "2026-05-20T06:00:00Z",
-          "tempF": 48.4,
-          "dewF": 42.4,
+          "tempF": 49.3,
+          "dewF": 43.3,
           "windMph": 4.5,
           "gustMph": 9.7,
           "windDirDeg": 320,
@@ -2214,8 +2214,8 @@
         },
         {
           "time": "2026-05-20T07:00:00Z",
-          "tempF": 47.4,
-          "dewF": 41.4,
+          "tempF": 48.3,
+          "dewF": 42.3,
           "windMph": 4.1,
           "gustMph": 9.2,
           "windDirDeg": 320,
@@ -2223,8 +2223,8 @@
         },
         {
           "time": "2026-05-20T08:00:00Z",
-          "tempF": 46.6,
-          "dewF": 40.6,
+          "tempF": 47.6,
+          "dewF": 41.6,
           "windMph": 4,
           "gustMph": 9,
           "windDirDeg": 320,
@@ -2232,8 +2232,8 @@
         },
         {
           "time": "2026-05-20T09:00:00Z",
-          "tempF": 46,
-          "dewF": 40,
+          "tempF": 47,
+          "dewF": 41,
           "windMph": 4.1,
           "gustMph": 9.1,
           "windDirDeg": 320,
@@ -2241,8 +2241,8 @@
         },
         {
           "time": "2026-05-20T10:00:00Z",
-          "tempF": 45.7,
-          "dewF": 39.7,
+          "tempF": 46.7,
+          "dewF": 40.7,
           "windMph": 4.4,
           "gustMph": 9.6,
           "windDirDeg": 320,
@@ -2250,8 +2250,8 @@
         },
         {
           "time": "2026-05-20T11:00:00Z",
-          "tempF": 45.6,
-          "dewF": 39.6,
+          "tempF": 46.6,
+          "dewF": 40.6,
           "windMph": 4.8,
           "gustMph": 10.3,
           "windDirDeg": 320,
@@ -2259,8 +2259,8 @@
         },
         {
           "time": "2026-05-20T12:00:00Z",
-          "tempF": 49.4,
-          "dewF": 43.4,
+          "tempF": 50.2,
+          "dewF": 44.2,
           "windMph": 5.4,
           "gustMph": 11.2,
           "windDirDeg": 320,
@@ -2268,8 +2268,8 @@
         },
         {
           "time": "2026-05-20T13:00:00Z",
-          "tempF": 53.1,
-          "dewF": 47.1,
+          "tempF": 53.9,
+          "dewF": 47.9,
           "windMph": 6.1,
           "gustMph": 12.2,
           "windDirDeg": 320,
@@ -2277,8 +2277,8 @@
         },
         {
           "time": "2026-05-20T14:00:00Z",
-          "tempF": 56.9,
-          "dewF": 50.9,
+          "tempF": 57.5,
+          "dewF": 51.5,
           "windMph": 6.7,
           "gustMph": 13.1,
           "windDirDeg": 320,
@@ -2286,8 +2286,8 @@
         },
         {
           "time": "2026-05-20T15:00:00Z",
-          "tempF": 60.7,
-          "dewF": 54.7,
+          "tempF": 61.1,
+          "dewF": 55.1,
           "windMph": 7.3,
           "gustMph": 14,
           "windDirDeg": 320,
@@ -2295,8 +2295,8 @@
         },
         {
           "time": "2026-05-20T16:00:00Z",
-          "tempF": 64.5,
-          "dewF": 58.5,
+          "tempF": 64.7,
+          "dewF": 58.7,
           "windMph": 7.7,
           "gustMph": 14.6,
           "windDirDeg": 320,
@@ -2304,8 +2304,8 @@
         },
         {
           "time": "2026-05-20T17:00:00Z",
-          "tempF": 68.2,
-          "dewF": 62.2,
+          "tempF": 68.4,
+          "dewF": 62.4,
           "windMph": 8,
           "gustMph": 14.9,
           "windDirDeg": 320,
@@ -2338,6 +2338,238 @@
         },
         {
           "time": "2026-05-19T19:00:00Z",
+          "tempF": 69.6,
+          "dewF": 63.6,
+          "windMph": 6.7,
+          "gustMph": 13,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-19T20:00:00Z",
+          "tempF": 67.3,
+          "dewF": 61.3,
+          "windMph": 7.2,
+          "gustMph": 13.9,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-19T21:00:00Z",
+          "tempF": 65,
+          "dewF": 59,
+          "windMph": 7.7,
+          "gustMph": 14.5,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-19T22:00:00Z",
+          "tempF": 62.7,
+          "dewF": 56.7,
+          "windMph": 7.9,
+          "gustMph": 14.9,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-19T23:00:00Z",
+          "tempF": 60.5,
+          "dewF": 54.5,
+          "windMph": 8,
+          "gustMph": 15,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T00:00:00Z",
+          "tempF": 58.5,
+          "dewF": 52.5,
+          "windMph": 7.8,
+          "gustMph": 14.7,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T01:00:00Z",
+          "tempF": 56.5,
+          "dewF": 50.5,
+          "windMph": 7.4,
+          "gustMph": 14.2,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T02:00:00Z",
+          "tempF": 54.7,
+          "dewF": 48.7,
+          "windMph": 6.9,
+          "gustMph": 13.4,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T03:00:00Z",
+          "tempF": 53,
+          "dewF": 47,
+          "windMph": 6.3,
+          "gustMph": 12.4,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T04:00:00Z",
+          "tempF": 51.5,
+          "dewF": 45.5,
+          "windMph": 5.6,
+          "gustMph": 11.4,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T05:00:00Z",
+          "tempF": 50.1,
+          "dewF": 44.1,
+          "windMph": 5,
+          "gustMph": 10.5,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T06:00:00Z",
+          "tempF": 49,
+          "dewF": 43,
+          "windMph": 4.5,
+          "gustMph": 9.7,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T07:00:00Z",
+          "tempF": 48,
+          "dewF": 42,
+          "windMph": 4.1,
+          "gustMph": 9.2,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T08:00:00Z",
+          "tempF": 47.3,
+          "dewF": 41.3,
+          "windMph": 4,
+          "gustMph": 9,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T09:00:00Z",
+          "tempF": 46.7,
+          "dewF": 40.7,
+          "windMph": 4.1,
+          "gustMph": 9.1,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T10:00:00Z",
+          "tempF": 46.4,
+          "dewF": 40.4,
+          "windMph": 4.4,
+          "gustMph": 9.6,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T11:00:00Z",
+          "tempF": 46.3,
+          "dewF": 40.3,
+          "windMph": 4.8,
+          "gustMph": 10.3,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T12:00:00Z",
+          "tempF": 50,
+          "dewF": 44,
+          "windMph": 5.4,
+          "gustMph": 11.2,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T13:00:00Z",
+          "tempF": 53.6,
+          "dewF": 47.6,
+          "windMph": 6.1,
+          "gustMph": 12.2,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T14:00:00Z",
+          "tempF": 57.3,
+          "dewF": 51.3,
+          "windMph": 6.7,
+          "gustMph": 13.1,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T15:00:00Z",
+          "tempF": 61,
+          "dewF": 55,
+          "windMph": 7.3,
+          "gustMph": 14,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T16:00:00Z",
+          "tempF": 64.7,
+          "dewF": 58.7,
+          "windMph": 7.7,
+          "gustMph": 14.6,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T17:00:00Z",
+          "tempF": 68.3,
+          "dewF": 62.3,
+          "windMph": 8,
+          "gustMph": 14.9,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T18:00:00Z",
+          "tempF": 72,
+          "dewF": 66,
+          "windMph": 8,
+          "gustMph": 15,
+          "windDirDeg": 320,
+          "precipIn": 0
+        }
+      ]
+    },
+    {
+      "stationId": "farm-sensor-field-ia-04",
+      "fieldId": "field-ia-04",
+      "scenario": "mild-0520",
+      "hourly": [
+        {
+          "time": "2026-05-19T18:00:00Z",
+          "tempF": 72,
+          "dewF": 66,
+          "windMph": 6,
+          "gustMph": 12,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-19T19:00:00Z",
           "tempF": 69.4,
           "dewF": 63.4,
           "windMph": 6.7,
@@ -2347,8 +2579,8 @@
         },
         {
           "time": "2026-05-19T20:00:00Z",
-          "tempF": 66.9,
-          "dewF": 60.9,
+          "tempF": 66.8,
+          "dewF": 60.8,
           "windMph": 7.2,
           "gustMph": 13.9,
           "windDirDeg": 320,
@@ -2356,8 +2588,8 @@
         },
         {
           "time": "2026-05-19T21:00:00Z",
-          "tempF": 64.4,
-          "dewF": 58.4,
+          "tempF": 64.3,
+          "dewF": 58.3,
           "windMph": 7.7,
           "gustMph": 14.5,
           "windDirDeg": 320,
@@ -2365,8 +2597,8 @@
         },
         {
           "time": "2026-05-19T22:00:00Z",
-          "tempF": 61.9,
-          "dewF": 55.9,
+          "tempF": 61.8,
+          "dewF": 55.8,
           "windMph": 7.9,
           "gustMph": 14.9,
           "windDirDeg": 320,
@@ -2374,8 +2606,8 @@
         },
         {
           "time": "2026-05-19T23:00:00Z",
-          "tempF": 59.6,
-          "dewF": 53.6,
+          "tempF": 59.5,
+          "dewF": 53.5,
           "windMph": 8,
           "gustMph": 15,
           "windDirDeg": 320,
@@ -2383,8 +2615,8 @@
         },
         {
           "time": "2026-05-20T00:00:00Z",
-          "tempF": 57.3,
-          "dewF": 51.3,
+          "tempF": 57.2,
+          "dewF": 51.2,
           "windMph": 7.8,
           "gustMph": 14.7,
           "windDirDeg": 320,
@@ -2392,8 +2624,8 @@
         },
         {
           "time": "2026-05-20T01:00:00Z",
-          "tempF": 55.2,
-          "dewF": 49.2,
+          "tempF": 55.1,
+          "dewF": 49.1,
           "windMph": 7.4,
           "gustMph": 14.2,
           "windDirDeg": 320,
@@ -2401,8 +2633,8 @@
         },
         {
           "time": "2026-05-20T02:00:00Z",
-          "tempF": 53.2,
-          "dewF": 47.2,
+          "tempF": 53.1,
+          "dewF": 47.1,
           "windMph": 6.9,
           "gustMph": 13.4,
           "windDirDeg": 320,
@@ -2410,8 +2642,8 @@
         },
         {
           "time": "2026-05-20T03:00:00Z",
-          "tempF": 51.4,
-          "dewF": 45.4,
+          "tempF": 51.2,
+          "dewF": 45.2,
           "windMph": 6.3,
           "gustMph": 12.4,
           "windDirDeg": 320,
@@ -2419,8 +2651,8 @@
         },
         {
           "time": "2026-05-20T04:00:00Z",
-          "tempF": 49.7,
-          "dewF": 43.7,
+          "tempF": 49.6,
+          "dewF": 43.6,
           "windMph": 5.6,
           "gustMph": 11.4,
           "windDirDeg": 320,
@@ -2428,8 +2660,8 @@
         },
         {
           "time": "2026-05-20T05:00:00Z",
-          "tempF": 48.3,
-          "dewF": 42.3,
+          "tempF": 48.1,
+          "dewF": 42.1,
           "windMph": 5,
           "gustMph": 10.5,
           "windDirDeg": 320,
@@ -2437,8 +2669,8 @@
         },
         {
           "time": "2026-05-20T06:00:00Z",
-          "tempF": 47,
-          "dewF": 41,
+          "tempF": 46.8,
+          "dewF": 40.8,
           "windMph": 4.5,
           "gustMph": 9.7,
           "windDirDeg": 320,
@@ -2446,8 +2678,8 @@
         },
         {
           "time": "2026-05-20T07:00:00Z",
-          "tempF": 46,
-          "dewF": 40,
+          "tempF": 45.8,
+          "dewF": 39.8,
           "windMph": 4.1,
           "gustMph": 9.2,
           "windDirDeg": 320,
@@ -2455,8 +2687,8 @@
         },
         {
           "time": "2026-05-20T08:00:00Z",
-          "tempF": 45.2,
-          "dewF": 39.2,
+          "tempF": 45,
+          "dewF": 39,
           "windMph": 4,
           "gustMph": 9,
           "windDirDeg": 320,
@@ -2464,8 +2696,8 @@
         },
         {
           "time": "2026-05-20T09:00:00Z",
-          "tempF": 44.6,
-          "dewF": 38.6,
+          "tempF": 44.4,
+          "dewF": 38.4,
           "windMph": 4.1,
           "gustMph": 9.1,
           "windDirDeg": 320,
@@ -2473,8 +2705,8 @@
         },
         {
           "time": "2026-05-20T10:00:00Z",
-          "tempF": 44.2,
-          "dewF": 38.2,
+          "tempF": 44,
+          "dewF": 38,
           "windMph": 4.4,
           "gustMph": 9.6,
           "windDirDeg": 320,
@@ -2482,8 +2714,8 @@
         },
         {
           "time": "2026-05-20T11:00:00Z",
-          "tempF": 44.1,
-          "dewF": 38.1,
+          "tempF": 43.9,
+          "dewF": 37.9,
           "windMph": 4.8,
           "gustMph": 10.3,
           "windDirDeg": 320,
@@ -2491,8 +2723,8 @@
         },
         {
           "time": "2026-05-20T12:00:00Z",
-          "tempF": 48.1,
-          "dewF": 42.1,
+          "tempF": 47.9,
+          "dewF": 41.9,
           "windMph": 5.4,
           "gustMph": 11.2,
           "windDirDeg": 320,
@@ -2500,8 +2732,8 @@
         },
         {
           "time": "2026-05-20T13:00:00Z",
-          "tempF": 52.1,
-          "dewF": 46.1,
+          "tempF": 51.9,
+          "dewF": 45.9,
           "windMph": 6.1,
           "gustMph": 12.2,
           "windDirDeg": 320,
@@ -2509,8 +2741,8 @@
         },
         {
           "time": "2026-05-20T14:00:00Z",
-          "tempF": 56.1,
-          "dewF": 50.1,
+          "tempF": 55.9,
+          "dewF": 49.9,
           "windMph": 6.7,
           "gustMph": 13.1,
           "windDirDeg": 320,
@@ -2555,8 +2787,472 @@
       ]
     },
     {
-      "stationId": "farm-sensor-field-ia-04",
-      "fieldId": "field-ia-04",
+      "stationId": "farm-sensor-field-ia-05",
+      "fieldId": "field-ia-05",
+      "scenario": "mild-0520",
+      "hourly": [
+        {
+          "time": "2026-05-19T18:00:00Z",
+          "tempF": 72,
+          "dewF": 66,
+          "windMph": 6,
+          "gustMph": 12,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-19T19:00:00Z",
+          "tempF": 69.3,
+          "dewF": 63.3,
+          "windMph": 6.7,
+          "gustMph": 13,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-19T20:00:00Z",
+          "tempF": 66.7,
+          "dewF": 60.7,
+          "windMph": 7.2,
+          "gustMph": 13.9,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-19T21:00:00Z",
+          "tempF": 64,
+          "dewF": 58,
+          "windMph": 7.7,
+          "gustMph": 14.5,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-19T22:00:00Z",
+          "tempF": 61.5,
+          "dewF": 55.5,
+          "windMph": 7.9,
+          "gustMph": 14.9,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-19T23:00:00Z",
+          "tempF": 59,
+          "dewF": 53,
+          "windMph": 8,
+          "gustMph": 15,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T00:00:00Z",
+          "tempF": 56.7,
+          "dewF": 50.7,
+          "windMph": 7.8,
+          "gustMph": 14.7,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T01:00:00Z",
+          "tempF": 54.5,
+          "dewF": 48.5,
+          "windMph": 7.4,
+          "gustMph": 14.2,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T02:00:00Z",
+          "tempF": 52.4,
+          "dewF": 46.4,
+          "windMph": 6.9,
+          "gustMph": 13.4,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T03:00:00Z",
+          "tempF": 50.5,
+          "dewF": 44.5,
+          "windMph": 6.3,
+          "gustMph": 12.4,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T04:00:00Z",
+          "tempF": 48.8,
+          "dewF": 42.8,
+          "windMph": 5.6,
+          "gustMph": 11.4,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T05:00:00Z",
+          "tempF": 47.3,
+          "dewF": 41.3,
+          "windMph": 5,
+          "gustMph": 10.5,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T06:00:00Z",
+          "tempF": 46,
+          "dewF": 40,
+          "windMph": 4.5,
+          "gustMph": 9.7,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T07:00:00Z",
+          "tempF": 44.9,
+          "dewF": 38.9,
+          "windMph": 4.1,
+          "gustMph": 9.2,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T08:00:00Z",
+          "tempF": 44,
+          "dewF": 38,
+          "windMph": 4,
+          "gustMph": 9,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T09:00:00Z",
+          "tempF": 43.4,
+          "dewF": 37.4,
+          "windMph": 4.1,
+          "gustMph": 9.1,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T10:00:00Z",
+          "tempF": 43,
+          "dewF": 37,
+          "windMph": 4.4,
+          "gustMph": 9.6,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T11:00:00Z",
+          "tempF": 42.9,
+          "dewF": 36.9,
+          "windMph": 4.8,
+          "gustMph": 10.3,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T12:00:00Z",
+          "tempF": 47.1,
+          "dewF": 41.1,
+          "windMph": 5.4,
+          "gustMph": 11.2,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T13:00:00Z",
+          "tempF": 51.2,
+          "dewF": 45.2,
+          "windMph": 6.1,
+          "gustMph": 12.2,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T14:00:00Z",
+          "tempF": 55.4,
+          "dewF": 49.4,
+          "windMph": 6.7,
+          "gustMph": 13.1,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T15:00:00Z",
+          "tempF": 59.5,
+          "dewF": 53.5,
+          "windMph": 7.3,
+          "gustMph": 14,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T16:00:00Z",
+          "tempF": 63.7,
+          "dewF": 57.7,
+          "windMph": 7.7,
+          "gustMph": 14.6,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T17:00:00Z",
+          "tempF": 67.8,
+          "dewF": 61.8,
+          "windMph": 8,
+          "gustMph": 14.9,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T18:00:00Z",
+          "tempF": 72,
+          "dewF": 66,
+          "windMph": 8,
+          "gustMph": 15,
+          "windDirDeg": 320,
+          "precipIn": 0
+        }
+      ]
+    },
+    {
+      "stationId": "farm-sensor-field-ia-06",
+      "fieldId": "field-ia-06",
+      "scenario": "mild-0520",
+      "hourly": [
+        {
+          "time": "2026-05-19T18:00:00Z",
+          "tempF": 72,
+          "dewF": 66,
+          "windMph": 6,
+          "gustMph": 12,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-19T19:00:00Z",
+          "tempF": 69.6,
+          "dewF": 63.6,
+          "windMph": 6.7,
+          "gustMph": 13,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-19T20:00:00Z",
+          "tempF": 67.2,
+          "dewF": 61.2,
+          "windMph": 7.2,
+          "gustMph": 13.9,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-19T21:00:00Z",
+          "tempF": 64.9,
+          "dewF": 58.9,
+          "windMph": 7.7,
+          "gustMph": 14.5,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-19T22:00:00Z",
+          "tempF": 62.6,
+          "dewF": 56.6,
+          "windMph": 7.9,
+          "gustMph": 14.9,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-19T23:00:00Z",
+          "tempF": 60.5,
+          "dewF": 54.5,
+          "windMph": 8,
+          "gustMph": 15,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T00:00:00Z",
+          "tempF": 58.4,
+          "dewF": 52.4,
+          "windMph": 7.8,
+          "gustMph": 14.7,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T01:00:00Z",
+          "tempF": 56.4,
+          "dewF": 50.4,
+          "windMph": 7.4,
+          "gustMph": 14.2,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T02:00:00Z",
+          "tempF": 54.6,
+          "dewF": 48.6,
+          "windMph": 6.9,
+          "gustMph": 13.4,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T03:00:00Z",
+          "tempF": 52.9,
+          "dewF": 46.9,
+          "windMph": 6.3,
+          "gustMph": 12.4,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T04:00:00Z",
+          "tempF": 51.3,
+          "dewF": 45.3,
+          "windMph": 5.6,
+          "gustMph": 11.4,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T05:00:00Z",
+          "tempF": 50,
+          "dewF": 44,
+          "windMph": 5,
+          "gustMph": 10.5,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T06:00:00Z",
+          "tempF": 48.8,
+          "dewF": 42.8,
+          "windMph": 4.5,
+          "gustMph": 9.7,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T07:00:00Z",
+          "tempF": 47.8,
+          "dewF": 41.8,
+          "windMph": 4.1,
+          "gustMph": 9.2,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T08:00:00Z",
+          "tempF": 47.1,
+          "dewF": 41.1,
+          "windMph": 4,
+          "gustMph": 9,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T09:00:00Z",
+          "tempF": 46.5,
+          "dewF": 40.5,
+          "windMph": 4.1,
+          "gustMph": 9.1,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T10:00:00Z",
+          "tempF": 46.2,
+          "dewF": 40.2,
+          "windMph": 4.4,
+          "gustMph": 9.6,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T11:00:00Z",
+          "tempF": 46.1,
+          "dewF": 40.1,
+          "windMph": 4.8,
+          "gustMph": 10.3,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T12:00:00Z",
+          "tempF": 49.8,
+          "dewF": 43.8,
+          "windMph": 5.4,
+          "gustMph": 11.2,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T13:00:00Z",
+          "tempF": 53.5,
+          "dewF": 47.5,
+          "windMph": 6.1,
+          "gustMph": 12.2,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T14:00:00Z",
+          "tempF": 57.2,
+          "dewF": 51.2,
+          "windMph": 6.7,
+          "gustMph": 13.1,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T15:00:00Z",
+          "tempF": 60.9,
+          "dewF": 54.9,
+          "windMph": 7.3,
+          "gustMph": 14,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T16:00:00Z",
+          "tempF": 64.6,
+          "dewF": 58.6,
+          "windMph": 7.7,
+          "gustMph": 14.6,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T17:00:00Z",
+          "tempF": 68.3,
+          "dewF": 62.3,
+          "windMph": 8,
+          "gustMph": 14.9,
+          "windDirDeg": 320,
+          "precipIn": 0
+        },
+        {
+          "time": "2026-05-20T18:00:00Z",
+          "tempF": 72,
+          "dewF": 66,
+          "windMph": 8,
+          "gustMph": 15,
+          "windDirDeg": 320,
+          "precipIn": 0
+        }
+      ]
+    },
+    {
+      "stationId": "farm-sensor-field-ia-07",
+      "fieldId": "field-ia-07",
       "scenario": "mild-0520",
       "hourly": [
         {
@@ -2633,8 +3329,8 @@
         },
         {
           "time": "2026-05-20T02:00:00Z",
-          "tempF": 54.4,
-          "dewF": 48.4,
+          "tempF": 54.5,
+          "dewF": 48.5,
           "windMph": 6.9,
           "gustMph": 13.4,
           "windDirDeg": 320,
@@ -2642,8 +3338,8 @@
         },
         {
           "time": "2026-05-20T03:00:00Z",
-          "tempF": 52.7,
-          "dewF": 46.7,
+          "tempF": 52.8,
+          "dewF": 46.8,
           "windMph": 6.3,
           "gustMph": 12.4,
           "windDirDeg": 320,
@@ -2651,8 +3347,8 @@
         },
         {
           "time": "2026-05-20T04:00:00Z",
-          "tempF": 51.2,
-          "dewF": 45.2,
+          "tempF": 51.3,
+          "dewF": 45.3,
           "windMph": 5.6,
           "gustMph": 11.4,
           "windDirDeg": 320,
@@ -2660,8 +3356,8 @@
         },
         {
           "time": "2026-05-20T05:00:00Z",
-          "tempF": 49.8,
-          "dewF": 43.8,
+          "tempF": 49.9,
+          "dewF": 43.9,
           "windMph": 5,
           "gustMph": 10.5,
           "windDirDeg": 320,
@@ -2669,8 +3365,8 @@
         },
         {
           "time": "2026-05-20T06:00:00Z",
-          "tempF": 48.6,
-          "dewF": 42.6,
+          "tempF": 48.7,
+          "dewF": 42.7,
           "windMph": 4.5,
           "gustMph": 9.7,
           "windDirDeg": 320,
@@ -2678,8 +3374,8 @@
         },
         {
           "time": "2026-05-20T07:00:00Z",
-          "tempF": 47.7,
-          "dewF": 41.7,
+          "tempF": 47.8,
+          "dewF": 41.8,
           "windMph": 4.1,
           "gustMph": 9.2,
           "windDirDeg": 320,
@@ -2687,8 +3383,8 @@
         },
         {
           "time": "2026-05-20T08:00:00Z",
-          "tempF": 46.9,
-          "dewF": 40.9,
+          "tempF": 47,
+          "dewF": 41,
           "windMph": 4,
           "gustMph": 9,
           "windDirDeg": 320,
@@ -2696,8 +3392,8 @@
         },
         {
           "time": "2026-05-20T09:00:00Z",
-          "tempF": 46.3,
-          "dewF": 40.3,
+          "tempF": 46.4,
+          "dewF": 40.4,
           "windMph": 4.1,
           "gustMph": 9.1,
           "windDirDeg": 320,
@@ -2705,8 +3401,8 @@
         },
         {
           "time": "2026-05-20T10:00:00Z",
-          "tempF": 46,
-          "dewF": 40,
+          "tempF": 46.1,
+          "dewF": 40.1,
           "windMph": 4.4,
           "gustMph": 9.6,
           "windDirDeg": 320,
@@ -2714,8 +3410,8 @@
         },
         {
           "time": "2026-05-20T11:00:00Z",
-          "tempF": 45.9,
-          "dewF": 39.9,
+          "tempF": 46,
+          "dewF": 40,
           "windMph": 4.8,
           "gustMph": 10.3,
           "windDirDeg": 320,
@@ -2723,8 +3419,8 @@
         },
         {
           "time": "2026-05-20T12:00:00Z",
-          "tempF": 49.6,
-          "dewF": 43.6,
+          "tempF": 49.7,
+          "dewF": 43.7,
           "windMph": 5.4,
           "gustMph": 11.2,
           "windDirDeg": 320,
@@ -2750,8 +3446,8 @@
         },
         {
           "time": "2026-05-20T15:00:00Z",
-          "tempF": 60.8,
-          "dewF": 54.8,
+          "tempF": 60.9,
+          "dewF": 54.9,
           "windMph": 7.3,
           "gustMph": 14,
           "windDirDeg": 320,
@@ -2759,704 +3455,8 @@
         },
         {
           "time": "2026-05-20T16:00:00Z",
-          "tempF": 64.5,
-          "dewF": 58.5,
-          "windMph": 7.7,
-          "gustMph": 14.6,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T17:00:00Z",
-          "tempF": 68.3,
-          "dewF": 62.3,
-          "windMph": 8,
-          "gustMph": 14.9,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T18:00:00Z",
-          "tempF": 72,
-          "dewF": 66,
-          "windMph": 8,
-          "gustMph": 15,
-          "windDirDeg": 320,
-          "precipIn": 0
-        }
-      ]
-    },
-    {
-      "stationId": "farm-sensor-field-ia-05",
-      "fieldId": "field-ia-05",
-      "scenario": "mild-0520",
-      "hourly": [
-        {
-          "time": "2026-05-19T18:00:00Z",
-          "tempF": 72,
-          "dewF": 66,
-          "windMph": 6,
-          "gustMph": 12,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-19T19:00:00Z",
-          "tempF": 69.4,
-          "dewF": 63.4,
-          "windMph": 6.7,
-          "gustMph": 13,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-19T20:00:00Z",
-          "tempF": 66.7,
-          "dewF": 60.7,
-          "windMph": 7.2,
-          "gustMph": 13.9,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-19T21:00:00Z",
-          "tempF": 64.2,
-          "dewF": 58.2,
-          "windMph": 7.7,
-          "gustMph": 14.5,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-19T22:00:00Z",
-          "tempF": 61.7,
-          "dewF": 55.7,
-          "windMph": 7.9,
-          "gustMph": 14.9,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-19T23:00:00Z",
-          "tempF": 59.3,
-          "dewF": 53.3,
-          "windMph": 8,
-          "gustMph": 15,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T00:00:00Z",
-          "tempF": 56.9,
-          "dewF": 50.9,
-          "windMph": 7.8,
-          "gustMph": 14.7,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T01:00:00Z",
-          "tempF": 54.8,
-          "dewF": 48.8,
-          "windMph": 7.4,
-          "gustMph": 14.2,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T02:00:00Z",
-          "tempF": 52.7,
-          "dewF": 46.7,
-          "windMph": 6.9,
-          "gustMph": 13.4,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T03:00:00Z",
-          "tempF": 50.9,
-          "dewF": 44.9,
-          "windMph": 6.3,
-          "gustMph": 12.4,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T04:00:00Z",
-          "tempF": 49.2,
-          "dewF": 43.2,
-          "windMph": 5.6,
-          "gustMph": 11.4,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T05:00:00Z",
-          "tempF": 47.7,
-          "dewF": 41.7,
-          "windMph": 5,
-          "gustMph": 10.5,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T06:00:00Z",
-          "tempF": 46.4,
-          "dewF": 40.4,
-          "windMph": 4.5,
-          "gustMph": 9.7,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T07:00:00Z",
-          "tempF": 45.3,
-          "dewF": 39.3,
-          "windMph": 4.1,
-          "gustMph": 9.2,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T08:00:00Z",
-          "tempF": 44.5,
-          "dewF": 38.5,
-          "windMph": 4,
-          "gustMph": 9,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T09:00:00Z",
-          "tempF": 43.9,
-          "dewF": 37.9,
-          "windMph": 4.1,
-          "gustMph": 9.1,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T10:00:00Z",
-          "tempF": 43.5,
-          "dewF": 37.5,
-          "windMph": 4.4,
-          "gustMph": 9.6,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T11:00:00Z",
-          "tempF": 43.4,
-          "dewF": 37.4,
-          "windMph": 4.8,
-          "gustMph": 10.3,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T12:00:00Z",
-          "tempF": 47.5,
-          "dewF": 41.5,
-          "windMph": 5.4,
-          "gustMph": 11.2,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T13:00:00Z",
-          "tempF": 51.6,
-          "dewF": 45.6,
-          "windMph": 6.1,
-          "gustMph": 12.2,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T14:00:00Z",
-          "tempF": 55.7,
-          "dewF": 49.7,
-          "windMph": 6.7,
-          "gustMph": 13.1,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T15:00:00Z",
-          "tempF": 59.7,
-          "dewF": 53.7,
-          "windMph": 7.3,
-          "gustMph": 14,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T16:00:00Z",
-          "tempF": 63.8,
-          "dewF": 57.8,
-          "windMph": 7.7,
-          "gustMph": 14.6,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T17:00:00Z",
-          "tempF": 67.9,
-          "dewF": 61.9,
-          "windMph": 8,
-          "gustMph": 14.9,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T18:00:00Z",
-          "tempF": 72,
-          "dewF": 66,
-          "windMph": 8,
-          "gustMph": 15,
-          "windDirDeg": 320,
-          "precipIn": 0
-        }
-      ]
-    },
-    {
-      "stationId": "farm-sensor-field-ia-06",
-      "fieldId": "field-ia-06",
-      "scenario": "mild-0520",
-      "hourly": [
-        {
-          "time": "2026-05-19T18:00:00Z",
-          "tempF": 72,
-          "dewF": 66,
-          "windMph": 6,
-          "gustMph": 12,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-19T19:00:00Z",
-          "tempF": 69.7,
-          "dewF": 63.7,
-          "windMph": 6.7,
-          "gustMph": 13,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-19T20:00:00Z",
-          "tempF": 67.4,
-          "dewF": 61.4,
-          "windMph": 7.2,
-          "gustMph": 13.9,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-19T21:00:00Z",
-          "tempF": 65.1,
-          "dewF": 59.1,
-          "windMph": 7.7,
-          "gustMph": 14.5,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-19T22:00:00Z",
-          "tempF": 62.9,
-          "dewF": 56.9,
-          "windMph": 7.9,
-          "gustMph": 14.9,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-19T23:00:00Z",
-          "tempF": 60.8,
-          "dewF": 54.8,
-          "windMph": 8,
-          "gustMph": 15,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T00:00:00Z",
-          "tempF": 58.8,
-          "dewF": 52.8,
-          "windMph": 7.8,
-          "gustMph": 14.7,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T01:00:00Z",
-          "tempF": 56.9,
-          "dewF": 50.9,
-          "windMph": 7.4,
-          "gustMph": 14.2,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T02:00:00Z",
-          "tempF": 55.1,
-          "dewF": 49.1,
-          "windMph": 6.9,
-          "gustMph": 13.4,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T03:00:00Z",
-          "tempF": 53.5,
-          "dewF": 47.5,
-          "windMph": 6.3,
-          "gustMph": 12.4,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T04:00:00Z",
-          "tempF": 52,
-          "dewF": 46,
-          "windMph": 5.6,
-          "gustMph": 11.4,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T05:00:00Z",
-          "tempF": 50.7,
-          "dewF": 44.7,
-          "windMph": 5,
-          "gustMph": 10.5,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T06:00:00Z",
-          "tempF": 49.5,
-          "dewF": 43.5,
-          "windMph": 4.5,
-          "gustMph": 9.7,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T07:00:00Z",
-          "tempF": 48.6,
-          "dewF": 42.6,
-          "windMph": 4.1,
-          "gustMph": 9.2,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T08:00:00Z",
-          "tempF": 47.9,
-          "dewF": 41.9,
-          "windMph": 4,
-          "gustMph": 9,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T09:00:00Z",
-          "tempF": 47.3,
-          "dewF": 41.3,
-          "windMph": 4.1,
-          "gustMph": 9.1,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T10:00:00Z",
-          "tempF": 47,
-          "dewF": 41,
-          "windMph": 4.4,
-          "gustMph": 9.6,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T11:00:00Z",
-          "tempF": 46.9,
-          "dewF": 40.9,
-          "windMph": 4.8,
-          "gustMph": 10.3,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T12:00:00Z",
-          "tempF": 50.5,
-          "dewF": 44.5,
-          "windMph": 5.4,
-          "gustMph": 11.2,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T13:00:00Z",
-          "tempF": 54.1,
-          "dewF": 48.1,
-          "windMph": 6.1,
-          "gustMph": 12.2,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T14:00:00Z",
-          "tempF": 57.7,
-          "dewF": 51.7,
-          "windMph": 6.7,
-          "gustMph": 13.1,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T15:00:00Z",
-          "tempF": 61.2,
-          "dewF": 55.2,
-          "windMph": 7.3,
-          "gustMph": 14,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T16:00:00Z",
-          "tempF": 64.8,
-          "dewF": 58.8,
-          "windMph": 7.7,
-          "gustMph": 14.6,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T17:00:00Z",
-          "tempF": 68.4,
-          "dewF": 62.4,
-          "windMph": 8,
-          "gustMph": 14.9,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T18:00:00Z",
-          "tempF": 72,
-          "dewF": 66,
-          "windMph": 8,
-          "gustMph": 15,
-          "windDirDeg": 320,
-          "precipIn": 0
-        }
-      ]
-    },
-    {
-      "stationId": "farm-sensor-field-ia-07",
-      "fieldId": "field-ia-07",
-      "scenario": "mild-0520",
-      "hourly": [
-        {
-          "time": "2026-05-19T18:00:00Z",
-          "tempF": 72,
-          "dewF": 66,
-          "windMph": 6,
-          "gustMph": 12,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-19T19:00:00Z",
-          "tempF": 69.6,
-          "dewF": 63.6,
-          "windMph": 6.7,
-          "gustMph": 13,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-19T20:00:00Z",
-          "tempF": 67.2,
-          "dewF": 61.2,
-          "windMph": 7.2,
-          "gustMph": 13.9,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-19T21:00:00Z",
-          "tempF": 64.8,
-          "dewF": 58.8,
-          "windMph": 7.7,
-          "gustMph": 14.5,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-19T22:00:00Z",
-          "tempF": 62.5,
-          "dewF": 56.5,
-          "windMph": 7.9,
-          "gustMph": 14.9,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-19T23:00:00Z",
-          "tempF": 60.3,
-          "dewF": 54.3,
-          "windMph": 8,
-          "gustMph": 15,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T00:00:00Z",
-          "tempF": 58.2,
-          "dewF": 52.2,
-          "windMph": 7.8,
-          "gustMph": 14.7,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T01:00:00Z",
-          "tempF": 56.2,
-          "dewF": 50.2,
-          "windMph": 7.4,
-          "gustMph": 14.2,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T02:00:00Z",
-          "tempF": 54.3,
-          "dewF": 48.3,
-          "windMph": 6.9,
-          "gustMph": 13.4,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T03:00:00Z",
-          "tempF": 52.6,
-          "dewF": 46.6,
-          "windMph": 6.3,
-          "gustMph": 12.4,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T04:00:00Z",
-          "tempF": 51.1,
-          "dewF": 45.1,
-          "windMph": 5.6,
-          "gustMph": 11.4,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T05:00:00Z",
-          "tempF": 49.7,
-          "dewF": 43.7,
-          "windMph": 5,
-          "gustMph": 10.5,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T06:00:00Z",
-          "tempF": 48.5,
-          "dewF": 42.5,
-          "windMph": 4.5,
-          "gustMph": 9.7,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T07:00:00Z",
-          "tempF": 47.6,
-          "dewF": 41.6,
-          "windMph": 4.1,
-          "gustMph": 9.2,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T08:00:00Z",
-          "tempF": 46.8,
-          "dewF": 40.8,
-          "windMph": 4,
-          "gustMph": 9,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T09:00:00Z",
-          "tempF": 46.2,
-          "dewF": 40.2,
-          "windMph": 4.1,
-          "gustMph": 9.1,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T10:00:00Z",
-          "tempF": 45.9,
-          "dewF": 39.9,
-          "windMph": 4.4,
-          "gustMph": 9.6,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T11:00:00Z",
-          "tempF": 45.8,
-          "dewF": 39.8,
-          "windMph": 4.8,
-          "gustMph": 10.3,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T12:00:00Z",
-          "tempF": 49.5,
-          "dewF": 43.5,
-          "windMph": 5.4,
-          "gustMph": 11.2,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T13:00:00Z",
-          "tempF": 53.3,
-          "dewF": 47.3,
-          "windMph": 6.1,
-          "gustMph": 12.2,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T14:00:00Z",
-          "tempF": 57,
-          "dewF": 51,
-          "windMph": 6.7,
-          "gustMph": 13.1,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T15:00:00Z",
-          "tempF": 60.8,
-          "dewF": 54.8,
-          "windMph": 7.3,
-          "gustMph": 14,
-          "windDirDeg": 320,
-          "precipIn": 0
-        },
-        {
-          "time": "2026-05-20T16:00:00Z",
-          "tempF": 64.5,
-          "dewF": 58.5,
+          "tempF": 64.6,
+          "dewF": 58.6,
           "windMph": 7.7,
           "gustMph": 14.6,
           "windDirDeg": 320,
@@ -3498,8 +3498,8 @@
         },
         {
           "time": "2026-05-19T19:00:00Z",
-          "tempF": 69.6,
-          "dewF": 63.6,
+          "tempF": 69.3,
+          "dewF": 63.3,
           "windMph": 6.7,
           "gustMph": 13,
           "windDirDeg": 320,
@@ -3507,8 +3507,8 @@
         },
         {
           "time": "2026-05-19T20:00:00Z",
-          "tempF": 67.3,
-          "dewF": 61.3,
+          "tempF": 66.7,
+          "dewF": 60.7,
           "windMph": 7.2,
           "gustMph": 13.9,
           "windDirDeg": 320,
@@ -3516,8 +3516,8 @@
         },
         {
           "time": "2026-05-19T21:00:00Z",
-          "tempF": 65,
-          "dewF": 59,
+          "tempF": 64.1,
+          "dewF": 58.1,
           "windMph": 7.7,
           "gustMph": 14.5,
           "windDirDeg": 320,
@@ -3525,8 +3525,8 @@
         },
         {
           "time": "2026-05-19T22:00:00Z",
-          "tempF": 62.8,
-          "dewF": 56.8,
+          "tempF": 61.5,
+          "dewF": 55.5,
           "windMph": 7.9,
           "gustMph": 14.9,
           "windDirDeg": 320,
@@ -3534,8 +3534,8 @@
         },
         {
           "time": "2026-05-19T23:00:00Z",
-          "tempF": 60.6,
-          "dewF": 54.6,
+          "tempF": 59.1,
+          "dewF": 53.1,
           "windMph": 8,
           "gustMph": 15,
           "windDirDeg": 320,
@@ -3543,8 +3543,8 @@
         },
         {
           "time": "2026-05-20T00:00:00Z",
-          "tempF": 58.5,
-          "dewF": 52.5,
+          "tempF": 56.7,
+          "dewF": 50.7,
           "windMph": 7.8,
           "gustMph": 14.7,
           "windDirDeg": 320,
@@ -3552,8 +3552,8 @@
         },
         {
           "time": "2026-05-20T01:00:00Z",
-          "tempF": 56.6,
-          "dewF": 50.6,
+          "tempF": 54.5,
+          "dewF": 48.5,
           "windMph": 7.4,
           "gustMph": 14.2,
           "windDirDeg": 320,
@@ -3561,8 +3561,8 @@
         },
         {
           "time": "2026-05-20T02:00:00Z",
-          "tempF": 54.8,
-          "dewF": 48.8,
+          "tempF": 52.5,
+          "dewF": 46.5,
           "windMph": 6.9,
           "gustMph": 13.4,
           "windDirDeg": 320,
@@ -3570,8 +3570,8 @@
         },
         {
           "time": "2026-05-20T03:00:00Z",
-          "tempF": 53.1,
-          "dewF": 47.1,
+          "tempF": 50.6,
+          "dewF": 44.6,
           "windMph": 6.3,
           "gustMph": 12.4,
           "windDirDeg": 320,
@@ -3579,8 +3579,8 @@
         },
         {
           "time": "2026-05-20T04:00:00Z",
-          "tempF": 51.6,
-          "dewF": 45.6,
+          "tempF": 48.9,
+          "dewF": 42.9,
           "windMph": 5.6,
           "gustMph": 11.4,
           "windDirDeg": 320,
@@ -3588,8 +3588,8 @@
         },
         {
           "time": "2026-05-20T05:00:00Z",
-          "tempF": 50.2,
-          "dewF": 44.2,
+          "tempF": 47.3,
+          "dewF": 41.3,
           "windMph": 5,
           "gustMph": 10.5,
           "windDirDeg": 320,
@@ -3597,8 +3597,8 @@
         },
         {
           "time": "2026-05-20T06:00:00Z",
-          "tempF": 49.1,
-          "dewF": 43.1,
+          "tempF": 46,
+          "dewF": 40,
           "windMph": 4.5,
           "gustMph": 9.7,
           "windDirDeg": 320,
@@ -3606,8 +3606,8 @@
         },
         {
           "time": "2026-05-20T07:00:00Z",
-          "tempF": 48.1,
-          "dewF": 42.1,
+          "tempF": 45,
+          "dewF": 39,
           "windMph": 4.1,
           "gustMph": 9.2,
           "windDirDeg": 320,
@@ -3615,8 +3615,8 @@
         },
         {
           "time": "2026-05-20T08:00:00Z",
-          "tempF": 47.4,
-          "dewF": 41.4,
+          "tempF": 44.1,
+          "dewF": 38.1,
           "windMph": 4,
           "gustMph": 9,
           "windDirDeg": 320,
@@ -3624,8 +3624,8 @@
         },
         {
           "time": "2026-05-20T09:00:00Z",
-          "tempF": 46.8,
-          "dewF": 40.8,
+          "tempF": 43.5,
+          "dewF": 37.5,
           "windMph": 4.1,
           "gustMph": 9.1,
           "windDirDeg": 320,
@@ -3633,8 +3633,8 @@
         },
         {
           "time": "2026-05-20T10:00:00Z",
-          "tempF": 46.5,
-          "dewF": 40.5,
+          "tempF": 43.1,
+          "dewF": 37.1,
           "windMph": 4.4,
           "gustMph": 9.6,
           "windDirDeg": 320,
@@ -3642,8 +3642,8 @@
         },
         {
           "time": "2026-05-20T11:00:00Z",
-          "tempF": 46.4,
-          "dewF": 40.4,
+          "tempF": 43,
+          "dewF": 37,
           "windMph": 4.8,
           "gustMph": 10.3,
           "windDirDeg": 320,
@@ -3651,8 +3651,8 @@
         },
         {
           "time": "2026-05-20T12:00:00Z",
-          "tempF": 50.1,
-          "dewF": 44.1,
+          "tempF": 47.1,
+          "dewF": 41.1,
           "windMph": 5.4,
           "gustMph": 11.2,
           "windDirDeg": 320,
@@ -3660,8 +3660,8 @@
         },
         {
           "time": "2026-05-20T13:00:00Z",
-          "tempF": 53.7,
-          "dewF": 47.7,
+          "tempF": 51.3,
+          "dewF": 45.3,
           "windMph": 6.1,
           "gustMph": 12.2,
           "windDirDeg": 320,
@@ -3669,8 +3669,8 @@
         },
         {
           "time": "2026-05-20T14:00:00Z",
-          "tempF": 57.4,
-          "dewF": 51.4,
+          "tempF": 55.4,
+          "dewF": 49.4,
           "windMph": 6.7,
           "gustMph": 13.1,
           "windDirDeg": 320,
@@ -3678,8 +3678,8 @@
         },
         {
           "time": "2026-05-20T15:00:00Z",
-          "tempF": 61,
-          "dewF": 55,
+          "tempF": 59.6,
+          "dewF": 53.6,
           "windMph": 7.3,
           "gustMph": 14,
           "windDirDeg": 320,
@@ -3687,8 +3687,8 @@
         },
         {
           "time": "2026-05-20T16:00:00Z",
-          "tempF": 64.7,
-          "dewF": 58.7,
+          "tempF": 63.7,
+          "dewF": 57.7,
           "windMph": 7.7,
           "gustMph": 14.6,
           "windDirDeg": 320,
@@ -3696,8 +3696,8 @@
         },
         {
           "time": "2026-05-20T17:00:00Z",
-          "tempF": 68.3,
-          "dewF": 62.3,
+          "tempF": 67.9,
+          "dewF": 61.9,
           "windMph": 8,
           "gustMph": 14.9,
           "windDirDeg": 320,

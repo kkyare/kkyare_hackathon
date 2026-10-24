@@ -3,16 +3,16 @@
   "claims": [
     {
       "id": "claim-0001",
-      "fieldId": "field-ia-03",
+      "fieldId": "field-ia-04",
       "peril": "frost",
       "date": "2026-05-12",
-      "claimedLossUsd": 96000,
-      "expectedYieldBuAc": 750,
-      "actualYieldBuAc": 670
+      "claimedLossUsd": 25000,
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 46
     },
     {
       "id": "claim-0002",
-      "fieldId": "field-ia-06",
+      "fieldId": "field-ia-02",
       "peril": "frost",
       "date": "2026-05-12",
       "claimedLossUsd": 150000,
@@ -21,25 +21,25 @@
     },
     {
       "id": "claim-0003",
-      "fieldId": "field-ia-02",
+      "fieldId": "field-ia-03",
       "peril": "excess_rain",
       "date": "2026-06-18",
-      "claimedLossUsd": 6300,
+      "claimedLossUsd": 8000,
       "expectedYieldBuAc": 58,
-      "actualYieldBuAc": 40
+      "actualYieldBuAc": 45
     },
     {
       "id": "claim-0004",
       "fieldId": "field-ia-05",
       "peril": "frost",
       "date": "2026-05-20",
-      "claimedLossUsd": 60000,
-      "expectedYieldBuAc": 750,
-      "actualYieldBuAc": 700
+      "claimedLossUsd": 30000,
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 52
     },
     {
       "id": "claim-0005",
-      "fieldId": "field-ia-04",
+      "fieldId": "field-ia-07",
       "peril": "excess_rain",
       "date": "2026-06-18",
       "claimedLossUsd": 250000,
