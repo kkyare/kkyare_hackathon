@@ -46,12 +46,14 @@
 - [x] `src/arena/run.ts`: 과제 × 모델 실행(동시 3개 제한) → 패밀리 `score()` → `leakAttempts`를 `leakFlags`에 합침
   - 진행 이벤트(`start/answer/score/error`)로 스트리밍, 실패는 `errors`로 모으고 계속
   - `replayRunner(saved)`(저장 기록 재생), `withFallback(실제, saved)`(실패 시 대체)
-- [ ] `POST /api/arena/run` `{ taskIds | tasks, models }` → `{ answers, scores }`. `?mock=1`이면 `fixtures/arena/`
+- [x] `POST /api/arena/run` `{ tasks, models? }` → `{ answers, scores, errors, live, replayed }`. `?mock=1`이거나 키가 없으면 `fixtures/arena/runs.json`
+  - 실제 호출이 실패하면 저장 응답으로 대체, 하나라도 대체되면 `live: false` (LIVE 배지는 실제 호출만)
+  - 과제별 스냅샷·관측 연결은 `src/arena/data.ts` (현재 나우캐스팅). `taskIds`는 아직 미지원
 - [ ] `/arena` 화면: 모델 레인 3개(도구 호출 로그·확률·결정·실측·점수), LIVE/DEMO DATA 배지
 - [x] 점수표 집계 `src/arena/scoreboard.ts`: 모델 × 패밀리 (Brier·CRPS·regret $·skill·정답률·누출 수)
 - [ ] 점수표 화면
 - [ ] 실제 키로 3모델 한 번 돌려 `fixtures/arena/`에 저장
-- [ ] **2:00 1차 합치기**: 실제 패밀리 1개가 generate → run → score 한 바퀴
+- [x] **2:00 1차 합치기**: 나우캐스팅으로 generate → run → score 한 바퀴 (`src/arena/integration.test.ts`, 예보 복사 답은 skill 0 확인)
 
 ### 4. 보정 곡선·리더보드·누출 감사 (2:00-3:30)
 - [x] `src/arena/calibration.ts`: 10구간 binning, 모델별 (예측 확률, 실제 빈도, 개수) + Brier 분해(reliability·resolution·uncertainty)
@@ -66,13 +68,18 @@
 - [x] `src/arena/export.ts`: `buildTaskPack(tasks, { snapshots, resolutions?, holdout })` — `meta.marketValueUsd = 과제 수 × $100`(9-4 가정), `demo: true`
   - 과제가 참조하는 `snapshots`를 반드시 포함 (묶음만으로 재현)
   - 공개 피드는 `resolutions` 포함·`includesResolution: true`, 비공개 평가셋(holdout)은 빼고 `false`
+  - `resolutions[i]` = `tasks[i]`의 t0~resolveAt 관측 (같은 관측소라도 시나리오마다 달라 과제 단위로 담음)
 - [x] JSONL `toJsonl(pack)`: 한 줄 = 과제 + 스냅샷 (+ t0~resolveAt 관측)
-- [ ] `POST /api/export` → `TaskPack` JSON, JSONL 다운로드
+- [x] `POST /api/export?format=json|jsonl|card&holdout=1&download=1` `{ tasks, scores? }` → TaskPack JSON / JSONL / 데이터 카드
 - [x] 데이터 카드 `dataCard(pack, baseline)` (Markdown)
 - [ ] 데이터 카드 화면: 출처(Open-Meteo·IEM ASOS·NOAA CPC), 기간·지역, 패밀리별 개수, 누출 방지 방식, Arena baseline 점수, "가정" 표시
 
 ### 6. P1 verifiers (3:30-4:00)
-- [ ] `py/verifiers_env/`: TaskPack JSONL 로드, Brier/CRPS/regret reward, `load_environment()`
+- [x] `py/verifiers_env/`: TaskPack JSONL 로드, Brier/regret reward, `load_environment()` (`SingleTurnEnv`, 보상 = 결정 + 0.5·Brier + 0.1·형식)
+  - 정답은 내보내기 JSONL의 `label.outcome`(TS 패밀리 `score()`로 판정, holdout이면 빠짐)을 쓴다 — Python이 패밀리 규칙을 다시 구현하지 않게
+  - 샘플 `data/sample.jsonl`: 나우캐스팅 데모 12개 (위반 6·정상 6)
+- [ ] CRPS 보상 (다운스케일링 패밀리 main 머지 후)
+- [ ] `prime env push`
 - [ ] 안 되면 JSON 내보내기로 충분
 
 ## 검증

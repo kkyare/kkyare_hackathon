@@ -1,12 +1,12 @@
 // 납품: TaskPack(JSON), RL 파이프라인용 JSONL, 데이터 카드(Markdown)
-import type { FamilyId, Observation, Snapshot, Task, TaskPack } from '../core/types'
+import type { Family, FamilyId, Observation, Snapshot, Task, TaskPack } from '../core/types'
 import type { Cell } from './scoreboard'
 
 export const PRICE_PER_TASK_USD = 100      // PLAN 9-4 가정값 (시장 하단)
 
 export interface BuildTaskPackOptions {
   snapshots: Snapshot[]                     // 가진 스냅샷 전부를 넘겨도 된다. 과제가 참조하는 것만 담는다
-  resolutions?: Observation[]
+  resolutionFor?(task: Task): Observation | undefined   // 과제의 정답 관측 (같은 관측소라도 시나리오마다 다를 수 있어 과제 단위로 받는다)
   holdout?: boolean                         // 비공개 평가셋: 정답(관측)을 빼고 보낸다
   id?: string
   region?: string
@@ -22,8 +22,9 @@ export function buildTaskPack(tasks: Task[], opts: BuildTaskPackOptions): TaskPa
   if (missing.length) throw new Error(`missing snapshots: ${missing.join(', ')}`)
 
   const snapshotIds = new Set(tasks.map(t => t.snapshotId))
-  const stations = new Set(tasks.map(t => t.field.stationId))
-  const includesResolution = !opts.holdout && !!opts.resolutions?.length
+  // resolutions[i]는 tasks[i]의 t0 ~ resolveAt 구간 관측 (못 찾으면 hourly 빈 배열)
+  const resolutions = !opts.holdout && opts.resolutionFor ? tasks.map(t => resolutionSlice(t, opts.resolutionFor!(t))) : undefined
+  const includesResolution = !!resolutions?.some(o => o.hourly.length > 0)
   const t0s = tasks.map(t => t.t0).sort()
   const families = [...new Set(tasks.map(t => t.family))] as FamilyId[]
 
@@ -32,7 +33,7 @@ export function buildTaskPack(tasks: Task[], opts: BuildTaskPackOptions): TaskPa
     families,
     tasks,
     snapshots: opts.snapshots.filter(s => snapshotIds.has(s.id)),
-    ...(includesResolution && { resolutions: opts.resolutions!.filter(o => stations.has(o.stationId)) }),
+    ...(includesResolution && { resolutions }),
     meta: {
       count: tasks.length,
       marketValueUsd: tasks.length * PRICE_PER_TASK_USD,
@@ -44,19 +45,36 @@ export function buildTaskPack(tasks: Task[], opts: BuildTaskPackOptions): TaskPa
   }
 }
 
-// 한 줄 = 과제 하나. 입력(t0 스냅샷)을 같이 넣어 줄 단위로 독립 실행되게 하고,
-// 정답이 있으면 t0 ~ resolveAt 구간 관측만 잘라 붙인다.
-export function toJsonl(pack: TaskPack): string {
+function resolutionSlice(task: Task, obs: Observation | undefined): Observation {
+  const from = Date.parse(task.t0), to = Date.parse(task.resolveAt)
+  return {
+    stationId: obs?.stationId ?? task.field.stationId,
+    hourly: (obs?.hourly ?? []).filter(h => Date.parse(h.time) >= from && Date.parse(h.time) <= to),
+  }
+}
+
+// 정답 라벨: 패밀리 score()로 판정한 이진 사건 결과. Python 쪽(verifiers)이 규칙을 다시 구현하지 않게 미리 붙인다
+export interface Label { outcome: 0 | 1 }
+
+export function labelOf(family: Family, task: Task, obs: Observation, snapshot: Snapshot): Label | undefined {
+  // p = 0으로 채점하면 brier = (0 - y)² = y
+  const s = family.score(task, { taskId: task.id, model: 'label', probability: 0, rationale: '', toolCalls: [] }, obs, snapshot)
+  if (s.outcome === 0 || s.outcome === 1) return { outcome: s.outcome }
+  if (typeof s.brier === 'number') return { outcome: s.brier > 0.5 ? 1 : 0 }
+  return undefined
+}
+
+// 한 줄 = 과제 하나. 입력(t0 스냅샷)을 같이 넣어 줄 단위로 독립 실행되게 하고, 정답(관측·라벨)이 있으면 붙인다.
+export function toJsonl(pack: TaskPack, labels: Map<string, Label> = new Map()): string {
   const snaps = new Map(pack.snapshots.map(s => [s.id, s]))
-  const obs = new Map((pack.resolutions ?? []).map(o => [o.stationId, o]))
-  return pack.tasks.map(t => {
-    const o = obs.get(t.field.stationId)
-    const from = Date.parse(t.t0), to = Date.parse(t.resolveAt)
-    const resolution = o && { stationId: o.stationId, hourly: o.hourly.filter(h => Date.parse(h.time) >= from && Date.parse(h.time) <= to) }
+  return pack.tasks.map((t, i) => {
+    const resolution = pack.resolutions?.[i]
+    const label = labels.get(t.id)
     return JSON.stringify({
       id: t.id, family: t.family, prompt: t.prompt, t0: t.t0, resolveAt: t.resolveAt,
       field: t.field, context: t.context, snapshot: snaps.get(t.snapshotId),
       ...(pack.meta.includesResolution && resolution && { resolution }),
+      ...(pack.meta.includesResolution && label && { label }),
     })
   }).join('\n') + '\n'
 }
