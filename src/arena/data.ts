@@ -1,9 +1,11 @@
 // Arena가 과제의 스냅샷·정답 관측을 찾는 곳. 패밀리마다 fixtures 구조가 달라 여기서 한 줄씩 연결한다.
 import * as fs from 'node:fs'
 import * as path from 'node:path'
-import { loadObservationForTask, loadSnapshotForTask } from '../families/nowcasting/index'
-import { loadS2sObservationForTask } from '../families/s2s/index'
-import { observationFor, snapshotById } from '../insurance/data'
+import { loadFields } from '../core/weather'
+import { families } from '../families/index'
+import { buildDemoTasks, loadObservationForTask, loadSnapshotForTask } from '../families/nowcasting/index'
+import { buildS2sTasks, loadS2sObservationForTask } from '../families/s2s/index'
+import { fields as insuranceFields, observationFor, snapshotById, snapshots as insuranceSnapshots } from '../insurance/data'
 import type { FamilyId, Observation, Snapshot, Task } from '../core/types'
 import type { ArenaRun } from './run'
 
@@ -24,6 +26,16 @@ const loaders: Partial<Record<FamilyId, TaskData>> = {
     snapshot: task => ({ id: task.snapshotId, t0: task.t0, fieldId: task.field.id, forecasts: [], obsUntilT0: [] }),
     observation: loadS2sObservationForTask,
   },
+}
+
+// 패밀리별 데모 과제 (fixtures). id가 고정이라 저장 응답(fixtures/arena/runs.json)과 맞춰 재생할 수 있다
+export function demoTasks(family: FamilyId, count: number): Task[] {
+  switch (family) {
+    case 'nowcasting': return buildDemoTasks(count).tasks
+    case 'downscaling': return families.downscaling?.generate({ fields: insuranceFields, snapshots: insuranceSnapshots, count }) ?? []
+    case 'decision': return families.decision?.generate({ fields: insuranceFields, snapshots: insuranceSnapshots, count }) ?? []
+    case 's2s': return buildS2sTasks(loadFields()).slice(0, count)
+  }
 }
 
 const attempt = <T,>(fn: () => T | undefined): T | undefined => {

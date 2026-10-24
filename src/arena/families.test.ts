@@ -3,22 +3,16 @@ import type Anthropic from '@anthropic-ai/sdk'
 import { describe, expect, it } from 'vitest'
 import { runAgent, type MessagesClient } from '../core/agent'
 import type { Answer, FamilyId, Task } from '../core/types'
-import { loadFields } from '../core/weather'
 import { engineAnswer as decisionEngine } from '../families/decision/index'
 import { engineAnswer as downscalingEngine } from '../families/downscaling/index'
 import { families } from '../families/index'
-import { buildDemoTasks } from '../families/nowcasting/index'
-import { buildS2sTasks } from '../families/s2s/index'
-import { fields as insuranceFields, snapshotById, snapshots } from '../insurance/data'
+import { snapshotById } from '../insurance/data'
 import { handleArenaRun, handleExport } from './api'
+import { demoTasks } from './data'
 import type { AgentRunner } from './run'
 
-const tasksOf: Record<FamilyId, () => Task[]> = {
-  nowcasting: () => buildDemoTasks(3).tasks,
-  downscaling: () => families.downscaling!.generate({ fields: insuranceFields, snapshots, count: 3 }),
-  decision: () => families.decision!.generate({ fields: insuranceFields, snapshots, count: 3 }),
-  s2s: () => buildS2sTasks(loadFields()).slice(0, 3),
-}
+const FAMILIES: FamilyId[] = ['nowcasting', 'downscaling', 'decision', 's2s']
+const tasksOf = (f: FamilyId): Task[] => demoTasks(f, 3)
 
 // 패밀리별로 형식이 맞는 답을 내는 가짜 에이전트 (유진님 엔진 답 재사용)
 const engine: AgentRunner = async ({ task, model }) => {
@@ -32,9 +26,9 @@ const engine: AgentRunner = async ({ task, model }) => {
 }
 
 describe('Arena × 등록된 패밀리 전부', () => {
-  for (const family of Object.keys(tasksOf) as FamilyId[]) {
+  for (const family of FAMILIES) {
     it(`${family}: 실행 → 채점`, async () => {
-      const tasks = tasksOf[family]()
+      const tasks = tasksOf(family)
       expect(tasks.length).toBeGreaterThan(0)
       const r = await handleArenaRun({ tasks, models: ['claude-haiku-5-5'] }, { families, saved: [], mock: false, live: engine })
       expect(r.errors).toEqual([])
@@ -46,7 +40,7 @@ describe('Arena × 등록된 패밀리 전부', () => {
     })
 
     it(`${family}: submit_answer 스키마로 runAgent가 돈다`, async () => {
-      const [task] = tasksOf[family]()
+      const [task] = tasksOf(family)
       const { answer } = await engine({ task, snapshot: undefined as never, model: 'm', answerSchema: families[family]!.answerSchema })
       const { taskId: _t, model: _m, toolCalls: _c, ...input } = answer
       const client: MessagesClient = {
@@ -66,7 +60,7 @@ describe('Arena × 등록된 패밀리 전부', () => {
   }
 
   it('납품: 라벨은 이진 확률 패밀리(나우캐스팅·서리 결정)에만 붙는다', () => {
-    const all = (Object.keys(tasksOf) as FamilyId[]).flatMap(f => tasksOf[f]())
+    const all = FAMILIES.flatMap(tasksOf)
     const lines = handleExport({ tasks: all }, { format: 'jsonl', families }).body.trim().split('\n').map(l => JSON.parse(l))
     const labeled = new Set(lines.filter(l => l.label).map(l => l.family))
     expect([...labeled].sort()).toEqual(['decision', 'nowcasting'])
