@@ -1,27 +1,27 @@
 'use client'
 
-// 농장 연결 화면 (P2): 연결된 농장·검증 청구가 늘수록 필지 추정 오차와 요율 range가 줄어드는 모습.
-// 데이터: GET /api/farm/learning-curve (목업). 셸·내비게이션은 영모님 레이아웃을 따른다.
+// 농장 연결: 연결된 농장과 검증된 청구가 늘수록 필지 추정 오차와 요율 범위가 줄어든다 (목업)
 import { useEffect, useState } from 'react'
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { Figure, Section } from '@/components/ui/card'
+import { getJson } from '@/lib/format'
 
 interface CurvePoint { connectedFields: number; maeF: number; rawGridMaeF: number }
 interface RangePoint { verifiedClaims: number; premiumWidthUsdAc: number; premiumRelativeWidthPct: number; renewalWidthPct: number }
 interface Payload { demo: boolean; points: CurvePoint[]; ranges: RangePoint[] }
+
+const tooltipStyle = { background: 'var(--paper-2)', border: '1px solid var(--rule)', borderRadius: 2 }
 
 export default function FarmConnectionPage() {
   const [data, setData] = useState<Payload | null>(null)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    fetch('/api/farm/learning-curve?fieldId=field-ia-04&peril=frost')
-      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
-      .then(setData)
-      .catch((e: Error) => setError(e.message))
+    getJson<Payload>('/api/farm/learning-curve?fieldId=field-ia-04&peril=frost').then(setData).catch((e: Error) => setError(e.message))
   }, [])
 
-  if (error) return <p className="p-6 text-red-400">불러오지 못했습니다: {error}</p>
-  if (!data) return <p className="p-6 text-neutral-400">불러오는 중…</p>
+  if (error) return <main className="mx-auto max-w-6xl px-4 py-8"><p className="border-l-4 border-[var(--loam)] pl-3 text-sm">농장 연결 데이터를 불러오지 못했습니다: {error}</p></main>
+  if (!data) return <main className="mx-auto max-w-6xl px-4 py-8 text-sm text-[var(--ink-2)]">불러오는 중입니다.</main>
 
   const first = data.points[0]
   const last = data.points.at(-1)!
@@ -29,68 +29,50 @@ export default function FarmConnectionPage() {
   const rN = data.ranges.at(-1)!
 
   return (
-    <main className="mx-auto max-w-5xl space-y-6 p-6">
-      <header className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-semibold">농장 연결</h1>
-          <p className="text-sm text-neutral-400">농장이 연결될수록 필지 판정이 정확해지고, 보험 요율 range가 좁아집니다.</p>
-        </div>
-        {data.demo && <span className="rounded border border-amber-500/50 px-2 py-1 text-xs text-amber-400">DEMO DATA</span>}
+    <main className="mx-auto max-w-6xl space-y-10 px-4 py-8">
+      <header className="max-w-3xl space-y-2">
+        <h1 className="figure text-4xl font-bold">농장이 연결될수록 판정이 정확해집니다</h1>
+        <p className="text-[var(--ink-2)]">
+          농장에는 필지 예보와 작업 판단을 주고, 동의를 받아 필지 실측과 수확량을 받습니다. 공개 데이터에는 없는 이 기록이 쌓일수록 오차와 요율 범위가 줄어듭니다.
+        </p>
       </header>
 
-      <section className="grid gap-4 sm:grid-cols-3">
-        <Stat label="원천 격자 예보 오차" value={`${first.rawGridMaeF.toFixed(2)}°F`} />
-        <Stat label="필지 보정 (연결 0곳)" value={`${first.maeF.toFixed(2)}°F`} />
-        <Stat label={`농장 ${last.connectedFields}곳 연결 후`} value={`${last.maeF.toFixed(2)}°F`} accent />
-      </section>
+      <div className="flex flex-wrap gap-12">
+        <Figure size="lg" label="원천 격자 예보의 필지 최저기온 오차" value={`${first.rawGridMaeF.toFixed(1)}°F`} />
+        <Figure size="lg" label="필지 보정, 연결된 농장 없음" value={`${first.maeF.toFixed(1)}°F`} />
+        <Figure size="lg" label={`필지 ${last.connectedFields}곳 연결 후`} value={`${last.maeF.toFixed(1)}°F`} tone="canopy" />
+      </div>
 
-      <Card title="연결된 농장 필지 수 → 필지 최저기온 추정 오차 (MAE, °F)">
-        <ResponsiveContainer width="100%" height={260}>
-          <LineChart data={data.points} margin={{ top: 8, right: 16, bottom: 8, left: 0 }}>
-            <CartesianGrid stroke="#333" strokeDasharray="3 3" />
-            <XAxis dataKey="connectedFields" stroke="#888" />
-            <YAxis stroke="#888" />
-            <Tooltip contentStyle={{ background: '#111', border: '1px solid #333' }} />
-            <Line type="monotone" dataKey="rawGridMaeF" name="원천 격자 예보" stroke="#666" strokeDasharray="4 4" dot={false} />
-            <Line type="monotone" dataKey="maeF" name="우리 엔진" stroke="#22c55e" strokeWidth={2} />
-          </LineChart>
-        </ResponsiveContainer>
-      </Card>
+      <div className="grid gap-10 lg:grid-cols-2">
+        <Section title="연결된 필지 수와 최저기온 추정 오차" note="평균 절대 오차, °F">
+          <ResponsiveContainer width="100%" height={250}>
+            <LineChart data={data.points} margin={{ left: -12 }}>
+              <CartesianGrid stroke="var(--rule)" vertical={false} />
+              <XAxis dataKey="connectedFields" stroke="var(--ink-2)" fontSize={12} tickLine={false} />
+              <YAxis stroke="var(--ink-2)" fontSize={12} tickLine={false} axisLine={false} />
+              <Tooltip contentStyle={tooltipStyle} />
+              <Line isAnimationActive={false} dataKey="rawGridMaeF" name="원천 격자 예보" stroke="var(--ink-2)" strokeDasharray="4 4" dot={false} />
+              <Line isAnimationActive={false} dataKey="maeF" name="필지 보정 엔진" stroke="var(--canopy)" strokeWidth={2.5} />
+            </LineChart>
+          </ResponsiveContainer>
+        </Section>
 
-      <Card title="검증된 청구 수 → 보험수가 range 폭 (가운데 값 대비 %)">
-        <ResponsiveContainer width="100%" height={260}>
-          <LineChart data={data.ranges} margin={{ top: 8, right: 16, bottom: 8, left: 0 }}>
-            <CartesianGrid stroke="#333" strokeDasharray="3 3" />
-            <XAxis dataKey="verifiedClaims" stroke="#888" />
-            <YAxis stroke="#888" unit="%" />
-            <Tooltip contentStyle={{ background: '#111', border: '1px solid #333' }} />
-            <Line type="monotone" dataKey="premiumRelativeWidthPct" name="보험수가 range 폭" stroke="#eab308" strokeWidth={2} />
-            <Line type="monotone" dataKey="renewalWidthPct" name="갱신 요율 range 폭 (%p)" stroke="#60a5fa" />
-          </LineChart>
-        </ResponsiveContainer>
-        <p className="mt-2 text-sm text-neutral-400">
-          검증 청구 {r0.verifiedClaims}건일 때 range 폭 {r0.premiumRelativeWidthPct}% → {rN.verifiedClaims}건일 때 {rN.premiumRelativeWidthPct}%.
-          필지 단위로 맞춰진 날씨-생산량 데이터는 공개 데이터로 만들 수 없습니다.
-        </p>
-      </Card>
+        <Section title="검증된 청구 수와 보험수가 범위 폭" note="범위 가운데 값 대비 %">
+          <ResponsiveContainer width="100%" height={250}>
+            <LineChart data={data.ranges} margin={{ left: -12 }}>
+              <CartesianGrid stroke="var(--rule)" vertical={false} />
+              <XAxis dataKey="verifiedClaims" stroke="var(--ink-2)" fontSize={12} tickLine={false} />
+              <YAxis stroke="var(--ink-2)" fontSize={12} unit="%" tickLine={false} axisLine={false} />
+              <Tooltip contentStyle={tooltipStyle} />
+              <Line isAnimationActive={false} dataKey="premiumRelativeWidthPct" name="보험수가 범위 폭" stroke="var(--corn)" strokeWidth={2.5} />
+              <Line isAnimationActive={false} dataKey="renewalWidthPct" name="갱신 요율 범위 폭 (%p)" stroke="var(--frost)" />
+            </LineChart>
+          </ResponsiveContainer>
+          <p className="text-sm">
+            검증 청구가 {r0.verifiedClaims}건일 때 범위 폭은 {r0.premiumRelativeWidthPct}%, {rN.verifiedClaims}건이면 {rN.premiumRelativeWidthPct}%입니다.
+          </p>
+        </Section>
+      </div>
     </main>
-  )
-}
-
-function Stat({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
-  return (
-    <div className="rounded-lg border border-neutral-800 p-4">
-      <p className="text-xs text-neutral-400">{label}</p>
-      <p className={`mt-1 font-mono text-2xl ${accent ? 'text-green-400' : ''}`}>{value}</p>
-    </div>
-  )
-}
-
-function Card({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <section className="rounded-lg border border-neutral-800 p-4">
-      <h2 className="mb-3 text-sm font-medium text-neutral-300">{title}</h2>
-      {children}
-    </section>
   )
 }
