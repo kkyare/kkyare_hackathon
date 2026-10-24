@@ -95,3 +95,13 @@
 - `?mock=1`로 `/arena`, `/export`가 키 없이 끝까지 뜸
 - 실제 키로 3모델 × 소량 과제 → 점수표·보정 곡선 채워짐
 - 내보낸 TaskPack을 다시 읽어 `score()` 재현
+
+## 마무리 (2026-10-24)
+- 1-6단계 전부 완료 (PR #1 #2 #3 #5 #7 #8 #10)
+- 데모 장면 점검 (최신 main, 화면이 부르는 순서대로 API 호출)
+  - 2:05 `/arena`: 과제 8개 × 3모델 저장 응답 재생 24건 오류 0, 누출 감사 3건(차단된 요청), 서버에 키가 있으면 "실제로 실행" 활성
+  - 2:35 `/export`: 공개 피드는 정답 포함·holdout은 제외, 데이터 카드에 Arena baseline, 다운로드 파일명 헤더 정상
+  - phase6 머지 이후 `/arena`·`/export`·공용 UI·레이아웃·전역 CSS 변경 없음 → phase6 때 스크린샷 그대로
+- 팀에 전달할 것
+  - 성호님: `/live`의 "Arena로 실행"은 저장 응답 재생 모드에서 `no saved run` (live 과제 id가 `fixtures/arena/runs.json`에 없음). 필요하면 `scripts/record-arena.ts`로 그 과제를 기록하면 됨
+  - 영모님: `next dev`가 레포 루트에 `AGENTS.md`를 자동 생성 (커밋할지 `agentRules: false`로 끌지), `vitest.config.ts`에 `@/` 별칭 없음
