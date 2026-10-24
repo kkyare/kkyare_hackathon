@@ -40,6 +40,16 @@ if (!existsSync(root) || !statSync(root).isDirectory()) {
   process.exit(1)
 }
 
+// calm-go: all of 2026-06-10 has wind strictly within 4-9 mph, gust <= 10, no precip.
+function checkCalm(rel: string, hourly: any[]) {
+  for (const p of hourly) {
+    if (typeof p?.time !== 'string' || !p.time.startsWith('2026-06-10')) continue
+    if (!(p.windMph > 4 && p.windMph < 9)) fail(rel, `calm-go ${p.time} windMph ${p.windMph} not within (4, 9)`)
+    if (p.gustMph !== null && p.gustMph > 10) fail(rel, `calm-go ${p.time} gustMph ${p.gustMph} > 10`)
+    if (p.precipIn !== 0) fail(rel, `calm-go ${p.time} precipIn ${p.precipIn} !== 0`)
+  }
+}
+
 const files = listJson(root)
 if (files.length === 0) fail(root, 'no JSON files found')
 
@@ -64,10 +74,12 @@ for (const file of files) {
     }
   } else if (base === 'observation.json') {
     if (!Array.isArray(data?.hourly) || data.hourly.length !== 72) fail(rel, 'observation hourly length !== 72')
+    if (rel.includes('calm-go')) checkCalm(rel, data?.hourly ?? [])
   } else if (base === 'snapshot-source.json') {
     if (!Array.isArray(data?.runs) || data.runs.length === 0) fail(rel, 'runs missing')
     for (const r of data?.runs ?? []) {
       if (!Array.isArray(r?.hourly) || r.hourly.length !== 48) fail(rel, `run ${r?.model}@${r?.issuedAt} hourly length !== 48`)
+      if (rel.includes('calm-go')) checkCalm(rel, r?.hourly ?? [])
     }
   }
 }

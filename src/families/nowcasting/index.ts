@@ -20,11 +20,12 @@ function violationOf(hourly: HourlyPoint[], t0: string): boolean {
   return evaluateWindow(hourly, t0).violation
 }
 
-/** Fraction of forecast runs whose hourly series predicts a violation in [t0, t0+4h). 0.5 when no forecasts. */
+/** Laplace-smoothed share of models whose forecast window violates: (k + 0.5) / (n + 1). 0.5 when n = 0. */
 export function referenceProbability(snapshot: Snapshot): number {
-  if (snapshot.forecasts.length === 0) return 0.5
-  const n = snapshot.forecasts.filter((f) => violationOf(f.hourly, snapshot.t0)).length
-  return n / snapshot.forecasts.length
+  const n = snapshot.forecasts.length
+  if (n === 0) return 0.5
+  const k = snapshot.forecasts.filter((f) => violationOf(f.hourly, snapshot.t0)).length
+  return (k + 0.5) / (n + 1)
 }
 
 function difficultyOf(pRef: number): Task['difficulty'] {
@@ -68,7 +69,7 @@ export const nowcasting: Family = {
     const oracleCostUsd = y ? COST_USD_PER_ACRE : 0
     const brierRef = (referenceProbability(snapshot) - y) ** 2
     // Matching the reference exactly is zero skill, even when both Briers are 0 (1 - 0/1e-6 would give +1).
-    const skill = Math.abs(brier - brierRef) < 1e-9 ? 0 : Math.max(-1, Math.min(1, 1 - brier / Math.max(brierRef, 1e-6)))
+    const skill = brier === brierRef ? 0 : 1 - brier / brierRef
     return {
       taskId: task.id,
       model: answer.model,

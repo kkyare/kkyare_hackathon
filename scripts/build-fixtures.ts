@@ -86,7 +86,10 @@ function buildTruth(scn: Scn, rng: Rng): P[] {
     let wind = h < 12 ? between(rng, 2, 6) : between(rng, 4, 9)
     let gust = wind + between(rng, 1, 2.5)
     let dir = 190 + between(rng, -20, 20)
-    if (scn === 'calm-go') gust = Math.min(gust, 10)
+    if (scn === 'calm-go') {
+      if (day === 10) wind = Math.min(8.8, Math.max(4.2, wind))
+      gust = Math.min(Math.max(gust, wind), 10)
+    }
     if (day === 10 && scn === 'gust-block') {
       if (h >= 12 && h <= 16) {
         wind = between(rng, 5, 8)
@@ -173,7 +176,7 @@ function buildRuns(scn: Scn, truth: P[], rng: Rng): ForecastRun[] {
           }
         }
         if (scn === 'calm-go') {
-          if (day === 10 && h >= 12) wind = clamp(wind, 4, 9)
+          if (day === 10) wind = clamp(wind, 4.2, 8.8)
           gust = clamp(gust, wind, 10)
         }
         if (day === 10 && scn === 'forecast-miss' && h >= 15 && h <= 19) {
