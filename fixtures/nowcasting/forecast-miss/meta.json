@@ -1,0 +1,15 @@
+{
+  "demo": true,
+  "story": "HRRR·NBM은 15~19Z 돌풍을 8mph로 예보했지만 실측은 16~18Z에 16mph까지 올라, 예보만 믿고 살포했다면 위반이 되는 날이다.",
+  "expected": {
+    "windowHours": 3,
+    "windows": [
+      {
+        "start": "2026-06-10T15:00:00Z",
+        "violation": true,
+        "basis": "observation"
+      }
+    ],
+    "forecastHrrrViolation": false
+  }
+}
