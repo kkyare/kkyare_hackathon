@@ -86,8 +86,9 @@
   - 정답은 내보내기 JSONL의 `label`(이진 `outcome`, 다운스케일링 `value`·`reference`, TS 패밀리 함수로 계산, holdout이면 빠짐) — Python이 패밀리 규칙을 다시 구현하지 않게
   - 샘플 `data/sample.jsonl`: 나우캐스팅 12 + 다운스케일링 6 + 서리 결정 6 (DEMO DATA)
 - [x] CRPS 보상 (다운스케일링)
-- ~~`prime env push`~~ 건너뜀: Prime Intellect 계정 없음 (2026-10-24)
-- [x] 안 되면 JSON 내보내기로 충분 → `/export`의 JSON·JSONL과 `py/verifiers_env/` 패키지로 납품
+- [x] `prime env push --runtime v0 --visibility PRIVATE` → `sj-park-kr/weather-decision-gym` 0.1.0 (비공개, Hub에선 Legacy v0)
+  - 설치: `prime env install sj-park-kr/weather-decision-gym`. 공개로 바꾸려면 대시보드 Settings
+- [x] JSON 내보내기도 그대로: `/export`의 JSON·JSONL
 
 ## 검증
 - `vitest` — 누출 테스트, agent 가짜 client 테스트, calibration·export 단위 테스트
