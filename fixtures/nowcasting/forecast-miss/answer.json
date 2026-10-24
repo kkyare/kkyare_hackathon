@@ -1,0 +1,7 @@
+{
+  "demo": true,
+  "model": "claude-sonnet-5-5 (saved)",
+  "probability": 0.2,
+  "decision": "spray",
+  "rationale": "HRRR·NBM 최신 런이 15~19Z 풍속 6~8 mph, 돌풍 8 mph 안팎으로 살포 조건을 만족한다고 예보한다. GFS·IFS는 돌풍 11~13 mph로 조금 높지만 고해상도 모델을 더 신뢰해 지금 살포한다."
+}

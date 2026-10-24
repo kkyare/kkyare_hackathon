@@ -1,0 +1,7 @@
+{
+  "demo": true,
+  "model": "claude-sonnet-5-5 (saved)",
+  "probability": 0.1,
+  "decision": "spray",
+  "rationale": "네 모델 모두 15~19Z 풍속 5~9 mph, 돌풍 10 mph 이하, 강수 없음으로 일치하고 t0 직전 관측도 같은 흐름이다. 지금 살포한다."
+}
