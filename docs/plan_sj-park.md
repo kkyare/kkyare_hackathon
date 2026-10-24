@@ -40,7 +40,7 @@
 - [x] `submit_answer` 입력을 `answerSchema`로 검증, 실패하면 오류를 돌려주고 한 번 더
 - [x] 모델 ID: `claude-haiku-5-5`, `claude-sonnet-5-5`, `claude-opus-5-5`. 키는 서버에서만
 - [x] vitest: 가짜 client로 도구 호출 → 제출 흐름, `toolCalls` 기록
-- [ ] 실제 키로 3모델 스모크 테스트 (키 받으면)
+- [x] 실제 키로 3모델 스모크 테스트 (`ANTHROPIC_WORKSPACE_ID` 필요했음)
 
 ### 3. Arena 실행·점수표 (0:45-2:00)
 - [x] `src/arena/run.ts`: 과제 × 모델 실행(동시 3개 제한) → 패밀리 `score()` → `leakAttempts`를 `leakFlags`에 합침
@@ -53,7 +53,8 @@
 - [ ] `/arena` 화면: 모델 레인 3개(도구 호출 로그·확률·결정·실측·점수), LIVE/DEMO DATA 배지
 - [x] 점수표 집계 `src/arena/scoreboard.ts`: 모델 × 패밀리 (Brier·CRPS·regret $·skill·정답률·누출 수)
 - [ ] 점수표 화면
-- [ ] 실제 키로 3모델 한 번 돌려 `fixtures/arena/`에 저장
+- [x] 실제 키로 3모델 한 번 돌려 `fixtures/arena/runs.json`에 저장 (`scripts/record-arena.ts --count 2`: 4개 패밀리 × 2 × 3모델 = 24회, 90초, 오류 0)
+  - S2S에서 관측 요청 구간이 t0를 넘은 3건이 `tool:obs_after_t0`로 기록됨 (잘려서 반환, 실제 누출 아님) → 누출 감사 화면에서 "t0 이후 구간 요청(잘림)"으로 구분해 보여 줄 것
 - [x] **2:00 1차 합치기**: 나우캐스팅으로 generate → run → score 한 바퀴 (`src/arena/integration.test.ts`, 예보 복사 답은 skill 0 확인)
 
 ### 4. 보정 곡선·리더보드·누출 감사 (2:00-3:30)
