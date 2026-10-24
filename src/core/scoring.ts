@@ -63,12 +63,12 @@ export function regret(protect: boolean, happened: boolean, cost: number, loss: 
 /**
  * 스킬 점수: 1 - score/reference (낮을수록 좋은 점수 기준).
  * 1 = 완벽, 0 = 기준 예보와 같음, 음수 = 기준보다 나쁨.
- * 기준 점수가 0이면(기준이 이미 완벽) 같으면 0, 더 나쁘면 -1로 둔다.
+ * 기준이 거의 완벽하면 값이 -5처럼 크게 튀어 화면에서 읽기 어려워서 아래쪽은 -1로 자른다.
  */
 export function skillScore(score: number, reference: number): number {
   if (!Number.isFinite(score) || !Number.isFinite(reference)) return 0
   if (reference === 0) return score === 0 ? 0 : -1
-  return 1 - score / reference
+  return Math.max(-1, 1 - score / reference)
 }
 
 /** RL 보상: -정규화 regret + λ·(-Brier). regret은 L로 나눠 0-1 범위로 */

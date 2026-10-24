@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+/*
+  디자인 토큰 - 주제: 미국 작물보험 언더라이팅 (아이오와 측량 지도, 흙, 작물)
+  paper  세이지 회색 측량지   ink    짙은 들판 먹색
+  canopy 낮은 위험 / 정상     corn   주의 / 강조
+  loam   높은 위험 / 손해     frost  서리·예보 선
+*/
+:root {
+  --paper: #e9ece6;
+  --paper-2: #f4f6f2;
+  --ink: #1c2620;
+  --ink-2: #4a5650;
+  --rule: #c5ccc3;
+  --canopy: #4e7a3a;
+  --corn: #c99a1e;
+  --loam: #7a4a2a;
+  --frost: #3b6a94;
+  --font-body: var(--font-public-sans), system-ui, sans-serif;
+  --font-figure: var(--font-barlow), var(--font-public-sans), sans-serif;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  word-break: keep-all; /* 한국어는 단어 단위로 줄바꿈 */
+  overflow-wrap: anywhere;
+}
+
+/* 숫자는 시세판처럼: 좁은 서체 + 고정폭 숫자 */
+.figure {
+  font-family: var(--font-figure);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
+}
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+:focus-visible {
+  outline: 2px solid var(--frost);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

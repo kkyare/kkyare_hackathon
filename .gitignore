@@ -2,3 +2,19 @@
 .env
 .env.*
 !.env.example
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+.vercel
+
+# Python (verifiers)
+__pycache__/
+.venv/
+
+# 로컬 도구
+.claude/settings.local.json
+.bridge/
