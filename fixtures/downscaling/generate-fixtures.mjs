@@ -112,20 +112,76 @@ const rainHourly = series('2026-06-18T00:00:00Z', 24, {
 })
 stationObs.hourly.push(...rainHourly)
 
+// 데모 청구 (화면에서 직접 검증해 보는 청구). 수확량은 bu/acre (사과도 bushel 단위)
 const claims = [
-  { id: 'claim-0001', fieldId: 'field-ia-03', peril: 'frost', date: '2026-05-12', claimedLossUsd: 96000 },
-  { id: 'claim-0002', fieldId: 'field-ia-06', peril: 'frost', date: '2026-05-12', claimedLossUsd: 150000 },
-  { id: 'claim-0003', fieldId: 'field-ia-02', peril: 'excess_rain', date: '2026-06-18', claimedLossUsd: 42000 },
-  { id: 'claim-0004', fieldId: 'field-ia-05', peril: 'frost', date: '2026-05-20', claimedLossUsd: 60000 },
-  { id: 'claim-0005', fieldId: 'field-ia-04', peril: 'hail', date: '2026-06-18', claimedLossUsd: 85000 },
+  { id: 'claim-0001', fieldId: 'field-ia-03', peril: 'frost', date: '2026-05-12', claimedLossUsd: 96000, expectedYieldBuAc: 750, actualYieldBuAc: 670 },
+  { id: 'claim-0002', fieldId: 'field-ia-06', peril: 'frost', date: '2026-05-12', claimedLossUsd: 150000, expectedYieldBuAc: 195, actualYieldBuAc: 120 },
+  { id: 'claim-0003', fieldId: 'field-ia-02', peril: 'excess_rain', date: '2026-06-18', claimedLossUsd: 6300, expectedYieldBuAc: 58, actualYieldBuAc: 40 },
+  { id: 'claim-0004', fieldId: 'field-ia-05', peril: 'frost', date: '2026-05-20', claimedLossUsd: 60000, expectedYieldBuAc: 750, actualYieldBuAc: 700 },
+  { id: 'claim-0005', fieldId: 'field-ia-04', peril: 'excess_rain', date: '2026-06-18', claimedLossUsd: 250000, expectedYieldBuAc: 195, actualYieldBuAc: 170 },
 ]
 
-// 지난 10년 5월 서리 밤 수 (목업 기후값)
-const climatology = fields.map((f) => ({
+// 지난 10년 기후값 (목업)
+let cseed = 11
+const crand = () => ((cseed = (cseed * 16807) % 2147483647) / 2147483647)
+const jitter = (n) => Math.round((crand() - 0.5) * 2 * n)
+const climFor = (f) => ({
   fieldId: f.id,
-  frostNightsMay10y: Math.max(0, Math.round(6 - ((f.elevationM - station.elevationM) / 100) * 4 + { valley: 8, flat: 0, ridge: -3 }[f.terrain])),
-  heavyRainDaysJun10y: f.terrain === 'valley' ? 9 : 6,
-}))
+  frostNightsMay10y: Math.max(0, Math.round(6 - ((f.elevationM - station.elevationM) / 100) * 4 + { valley: 8, flat: 0, ridge: -3 }[f.terrain]) + jitter(3)),
+  heavyRainDaysJun10y: Math.max(1, (f.terrain === 'valley' ? 9 : f.terrain === 'flat' ? 6 : 4) + jitter(3)),
+  dryWeeksJul10y: Math.max(1, (f.terrain === 'ridge' ? 9 : f.terrain === 'flat' ? 6 : 3) + jitter(3)),
+})
+
+// 보험 포트폴리오: 데모 필지 8개 + 임의의 아이오와 필지 40개, 지난 시즌 청구·생산량 이력.
+// 손해는 위험 요인과 양의 상관이지만 잡음이 있게 만든다 (완벽하면 가짜처럼 보임).
+let seed = 7
+const rand = () => ((seed = (seed * 16807) % 2147483647) / 2147483647)
+const terrains = ['valley', 'flat', 'flat', 'ridge']
+const portfolioFields = [
+  ...fields,
+  ...Array.from({ length: 40 }, (_, i) => {
+    const terrain = terrains[Math.floor(rand() * terrains.length)]
+    const crop = rand() < 0.55 ? 'corn' : 'soybean'
+    return {
+      id: `field-ia-${String(i + 9).padStart(2, '0')}`,
+      name: `Iowa Field ${i + 9}`,
+      farmId: `farm-${String.fromCharCode(97 + (i % 12))}`,
+      lat: round1(41.3 + rand() * 0.8),
+      lon: round1(-94.2 + rand() * 1.0),
+      elevationM: Math.round(station.elevationM + (terrain === 'valley' ? -30 : terrain === 'ridge' ? 30 : 0) + (rand() - 0.5) * 20),
+      acres: Math.round(80 + rand() * 320),
+      crop,
+      terrain,
+      stationId: station.id,
+    }
+  }),
+]
+const climatology = portfolioFields.map(climFor)
+
+const PRICE = { corn: 4.5, soybean: 11, orchard: 9 } // $/bu, 가정
+const EXPECTED = { corn: 195, soybean: 58, orchard: 750 } // bu/acre
+const perilWeight = {
+  frost: (c, f) => c.frostNightsMay10y / 14 + (f.crop === 'orchard' ? 0.3 : 0),
+  excess_rain: (c) => c.heavyRainDaysJun10y / 10,
+  drought: (c) => c.dryWeeksJul10y / 10,
+}
+const history = []
+for (const season of ['2023', '2024', '2025']) {
+  for (const f of portfolioFields) {
+    const c = climatology.find((x) => x.fieldId === f.id)
+    for (const peril of Object.keys(perilWeight)) {
+      const w = perilWeight[peril](c, f)
+      // 위험이 클수록 청구가 잦고 크다. 잡음을 넣어 완벽한 상관은 피한다
+      const q = Math.min(0.6, 0.02 + 0.22 * w * w)
+      if (rand() >= q) continue
+      const lossFrac = Math.max(0.03, Math.min(0.6, 0.06 + 0.12 * w + (rand() - 0.5) * 0.12))
+      const expected = EXPECTED[f.crop]
+      const actual = Math.round(expected * (1 - lossFrac))
+      const paid = Math.round((expected - actual) * PRICE[f.crop] * f.acres * 0.75) // 보장 75% 가정
+      history.push({ id: `hist-${season}-${f.id}-${peril}`, fieldId: f.id, peril, date: `${season}-06-15`, claimedLossUsd: Math.round(paid * 1.05), paidLossUsd: paid, expectedYieldBuAc: expected, actualYieldBuAc: actual })
+    }
+  }
+}
 
 write('downscaling/fields.json', { demo: true, station, fields })
 write('downscaling/snapshots.json', { demo: true, snapshots })
@@ -133,4 +189,12 @@ write('downscaling/station-observations.json', { demo: true, observations: [stat
 write('downscaling/field-observations.json', { demo: true, note: '농장 센서 목업 (연결된 농장의 필지 실측)', observations: fieldObs })
 write('insurance/claims.json', { demo: true, claims })
 write('insurance/climatology.json', { demo: true, climatology })
-console.log(`fields ${fields.length}, snapshots ${snapshots.length}, field obs ${fieldObs.length}, claims ${claims.length}`)
+write('insurance/portfolio.json', {
+  demo: true,
+  note: '임의의 아이오와 필지 48개, 2023-2025 청구·생산량 이력 (목업). 가격 $/bu와 보장률 75%는 가정',
+  pricesUsdBu: PRICE,
+  basePremiumUsdAc: { corn: 40, soybean: 29, orchard: 300 },
+  fields: portfolioFields,
+  history,
+})
+console.log(`fields ${fields.length}, portfolio ${portfolioFields.length}, history ${history.length}, claims ${claims.length}`)

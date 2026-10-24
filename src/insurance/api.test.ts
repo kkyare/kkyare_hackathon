@@ -7,6 +7,9 @@ import * as dcScore from '../app/api/families/decision/score/route'
 import * as verify from '../app/api/insurance/verify/route'
 import * as risk from '../app/api/insurance/risk/route'
 import * as claimsRoute from '../app/api/insurance/claims/route'
+import * as lossCurveRoute from '../app/api/insurance/loss-curve/route'
+import * as rateRoute from '../app/api/insurance/rate-range/route'
+import * as learning from '../app/api/farm/learning-curve/route'
 
 const post = (body: unknown) => new Request('http://local/api', { method: 'POST', body: JSON.stringify(body) })
 
@@ -32,14 +35,29 @@ describe('families API', () => {
 describe('insurance API', () => {
   it('claimId로 검증', async () => {
     const r = await (await verify.POST(post({ claimId: 'claim-0001' }))).json()
-    expect(r.verdict).toBe('supported')
+    expect(r.verdict).toBe('within_range')
   })
   it('리스크 점수 전체 필지', async () => {
     const r = await (await risk.GET(new Request('http://local/api/insurance/risk?peril=frost'))).json()
-    expect(r).toHaveLength(8)
+    expect(r).toHaveLength(48)
   })
   it('청구 목록', async () => {
     const r = await (await claimsRoute.GET()).json()
     expect(r.claims.length).toBeGreaterThan(0)
+  })
+  it('손해율 곡선', async () => {
+    const r = await (await lossCurveRoute.GET(new Request('http://local/api/insurance/loss-curve?peril=excess_rain'))).json()
+    expect(r.bins).toHaveLength(5)
+  })
+  it('요율 range 단일·전체', async () => {
+    const one = await (await rateRoute.GET(new Request('http://local/api/insurance/rate-range?fieldId=field-ia-03&peril=frost'))).json()
+    expect(one.premiumUsdAc).toHaveLength(2)
+    const all = await (await rateRoute.GET(new Request('http://local/api/insurance/rate-range?peril=drought'))).json()
+    expect(all).toHaveLength(48)
+  })
+  it('농장 연결 곡선', async () => {
+    const r = await (await learning.GET(new Request('http://local/api/farm/learning-curve'))).json()
+    expect(r.points.length).toBeGreaterThan(1)
+    expect(r.ranges.length).toBeGreaterThan(1)
   })
 })

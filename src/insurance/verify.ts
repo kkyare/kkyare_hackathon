@@ -1,7 +1,7 @@
 // 보험 청구 검증과 필지 리스크 점수.
 // "청구된 날씨 원인이 그날 그 필지에 실제로 있었나"를 확률과 근거로 돌려준다.
 import { normalCdf } from '../core/scoring'
-import type { Claim, ClaimReport, Field, Observation, Peril, RiskScore, Snapshot } from '../core/types'
+import type { Claim, ClaimReport, Field, Observation, Peril, RateRange, RiskScore, Snapshot } from '../core/types'
 import { fieldAdjustmentF, minTemp, rawGridMin, round1, sumPrecip } from '../families/downscaling/model'
 
 export const THRESHOLDS = {
@@ -17,6 +17,7 @@ export interface VerifyContext {
   stationObs: Observation[]
   fieldObs?: (Observation & { fieldId: string })[] // 연결된 농장의 필지 센서 (있으면 우선)
   snapshots?: Snapshot[]
+  rateFor?: (fieldId: string, peril: Peril) => RateRange | undefined // 피해보상액 range 계산용
 }
 
 // 청구 날짜(현지 날짜)를 UTC 창으로: 전날 현지 저녁 ~ 당일 현지 낮 (CDT = UTC-5)
@@ -28,16 +29,25 @@ function dayWindow(date: string) {
   return { from: `${date}T00:00:00Z`, to: `${next}T00:00:00Z` }
 }
 
-function verdictOf(p: number): ClaimReport['verdict'] {
-  if (p >= THRESHOLDS.supported) return 'supported'
-  if (p <= THRESHOLDS.notSupported) return 'not_supported'
+/** 조건 확률 + 청구액이 보상액 range 안인지로 판정 */
+function verdictOf(p: number, claimed: number, range: [number, number]): ClaimReport['verdict'] {
+  if (p <= THRESHOLDS.notSupported) return 'outside_range' // 피해 조건 자체가 없었음
+  if (claimed > range[1]) return 'outside_range' // 조건은 있었지만 청구액이 범위 위
+  if (p >= THRESHOLDS.supported) return 'within_range'
   return 'unclear'
+}
+
+function indemnityRange(claim: Claim, field: Field, ctx: VerifyContext): [number, number] {
+  const r = ctx.rateFor?.(field.id, claim.peril)
+  if (!r) return [0, claim.claimedLossUsd]
+  return [Math.round(r.indemnityUsdAc[0] * field.acres), Math.round(r.indemnityUsdAc[1] * field.acres)]
 }
 
 export function verifyClaim(claim: Claim, ctx: VerifyContext): ClaimReport {
   const field = ctx.fields.find((f) => f.id === claim.fieldId)
   if (!field) throw new Error(`unknown field ${claim.fieldId}`)
   const station = ctx.stationObs.find((o) => o.stationId === field.stationId) ?? ctx.stationObs[0]
+  const range = indemnityRange(claim, field, ctx)
 
   if (claim.peril === 'frost') {
     const { from, to } = frostWindow(claim.date)
@@ -53,13 +63,14 @@ export function verifyClaim(claim: Claim, ctx: VerifyContext): ClaimReport {
       claimId: claim.id,
       peril: claim.peril,
       conditionProbability: round2(p),
-      verdict: estimate === null ? 'unclear' : verdictOf(p),
+      indemnityRange: range,
+      verdict: estimate === null ? 'unclear' : verdictOf(p, claim.claimedLossUsd, range),
       evidence: {
         fieldEstimate: { variable: 'min_temp', value: round1(estimate ?? Number.NaN), sigma, unit: 'F' },
         nearbyObs: { stationId: station?.stationId ?? field.stationId, value: stationMin, unit: 'F' },
         forecastAtT0: snap?.forecasts.map((r) => ({ model: r.model, value: rawGridMin(r), unit: 'F' })),
       },
-      explanation: frostExplanation(field, estimate, sigma, p, sensorMin !== null, stationMin),
+      explanation: `${frostExplanation(field, estimate, sigma, p, sensorMin !== null, stationMin)} ${rangeText(claim.claimedLossUsd, range)}`,
     }
   }
 
@@ -72,7 +83,8 @@ export function verifyClaim(claim: Claim, ctx: VerifyContext): ClaimReport {
       claimId: claim.id,
       peril: claim.peril,
       conditionProbability: round2(p),
-      verdict: total === null ? 'unclear' : verdictOf(p),
+      indemnityRange: range,
+      verdict: total === null ? 'unclear' : verdictOf(p, claim.claimedLossUsd, range),
       evidence: {
         fieldEstimate: { variable: 'precip_24h', value: round2(total ?? Number.NaN), sigma: round2(sigma), unit: 'in' },
         nearbyObs: { stationId: station?.stationId ?? field.stationId, value: total === null ? null : round2(total), unit: 'in' },
@@ -80,25 +92,26 @@ export function verifyClaim(claim: Claim, ctx: VerifyContext): ClaimReport {
       explanation:
         total === null
           ? '해당 날짜 강수 관측이 없어 판단할 수 없습니다.'
-          : `인근 관측소 24시간 강수 ${round2(total)} inch (기준 ${THRESHOLDS.heavyRainIn} inch), 폭우 조건 확률 ${pct(p)}.`,
+          : `인근 관측소 24시간 강수 ${round2(total)} inch (기준 ${THRESHOLDS.heavyRainIn} inch), 폭우 조건 확률 ${pct(p)}. ${rangeText(claim.claimedLossUsd, range)}`,
     }
   }
 
-  // hail·drought: 데모 데이터에 직접 근거가 없음 → 판단 보류
+  // drought: 수주 누적 강수·토양수분이 필요해 데모 데이터로는 판단 보류
   return {
     claimId: claim.id,
     peril: claim.peril,
     conditionProbability: 0.5,
-    verdict: 'unclear',
+    indemnityRange: range,
+    verdict: claim.claimedLossUsd > range[1] ? 'outside_range' : 'unclear',
     evidence: {
       fieldEstimate: { variable: claim.peril, value: Number.NaN, sigma: Number.NaN, unit: '-' },
       nearbyObs: { stationId: field.stationId, value: null, unit: '-' },
     },
-    explanation: `${claim.peril === 'hail' ? '우박' : '가뭄'}은 지상 관측만으로 확인하기 어렵습니다. 레이더·위성 자료 연동이 필요합니다(로드맵).`,
+    explanation: '가뭄은 수주 누적 강수·토양수분 자료가 필요해 데모 데이터로는 조건을 확인하지 않았습니다(로드맵). 청구액만 보상액 range와 비교했습니다.',
   }
 }
 
-export interface Climatology { fieldId: string; frostNightsMay10y: number; heavyRainDaysJun10y: number }
+export interface Climatology { fieldId: string; frostNightsMay10y: number; heavyRainDaysJun10y: number; dryWeeksJul10y: number }
 
 export function riskScore(field: Field, peril: Peril, stationElevationM: number, clim?: Climatology): RiskScore {
   const drivers: string[] = []
@@ -125,8 +138,12 @@ export function riskScore(field: Field, peril: Peril, stationElevationM: number,
       drivers.push(`지난 10년 6월 폭우일 ${clim.heavyRainDaysJun10y}일`)
     }
   } else {
-    drivers.push('데모 데이터에 근거 없음')
-    score = 50
+    score += field.terrain === 'ridge' ? 35 : field.terrain === 'flat' ? 20 : 8
+    if (field.terrain === 'ridge') drivers.push('능선: 배수가 빨라 토양이 쉽게 마름')
+    if (clim) {
+      score += Math.min(55, clim.dryWeeksJul10y * 5)
+      drivers.push(`지난 10년 7월 건조 주 ${clim.dryWeeksJul10y}주`)
+    }
   }
   return { fieldId: field.id, peril, season: peril === 'frost' ? 'spring' : 'summer', score: Math.round(Math.min(100, score)), drivers }
 }
@@ -135,6 +152,10 @@ function frostExplanation(field: Field, est: number | null, sigma: number, p: nu
   if (est === null) return '해당 시간대 기온 관측이 없어 판단할 수 없습니다.'
   const src = fromSensor ? '연결된 농장 센서 실측' : `인근 관측소(${stationMin}°F)를 고도·지형으로 보정한 추정`
   return `${field.name}의 최저기온은 ${src} 기준 ${round1(est)}°F (±${sigma}). 서리(≤ ${THRESHOLDS.frostF}°F) 조건 확률 ${pct(p)}.`
+}
+
+function rangeText(claimed: number, range: [number, number]) {
+  return `청구액 $${claimed.toLocaleString('en-US')}, 예상 보상액 range $${range[0].toLocaleString('en-US')}-$${range[1].toLocaleString('en-US')}.`
 }
 
 function prevDate(date: string) {

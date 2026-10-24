@@ -6,35 +6,45 @@
       "fieldId": "field-ia-03",
       "peril": "frost",
       "date": "2026-05-12",
-      "claimedLossUsd": 96000
+      "claimedLossUsd": 96000,
+      "expectedYieldBuAc": 750,
+      "actualYieldBuAc": 670
     },
     {
       "id": "claim-0002",
       "fieldId": "field-ia-06",
       "peril": "frost",
       "date": "2026-05-12",
-      "claimedLossUsd": 150000
+      "claimedLossUsd": 150000,
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 120
     },
     {
       "id": "claim-0003",
       "fieldId": "field-ia-02",
       "peril": "excess_rain",
       "date": "2026-06-18",
-      "claimedLossUsd": 42000
+      "claimedLossUsd": 6300,
+      "expectedYieldBuAc": 58,
+      "actualYieldBuAc": 40
     },
     {
       "id": "claim-0004",
       "fieldId": "field-ia-05",
       "peril": "frost",
       "date": "2026-05-20",
-      "claimedLossUsd": 60000
+      "claimedLossUsd": 60000,
+      "expectedYieldBuAc": 750,
+      "actualYieldBuAc": 700
     },
     {
       "id": "claim-0005",
       "fieldId": "field-ia-04",
-      "peril": "hail",
+      "peril": "excess_rain",
       "date": "2026-06-18",
-      "claimedLossUsd": 85000
+      "claimedLossUsd": 250000,
+      "expectedYieldBuAc": 195,
+      "actualYieldBuAc": 170
     }
   ]
 }

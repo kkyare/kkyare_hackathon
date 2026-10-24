@@ -1,7 +1,17 @@
-// GET /api/farm/learning-curve -> CurvePoint[]  연결된 농장이 늘수록 필지 추정 오차(MAE, °F)가 줄어드는 곡선 (목업)
-import { fieldObs, fields, snapshots } from '../../../../insurance/data'
-import { learningCurve } from '../../../../farm/learning'
+// GET /api/farm/learning-curve?fieldId=field-ia-03&peril=frost
+// -> { points: 연결 농장 수별 필지 추정 오차, ranges: 검증 청구 수별 요율 range 폭 }  (목업)
+import { fieldObs, fields, portfolio, riskScores, scoreFor, snapshots } from '../../../../insurance/data'
+import { learningCurve, rangeNarrowing } from '../../../../farm/learning'
+import type { Peril } from '../../../../core/types'
 
-export async function GET() {
-  return Response.json({ demo: true, points: learningCurve(fields, snapshots, fieldObs) })
+export async function GET(req: Request) {
+  const url = new URL(req.url)
+  const peril = (url.searchParams.get('peril') ?? 'frost') as Peril
+  const field = portfolio.fields.find((f) => f.id === (url.searchParams.get('fieldId') ?? 'field-ia-03')) ?? portfolio.fields[0]
+  const score = scoreFor(field.id, peril)?.score ?? 50
+  return Response.json({
+    demo: true,
+    points: learningCurve(fields, snapshots, fieldObs),
+    ranges: rangeNarrowing(field, peril, score, portfolio, riskScores),
+  })
 }
