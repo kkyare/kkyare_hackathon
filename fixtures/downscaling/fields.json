@@ -1,0 +1,108 @@
+{
+  "demo": true,
+  "station": {
+    "id": "DSM",
+    "name": "Des Moines Intl",
+    "lat": 41.534,
+    "lon": -93.653,
+    "elevationM": 292
+  },
+  "fields": [
+    {
+      "id": "field-ia-01",
+      "name": "Miller North 160",
+      "farmId": "farm-miller",
+      "lat": 41.62,
+      "lon": -93.71,
+      "elevationM": 298,
+      "acres": 160,
+      "crop": "corn",
+      "terrain": "flat",
+      "stationId": "DSM"
+    },
+    {
+      "id": "field-ia-02",
+      "name": "Miller South 80",
+      "farmId": "farm-miller",
+      "lat": 41.6,
+      "lon": -93.7,
+      "elevationM": 285,
+      "acres": 80,
+      "crop": "soybean",
+      "terrain": "flat",
+      "stationId": "DSM"
+    },
+    {
+      "id": "field-ia-03",
+      "name": "Raccoon Bottom 120",
+      "farmId": "farm-johnson",
+      "lat": 41.55,
+      "lon": -93.82,
+      "elevationM": 262,
+      "acres": 120,
+      "crop": "orchard",
+      "terrain": "valley",
+      "stationId": "DSM"
+    },
+    {
+      "id": "field-ia-04",
+      "name": "Johnson East 240",
+      "farmId": "farm-johnson",
+      "lat": 41.57,
+      "lon": -93.78,
+      "elevationM": 290,
+      "acres": 240,
+      "crop": "corn",
+      "terrain": "flat",
+      "stationId": "DSM"
+    },
+    {
+      "id": "field-ia-05",
+      "name": "Walnut Creek 90",
+      "farmId": "farm-olsen",
+      "lat": 41.48,
+      "lon": -93.86,
+      "elevationM": 268,
+      "acres": 90,
+      "crop": "orchard",
+      "terrain": "valley",
+      "stationId": "DSM"
+    },
+    {
+      "id": "field-ia-06",
+      "name": "Olsen Ridge 200",
+      "farmId": "farm-olsen",
+      "lat": 41.46,
+      "lon": -93.9,
+      "elevationM": 326,
+      "acres": 200,
+      "crop": "corn",
+      "terrain": "ridge",
+      "stationId": "DSM"
+    },
+    {
+      "id": "field-ia-07",
+      "name": "Ankeny West 300",
+      "farmId": "farm-hansen",
+      "lat": 41.72,
+      "lon": -93.65,
+      "elevationM": 305,
+      "acres": 300,
+      "crop": "soybean",
+      "terrain": "flat",
+      "stationId": "DSM"
+    },
+    {
+      "id": "field-ia-08",
+      "name": "Hansen Hill 150",
+      "farmId": "farm-hansen",
+      "lat": 41.75,
+      "lon": -93.6,
+      "elevationM": 318,
+      "acres": 150,
+      "crop": "corn",
+      "terrain": "ridge",
+      "stationId": "DSM"
+    }
+  ]
+}

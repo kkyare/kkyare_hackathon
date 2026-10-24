@@ -1,0 +1,45 @@
+{
+  "demo": true,
+  "climatology": [
+    {
+      "fieldId": "field-ia-01",
+      "frostNightsMay10y": 6,
+      "heavyRainDaysJun10y": 6
+    },
+    {
+      "fieldId": "field-ia-02",
+      "frostNightsMay10y": 6,
+      "heavyRainDaysJun10y": 6
+    },
+    {
+      "fieldId": "field-ia-03",
+      "frostNightsMay10y": 15,
+      "heavyRainDaysJun10y": 9
+    },
+    {
+      "fieldId": "field-ia-04",
+      "frostNightsMay10y": 6,
+      "heavyRainDaysJun10y": 6
+    },
+    {
+      "fieldId": "field-ia-05",
+      "frostNightsMay10y": 15,
+      "heavyRainDaysJun10y": 9
+    },
+    {
+      "fieldId": "field-ia-06",
+      "frostNightsMay10y": 2,
+      "heavyRainDaysJun10y": 6
+    },
+    {
+      "fieldId": "field-ia-07",
+      "frostNightsMay10y": 5,
+      "heavyRainDaysJun10y": 6
+    },
+    {
+      "fieldId": "field-ia-08",
+      "frostNightsMay10y": 2,
+      "heavyRainDaysJun10y": 6
+    }
+  ]
+}
