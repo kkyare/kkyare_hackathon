@@ -1,8 +1,9 @@
-// POST /api/arena/run, POST /api/export 본체. route.ts는 요청·응답 변환만 한다.
+// /api/arena/*, /api/export 본체. route.ts는 요청·응답 변환만 한다.
 import { ARENA_MODELS, runAgent } from '../core/agent'
 import type { Answer, Family, FamilyId, Score, Task } from '../core/types'
-import { taskData } from './data'
+import { demoTasks, taskData } from './data'
 import { buildTaskPack, dataCard, labelOf, toJsonl, type Label } from './export'
+import { auditRuns, auditSummary } from './leakAudit'
 import { replayRunner, runArena, type AgentRunner, type ArenaError, type ArenaRun } from './run'
 import { scoreboard } from './scoreboard'
 
@@ -87,4 +88,26 @@ export function handleExport(body: ExportRequest, opts: { format?: string; holdo
   }
   if (format === 'card') return { body: dataCard(pack, scoreboard(body.scores ?? [])), contentType: 'text/markdown; charset=utf-8', filename: `${name}.md` }
   return { body: JSON.stringify(pack), contentType: 'application/json', filename: `${name}.json` }
+}
+
+// ---- GET /api/arena/tasks, POST /api/arena/audit ------------------------------------
+
+export const ARENA_FAMILIES: FamilyId[] = ['nowcasting', 'downscaling', 'decision', 's2s']
+
+// 화면용 데모 과제. 저장 응답(fixtures/arena/runs.json)과 같은 id라 ?mock=1로 재생된다
+export function handleArenaTasks(opts: { count?: number; saved: ArenaRun[]; hasKey: boolean }) {
+  const count = Math.max(1, Math.min(10, Math.floor(opts.count ?? 2)))
+  const tasks = ARENA_FAMILIES.flatMap(f => demoTasks(f, count))
+  const savedKeys = new Set(opts.saved.map(r => `${r.taskId}|${r.model}`))
+  const replayable = tasks.every(t => ARENA_MODELS.every(m => savedKeys.has(`${t.id}|${m}`)))
+  return { tasks, models: ARENA_MODELS, replayable, liveAvailable: opts.hasKey }
+}
+
+export interface AuditRequest { tasks?: Task[]; runs?: ArenaRun[] }
+
+// mock이면 도구 기록만 (Claude 호출 없음), 아니면 rationale도 Claude로 검사
+export async function handleAudit(body: AuditRequest, opts: { mock: boolean }) {
+  if (!Array.isArray(body.tasks) || !Array.isArray(body.runs)) throw new BadRequest('tasks and runs must be arrays')
+  const findings = await auditRuns(body.runs, body.tasks, { rationale: !opts.mock })
+  return { findings, summary: auditSummary(findings, body.runs), rationaleChecked: !opts.mock }
 }

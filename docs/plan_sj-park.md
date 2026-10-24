@@ -50,9 +50,11 @@
   - 실제 호출이 실패하면 저장 응답으로 대체, 하나라도 대체되면 `live: false` (LIVE 배지는 실제 호출만)
   - 과제별 스냅샷·관측 연결은 `src/arena/data.ts`: 나우캐스팅·다운스케일링·서리 결정·S2S 4개 모두 (`src/arena/families.test.ts`). `taskIds`는 아직 미지원
   - S2S는 t0 예보 런이 없어 빈 스냅샷 → 에이전트가 CPC 전망을 도구로 볼 수 없음 (도구 추가는 성호님과 상의)
-- [ ] `/arena` 화면: 모델 레인 3개(도구 호출 로그·확률·결정·실측·점수), LIVE/DEMO DATA 배지
+- [x] `/arena` 화면 (`src/app/arena/page.tsx`): 모델 레인 3개(도구 호출 로그·확률·결정·실측·점수), DEMO DATA + Claude 응답 LIVE/재생 배지
+  - 기본은 저장 응답 재생, "실제 실행 (LIVE)"은 서버에 키가 있을 때만. 과제 목록 `GET /api/arena/tasks`
+  - 뼈대 없이 성호님 live 화면 방식(`'use client'` + Tailwind). shadcn 교체·`nav.ts` 메뉴 등록은 뼈대가 올라오면
 - [x] 점수표 집계 `src/arena/scoreboard.ts`: 모델 × 패밀리 (Brier·CRPS·regret $·skill·정답률·누출 수)
-- [ ] 점수표 화면
+- [x] 점수표 화면 (`/arena` 안)
 - [x] 실제 키로 3모델 한 번 돌려 `fixtures/arena/runs.json`에 저장 (`scripts/record-arena.ts --count 2`: 4개 패밀리 × 2 × 3모델 = 24회, 90초, 오류 0)
   - S2S에서 관측 요청 구간이 t0를 넘은 3건이 `tool:obs_after_t0`로 기록됨 (잘려서 반환, 실제 누출 아님) → 누출 감사 화면에서 "t0 이후 구간 요청(잘림)"으로 구분해 보여 줄 것
 - [x] **2:00 1차 합치기**: 나우캐스팅으로 generate → run → score 한 바퀴 (`src/arena/integration.test.ts`, 예보 복사 답은 skill 0 확인)
@@ -60,12 +62,12 @@
 ### 4. 보정 곡선·리더보드·누출 감사 (2:00-3:30)
 - [x] `src/arena/calibration.ts`: 10구간 binning, 모델별 (예측 확률, 실제 빈도, 개수) + Brier 분해(reliability·resolution·uncertainty)
   - 실제 결과는 `Score.outcome`(types.ts에 추가), 없으면 brier에서 역산
-- [ ] 보정 곡선(Recharts) + 대각선
+- [x] 보정 곡선(Recharts) + 대각선 (`CalibrationChart.tsx`, 모델 색 고정·dataviz 팔레트 검증, 수치 표 같이)
 - [x] 리더보드 집계: `leaderboard()`(패밀리별 평균 skill을 다시 평균), `topModelMissRate()`
   - skill은 과제별 [-1, 1]로 잘라 평균 (원천 예보 Brier가 0에 가까우면 -39까지 나와 순위를 좌우함), 원래 평균은 `skillRaw`
-- [ ] 리더보드 화면: "최고 모델도 틀린 과제 비율" 강조
+- [x] 리더보드 화면: "최고 모델도 틀린 과제 비율" 강조 (`/arena` 상단)
 - [x] 누출 감사 로직 `src/arena/leakAudit.ts`: 도구 기록 집계 + Claude(`report_audit` 강제)로 rationale 검사 → `audit:future_knowledge`, `applyAudit`, 모델별 요약
-- [ ] 누출 감사 화면: 적발 카드
+- [x] 누출 감사 화면: 차단된 요청(실제 누출 아님)과 근거 적발 카드 구분, "Claude로 근거 감사" 버튼 (`POST /api/arena/audit`)
 
 ### 5. 납품 (2:00-3:30)
 - [x] `src/arena/export.ts`: `buildTaskPack(tasks, { snapshots, resolutions?, holdout })` — `meta.marketValueUsd = 과제 수 × $100`(9-4 가정), `demo: true`
@@ -75,7 +77,7 @@
 - [x] JSONL `toJsonl(pack)`: 한 줄 = 과제 + 스냅샷 (+ t0~resolveAt 관측)
 - [x] `POST /api/export?format=json|jsonl|card&holdout=1&download=1` `{ tasks, scores? }` → TaskPack JSON / JSONL / 데이터 카드
 - [x] 데이터 카드 `dataCard(pack, baseline)` (Markdown)
-- [ ] 데이터 카드 화면: 출처(Open-Meteo·IEM ASOS·NOAA CPC), 기간·지역, 패밀리별 개수, 누출 방지 방식, Arena baseline 점수, "가정" 표시
+- [x] 데이터 카드 화면 (`/export`): 패밀리·개수·holdout 선택, JSON/JSONL/카드 다운로드, 미리보기. 출처(Open-Meteo·IEM ASOS·NOAA CPC), 기간·지역, 패밀리별 개수, 누출 방지 방식, Arena baseline 점수, "가정" 표시
 
 ### 6. P1 verifiers (3:30-4:00)
 - [x] `py/verifiers_env/`: TaskPack JSONL 로드, `load_environment()` (`SingleTurnEnv`)
