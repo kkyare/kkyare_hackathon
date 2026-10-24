@@ -71,8 +71,8 @@ export async function auditRationale(task: Task, run: ArenaRun, opts: { client?:
 }
 
 const TOOL_REASON: Record<string, string> = {
-  'tool:obs_after_t0': 't0 이후 관측을 요청함 (잘려서 반환)',
-  'tool:forecast_after_t0': 't0 이후 발표된 예보를 요청함 (거부됨)',
+  'tool:obs_after_t0': 't0 이후 구간의 관측을 요청함 → t0 이전까지만 잘려서 반환 (실제로 새어 나간 데이터 없음)',
+  'tool:forecast_after_t0': 't0 이후 발표된 예보를 요청함 → 거부 (실제로 새어 나간 데이터 없음)',
 }
 
 // 실행 기록 전체 감사: 도구 기록은 바로, rationale은 Claude로 (동시 3개)
