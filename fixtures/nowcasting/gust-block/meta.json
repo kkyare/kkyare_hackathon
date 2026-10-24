@@ -1,0 +1,17 @@
+{
+  "demo": true,
+  "story": "6월 10일 오전(12~16Z)에는 바람이 잔잔해 살포가 가능하지만, 17Z(현지 낮 12시)부터 돌풍이 16~20mph로 올라 살포 창이 막히는 날이다.",
+  "expected": {
+    "windowHours": 3,
+    "windows": [
+      {
+        "start": "2026-06-10T13:00:00Z",
+        "violation": false
+      },
+      {
+        "start": "2026-06-10T16:00:00Z",
+        "violation": true
+      }
+    ]
+  }
+}

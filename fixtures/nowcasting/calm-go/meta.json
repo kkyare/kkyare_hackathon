@@ -1,0 +1,13 @@
+{
+  "demo": true,
+  "story": "6월 10일은 하루 종일 바람이 4~9mph로 잔잔하고 돌풍도 10mph 이하라 15Z(현지 오전 10시)에 살포를 시작해도 문제없는 날이다.",
+  "expected": {
+    "windowHours": 3,
+    "windows": [
+      {
+        "start": "2026-06-10T15:00:00Z",
+        "violation": false
+      }
+    ]
+  }
+}
