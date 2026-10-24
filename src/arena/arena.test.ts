@@ -137,4 +137,17 @@ describe('scoreboard', () => {
     expect(topModelMissRate(scores)).toEqual({ model: 'opus', missRate: 0.5, n: 2 })
     expect(topModelMissRate([])).toBeUndefined()
   })
+
+  it('skill은 과제별로 [-1, 1]로 잘라 평균한다 (원천 예보 오차가 0에 가까운 과제 하나가 순위를 뒤집지 않게)', () => {
+    // 실제 기록에서 서리 결정 skill이 -39까지 나온 경우를 흉내
+    const outlier: Score[] = [
+      s('opus', 'decision', -39, false), s('opus', 'nowcasting', 0.6, true),
+      s('haiku', 'decision', -0.9, false), s('haiku', 'nowcasting', -0.5, true),
+    ]
+    const opusDecision = scoreboard(outlier).find(c => c.model === 'opus' && c.family === 'decision')!
+    expect(opusDecision).toMatchObject({ skill: -1, skillRaw: -39 })
+    const lb = leaderboard(outlier)
+    expect(lb.map(c => c.model)).toEqual(['opus', 'haiku'])     // 자르지 않으면 opus가 꼴찌
+    expect(lb[0].skill).toBeCloseTo(-0.2)
+  })
 })

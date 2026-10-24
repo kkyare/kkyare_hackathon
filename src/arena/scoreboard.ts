@@ -1,11 +1,14 @@
 // 점수표 집계: 모델 × 패밀리 평균, 모델별 종합. Brier·CRPS·regret은 낮을수록, skill은 높을수록 좋음.
+// skill은 과제마다 [-1, 1]로 잘라 평균한다. 원천 예보 오차가 0에 가까우면 skill이 -수십까지 내려가
+// 과제 하나가 평균과 순위를 좌우하기 때문이다 (패밀리 score()의 값은 그대로 두고 skillRaw로 함께 보여 준다).
 import type { FamilyId, ModelId, Score } from '../core/types'
 
 export interface Cell {
   model: ModelId; family: FamilyId | 'all'
   n: number
   brier?: number; crps?: number; regretUsd?: number
-  skill: number
+  skill: number                // 과제별 [-1, 1]로 자른 skill의 평균
+  skillRaw: number             // 자르지 않은 평균 (패밀리 score() 값 그대로)
   accuracy?: number            // correct가 있는 점수 중 맞은 비율
   leaks: number                // leakFlags가 하나라도 있는 점수 수
 }
@@ -15,6 +18,8 @@ const mean = (xs: (number | undefined)[]) => {
   return v.length ? v.reduce((a, b) => a + b, 0) / v.length : undefined
 }
 
+export const clipSkill = (x: number) => Math.max(-1, Math.min(1, x))
+
 function cell(model: ModelId, family: Cell['family'], scores: Score[]): Cell {
   const judged = scores.filter(s => typeof s.correct === 'boolean')
   return {
@@ -22,7 +27,8 @@ function cell(model: ModelId, family: Cell['family'], scores: Score[]): Cell {
     brier: mean(scores.map(s => s.brier)),
     crps: mean(scores.map(s => s.crps)),
     regretUsd: mean(scores.map(s => s.regretUsd)),
-    skill: mean(scores.map(s => s.skill)) ?? 0,
+    skill: mean(scores.map(s => clipSkill(s.skill))) ?? 0,
+    skillRaw: mean(scores.map(s => s.skill)) ?? 0,
     accuracy: judged.length ? judged.filter(s => s.correct).length / judged.length : undefined,
     leaks: scores.filter(s => s.leakFlags.length > 0).length,
   }

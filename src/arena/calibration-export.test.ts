@@ -90,7 +90,7 @@ describe('export', () => {
 
   it('데이터 카드에 개수·가정·baseline이 들어간다', () => {
     const pack = buildTaskPack([task, t2], { snapshots: [snapshot] })
-    const md = dataCard(pack, [{ model: 'claude-opus-5-5', family: 'decision', n: 1, brier: 0.04, skill: 0.84, leaks: 0 }])
+    const md = dataCard(pack, [{ model: 'claude-opus-5-5', family: 'decision', n: 1, brier: 0.04, skill: 0.84, skillRaw: 0.84, leaks: 0 }])
     expect(md).toContain('DEMO DATA')
     expect(md).toContain('$200')
     expect(md).toContain('**가정**')

@@ -62,6 +62,7 @@
   - 실제 결과는 `Score.outcome`(types.ts에 추가), 없으면 brier에서 역산
 - [ ] 보정 곡선(Recharts) + 대각선
 - [x] 리더보드 집계: `leaderboard()`(패밀리별 평균 skill을 다시 평균), `topModelMissRate()`
+  - skill은 과제별 [-1, 1]로 잘라 평균 (원천 예보 Brier가 0에 가까우면 -39까지 나와 순위를 좌우함), 원래 평균은 `skillRaw`
 - [ ] 리더보드 화면: "최고 모델도 틀린 과제 비율" 강조
 - [x] 누출 감사 로직 `src/arena/leakAudit.ts`: 도구 기록 집계 + Claude(`report_audit` 강제)로 rationale 검사 → `audit:future_knowledge`, `applyAudit`, 모델별 요약
 - [ ] 누출 감사 화면: 적발 카드
