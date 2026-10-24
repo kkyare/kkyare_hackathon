@@ -67,9 +67,9 @@
       <div>
         <div class="colh">Farm data in</div>
         <div class="farm">
-          <h3>Corn farm <small>· Iowa, 280 acres</small></h3>
+          <h3>Corn farm <small>· Iowa, 290 acres</small></h3>
           <p>Satellite, forecasts, field sensors, harvests</p>
-          <p class="out">→ 2026 yield: 84.5% of normal</p>
+          <p class="out">→ 2026 yield: 86.5% of normal</p>
         </div>
         <div class="farm poultry">
           <h3>Poultry farm <small>· Iowa broilers</small></h3>
@@ -83,7 +83,7 @@
         <div class="step"><b>1. Field-level weather</b><span>Forecasts downscaled to each field or barn</span></div>
         <div class="step"><b>2. Loss model</b><span>Weather → yield % or flock loss %</span></div>
         <div class="step"><b>3. Retrain on real outcomes</b><span>Every harvest and flock record retrains it</span></div>
-        <div class="loop"><svg width="40" height="32" viewBox="0 0 40 32" aria-hidden="true"><path d="M34 16 A13 12 0 1 1 22 4" stroke="#4e7a3a" stroke-width="4" fill="none"/><path d="M18 0 L28 4 L19 10 Z" fill="#4e7a3a"/></svg>error 6.2 → 2.5 %p after 3 seasons</div>
+        <div class="loop"><svg width="40" height="32" viewBox="0 0 40 32" aria-hidden="true"><path d="M34 16 A13 12 0 1 1 22 4" stroke="#4e7a3a" stroke-width="4" fill="none"/><path d="M18 0 L28 4 L19 10 Z" fill="#4e7a3a"/></svg>error 3.4 → 2.5 %p (baseline 6.2)</div>
       </div>
       <div class="arrow"><svg width="64" height="40" viewBox="0 0 64 40" aria-hidden="true"><path d="M4 20 H50" stroke="#1c2620" stroke-width="5" fill="none"/><path d="M44 8 L60 20 L44 32 Z" fill="#1c2620"/></svg></div>
       <div>
@@ -121,7 +121,7 @@
     <div class="cols" style="margin-top:4px;gap:56px">
       <div class="col">
         <h2>How it works</h2>
-        <p>Field weather → yield % per farm → retrained on each real harvest: error falls <span class="k">6.2 → 2.5 %p</span>. <b>Claude</b> finds farms, writes briefings, and is the agent graded in our RL tasks.</p>
+        <p>Field weather → yield % per farm → retrained on each real harvest: error falls <span class="k">3.4 → 2.5 %p</span> as seasons are added (no-model baseline 6.2). <b>Claude</b> finds farms, writes briefings, and is the agent graded in our RL tasks.</p>
       </div>
       <div class="col">
         <h2>Why us · next 7 days</h2>

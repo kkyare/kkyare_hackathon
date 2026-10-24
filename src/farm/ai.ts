@@ -5,7 +5,12 @@ import { templateBriefing, type FarmBrief } from './brief'
 
 export const FARM_AI_MODEL = CLAUDE_MODEL
 
+// 데모 데이터는 고정이라 같은 필지의 브리핑은 한 번만 만들고 다시 쓴다 (새로고침마다 Claude를 부르지 않는다)
+const briefCache = new Map<string, { text: string; by: 'claude' }>()
+
 export async function briefWithClaude(b: FarmBrief): Promise<{ text: string; by: 'claude' | 'template' }> {
+  const cached = briefCache.get(b.field.id)
+  if (cached) return cached
   const fallback = { text: templateBriefing(b), by: 'template' as const }
   if (!process.env.ANTHROPIC_API_KEY) return fallback
   try {
@@ -14,7 +19,10 @@ export async function briefWithClaude(b: FarmBrief): Promise<{ text: string; by:
         '올해 예상 생산량과 범위, 가장 큰 날씨 요인, 이 필지의 과거 수확 기록이 예측에 어떻게 반영됐는지, 지금 할 일 하나를 말한다. 숫자를 바꾸거나 근거에 없는 사실을 만들지 않는다.',
       JSON.stringify({ ...b, learning: undefined }),
     )
-    return text ? { text, by: 'claude' } : fallback
+    if (!text) return fallback
+    const result = { text, by: 'claude' as const }
+    briefCache.set(b.field.id, result)
+    return result
   } catch (e) {
     console.error('[farm/brief] Claude call failed:', e)
     return fallback

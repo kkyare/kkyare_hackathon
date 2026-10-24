@@ -218,7 +218,7 @@ function FarmPanel({ b, loading }: { b: Brief; loading: boolean }) {
         </Section>
       )}
 
-      <Section title="AI 브리핑" note={b.briefing.by === 'claude' ? 'Claude가 위 숫자로 작성' : 'Claude 키가 없어 규칙 기반 문장'}>
+      <Section title="AI 브리핑" note={b.briefing.by === 'claude' ? 'Claude 분석 결과' : 'Claude 키가 없어 규칙 기반 문장'}>
         <p className="leading-relaxed">{b.briefing.text}</p>
         {b.briefing.by === 'claude' && <div className="mt-2"><Badge tone="frost">Claude</Badge></div>}
       </Section>

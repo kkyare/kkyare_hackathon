@@ -11,7 +11,13 @@ const SYSTEM = `너는 미국 작물보험 손해사정을 돕는 분석가다.
 판정과 확률은 이미 계산되어 있으니 바꾸지 말고 그대로 인용한다. 근거에 없는 사실을 만들지 않는다.
 데모용 목업 데이터라는 점은 언급하지 않는다.`
 
+// 같은 청구의 해설은 한 번만 만들고 다시 쓴다
+const explainCache = new Map<string, string>()
+
 export async function explainWithClaude(claim: Claim, field: Field, report: ClaimReport): Promise<ClaimReport> {
+  const key = `${claim.id}:${claim.fieldId}:${claim.date}:${claim.claimedLossUsd}`
+  const hit = explainCache.get(key)
+  if (hit) return { ...report, explanation: hit }
   if (!process.env.ANTHROPIC_API_KEY) return report
   try {
     const text = await askClaude(SYSTEM, JSON.stringify({
@@ -21,7 +27,9 @@ export async function explainWithClaude(claim: Claim, field: Field, report: Clai
             conditionProbability: report.conditionProbability,
             evidence: report.evidence,
           }))
-    return text ? { ...report, explanation: text } : report
+    if (!text) return report
+    explainCache.set(key, text)
+    return { ...report, explanation: text }
   } catch (e) {
     console.error('[insurance/explain] Claude call failed:', e)
     return report
