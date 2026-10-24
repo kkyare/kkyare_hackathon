@@ -55,11 +55,14 @@ export interface Score {
   skill: number
   correct?: boolean
   leakFlags: string[]
+  resolvedWith?: { stationId: string; at: string }   // 어떤 관측으로 채점했는지 (재현성)
 }
 
 export interface TaskPack {
   id: string; families: FamilyId[]; tasks: Task[]
-  meta: { count: number; marketValueUsd: number; period: string; region: string; demo: boolean }
+  snapshots: Snapshot[]                     // 과제 입력(t0 예보)을 묶음만으로 재현하기 위해 포함
+  resolutions?: Observation[]               // 공개 피드에만 포함, 비공개 평가셋은 뺌
+  meta: { count: number; marketValueUsd: number; period: string; region: string; demo: boolean; includesResolution: boolean }
 }
 
 export type Peril = 'frost' | 'hail' | 'excess_rain' | 'drought'

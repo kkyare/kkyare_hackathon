@@ -35,7 +35,8 @@
 | **청구 검증 리포트** | 청구된 필지·날짜에 대해 필지 보정 기온·강수·바람 + 인근 관측 + 당시 예보를 묶은 근거 리포트, "피해 조건 충족 확률" | 청구 건당 |
 | **필지 리스크 점수** | 필지별 서리·폭우·가뭄 위험 점수 (언더라이팅·포트폴리오 관리) | 에이커당 연 / API 호출 |
 | 지수형 트리거 데이터 (P2) | 필지 단위 지수 산출 | 계약 |
-- 정직하게: 기상 기록으로 보험료를 할인해 준 근거는 못 찾았다. 우리는 **"보험료 절감"이 아니라 "손해사정 시간 단축과 근거 강화"**를 판다. 보험사 구매 의사는 아직 검증 전이다.
+- 정직하게: 기상 기록으로 보험료를 할인해 준 근거는 못 찾았다. 우리는 **"보험료 절감"이 아니라 "손해사정·부정 청구 점검 시간 단축과 근거 강화"**를 판다. 보험사 구매 의사는 아직 검증 전이다.
+- 주의: 미국 작물보험의 대부분인 연방 MPCI는 "그날 서리가 있었나"가 아니라 수확량·수입 감소로 보험금을 준다. 날씨는 보장 원인 확인 근거로 쓰인다. 그래서 청구 검증이 가장 잘 맞는 곳은 **민간 우박보험(crop-hail) 같은 특정 위험 보장, 지수형 상품, 부정 청구 점검**이다. 덱에서는 "청구된 날씨 원인이 실제로 있었는지 근거 리포트"로 말한다.
 
 ### 농장 - 데이터가 쌓이는 곳 (해자)
 - 농장에는 필지 단위 예보·작업 판단을 무료/할인으로 주고, 동의를 받아 결과 데이터(필지 실측, 작업 기록, 수확량, 피해)를 받는다. 연동: John Deere Operations Center 등 농장주 권한 기반 API, 데이터 제공 농장에 수익 공유
@@ -241,11 +242,14 @@ export interface Score {
   skill: number
   correct?: boolean
   leakFlags: string[]
+  resolvedWith?: { stationId: string; at: string }   // 어떤 관측으로 채점했는지 (재현성)
 }
 
 export interface TaskPack {
   id: string; families: FamilyId[]; tasks: Task[]
-  meta: { count: number; marketValueUsd: number; period: string; region: string; demo: boolean }
+  snapshots: Snapshot[]                     // 과제 입력(t0 예보)을 묶음만으로 재현하기 위해 포함
+  resolutions?: Observation[]               // 공개 피드에만 포함, 비공개 평가셋은 뺌
+  meta: { count: number; marketValueUsd: number; period: string; region: string; demo: boolean; includesResolution: boolean }
 }
 
 export type Peril = 'frost' | 'hail' | 'excess_rain' | 'drought'
@@ -299,6 +303,7 @@ export interface Family {
 | 항목 | 값 |
 |---|---|
 | 지역 | 아이오와 중부, 관측소 DSM(Des Moines) 주변 필지 6-8개 |
+| 농장 | 임의의 아이오와 농장 4곳·필지 8개 (목업, 실제 날씨와 다름) |
 | 서리 시나리오 | 2026-05-12 밤 (늦서리, 목업) |
 | 폭우 시나리오 | 2026-06-18 (목업) |
 | 살포 시나리오 | 2026-06 중 돌풍 날 (성호님 확정) |
@@ -312,7 +317,7 @@ export interface Family {
 | 원천 예보 | **ECMWF Open Data**(IFS·AIFS, CC-BY 4.0), **NOAA GFS/GEFS**, **Open-Meteo** | 무료. Open-Meteo 무료 API는 비상업, 출처 표기 | 낮음 |
 | 과거 시점 예보 (t0 스냅샷) | **Open-Meteo Single Runs API** `run=2026-06-10T12:00` (**확인됨**). HRRR 12Z, NBM, ECMWF IFS 00Z, AIFS, GFS는 `gfs_seamless` | 무료(비상업) | HRRR은 6시간 간격 런·49시간까지, IFS는 00Z만, AIFS는 돌풍 없음, `gfs_global`은 값 비어 있음. Historical Forecast API는 미래 정보가 섞여 **화면 표시용으로만** |
 | S2S 예보 | **NOAA CPC 전망 아카이브** (6-10일·8-14일 매일, 3-4주 매주 금요일), 3구간 확률 (**확인됨**) | 무료 | Open-Meteo 과거 계절 런은 없음. CPC 형식 파싱 필요 |
-| 실측 관측 | **Iowa Environmental Mesonet ASOS** | 무료, 키 없음 | 매시 :54 관측, 확인 시점 약 56분 전 값. knot → mph ×1.151, 돌풍 결측(M) 처리 |
+| 실측 관측 | **Iowa Environmental Mesonet ASOS** | 무료, 키 없음 | 매시 :53-:54 관측, 업로드 지연 약 2-3분(실측 1회) → 최신 관측은 길어야 약 63분 전. knot → mph ×1.151, 돌풍 결측(M) 처리 |
 | 에이전트·판정·해설 | **Claude API** (tool use, structured output) | API 키 | 낮음 |
 | 모델 비교 | Claude Haiku/Sonnet/Opus 3종, 타사 모델은 키가 있으면 추가(평가 대상으로만) | | 키 없으면 Claude 3종 |
 | 지도·차트·UI | deck.gl/MapLibre, Recharts, shadcn/ui, motion | 오픈소스 | 낮음 |
@@ -381,7 +386,8 @@ export interface Family {
 - **핵심 AI 판단·대화 기능은 Claude로.** 과제 생성, 에이전트 실행기, 청구 검증 해설, 누출 감사는 Claude. 타사 모델은 Arena의 평가 대상으로만.
 - **이미지·영상 도구(힉스필드 등)** 발표자료·비주얼에 사용 가능, 비용 각자 부담.
 - **제출 "오늘 새로 만든 부분 (한 줄)"** 초안:
-  > 날씨 판정 엔진(4개 과제 패밀리 생성·Brier/CRPS/regret 채점)·모델 Arena·채점 흐름·보험 청구 검증·납품까지 전체 흐름을 오늘 직접 구현. 예보·관측 데이터는 Open-Meteo·ECMWF·NOAA CPC·IEM ASOS 사용.
+  > 날씨 판정 엔진(4개 과제 패밀리 생성·Brier/CRPS/regret 채점)·모델 Arena·채점 흐름·보험 청구 검증·납품까지 전체 흐름을 오늘 직접 구현. Open-Meteo·NOAA CPC·IEM ASOS 형식에 맞춰 설계했고, 데모는 임의의 아이오와 농장 목업 데이터로 시연.
+  - 실데이터를 실제로 붙였다면 그때 문구를 바꾸고, Open-Meteo 데이터를 쓰면 README Credits에 "Weather data by Open-Meteo.com"(CC BY 4.0) 표기.
 
 ## 14. 시작 전에 정할 것
 
