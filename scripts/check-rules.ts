@@ -17,7 +17,7 @@ function point(
 }
 
 const dayLow = evaluateHour(point(12, { windMph: 2.9 }))
-assert.equal(dayLow.status, 'CAUTION')
+assert.equal(dayLow.status, 'NO_GO')
 assert.deepEqual(dayLow.reasons, ['WIND_LOW'])
 
 const nightLow = evaluateHour(point(0, { windMph: 2.9 }))
@@ -34,6 +34,7 @@ const start = '2026-06-01T12:00:00.000Z'
 const fourHours = (override: Partial<HourlyPoint> = {}) =>
   Array.from({ length: 4 }, (_, i) => point(12 + i, i === 0 ? override : {}))
 
+assert.equal(evaluateWindow(fourHours({ windMph: 2.9 }), start).violation, true)
 assert.equal(evaluateWindow(fourHours({ gustMph: 15.1 }), start).violation, true)
 assert.equal(evaluateWindow(fourHours({ gustMph: 15.0 }), start).violation, false)
 assert.equal(evaluateWindow(fourHours({ precipIn: 0.01 }), start).violation, false)

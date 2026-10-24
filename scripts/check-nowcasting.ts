@@ -35,6 +35,16 @@ check('(c) oracle decision -> regret 0', regretOk)
 
 // (d)
 const pool = buildDemoTasks(Number.MAX_SAFE_INTEGER).tasks
+// (b2) skill is not clamped: confidently wrong answer vs a good reference gives skill < -1
+{
+  const t = pool.find((t) => {
+    const y = yOf(t)
+    return (referenceProbability(loadSnapshotForTask(t)) - y) ** 2 < 0.5
+  })!
+  const y = yOf(t)
+  const bad = nowcasting.score(t, ans(t, 1 - y, y ? 'spray' : 'delay'), loadObservationForTask(t), loadSnapshotForTask(t))
+  check('(b2) unclamped skill < -1 and finite', Number.isFinite(bad.skill) && bad.skill < -1, String(bad.skill))
+}
 const find = (scenario: string, t0: string) => pool.find((t) => t.snapshotId.endsWith('@' + scenario) && t.t0 === t0)!
 const gb = find('gust-block', '2026-06-10T16:00:00.000Z')
 const cg = find('calm-go', '2026-06-10T15:00:00.000Z')

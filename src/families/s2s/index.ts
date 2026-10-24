@@ -134,7 +134,7 @@ export const s2s: Family = {
     const reference = loadS2sOutlook().terciles
     const brier = brierFor(probabilities, category)
     const brierRef = brierFor(reference, category)
-    const skill = brier === brierRef ? 0 : Math.max(-1, Math.min(1, 1 - brier / Math.max(brierRef, 1e-6)))
+    const skill = brier === brierRef ? 0 : 1 - brier / brierRef
     const predictedCategory = probabilities.reduce(
       (bestIndex, probability, index) => probability > probabilities[bestIndex] ? index : bestIndex,
       0,

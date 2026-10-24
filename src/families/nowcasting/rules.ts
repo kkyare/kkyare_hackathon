@@ -40,7 +40,7 @@ export function evaluateHour(
 
   if (p.windMph === null) add('CAUTION', 'MISSING_DATA')
   else if (p.windMph < rules.windMinMph) {
-    add(isNightUtc(p.time) ? 'NO_GO' : 'CAUTION', isNightUtc(p.time) ? 'WIND_LOW_INVERSION' : 'WIND_LOW')
+    add('NO_GO', isNightUtc(p.time) ? 'WIND_LOW_INVERSION' : 'WIND_LOW')
   } else if (p.windMph > rules.windMaxMph) add('NO_GO', 'WIND_HIGH')
 
   if (p.gustMph !== null && p.gustMph > rules.gustCautionMph) {
