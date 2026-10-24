@@ -57,7 +57,9 @@
 - [ ] 누출 감사: 도구 기록 집계 + Claude로 rationale 검사(t0 이후 사실을 아는 듯 말하는가) → 적발 카드
 
 ### 5. 납품 (2:00-3:30)
-- [ ] `src/arena/export.ts`: `buildTaskPack(tasks)` — `meta.marketValueUsd = 과제 수 × $100`(9-4 가정), `demo: true`
+- [ ] `src/arena/export.ts`: `buildTaskPack(tasks, { snapshots, resolutions?, holdout })` — `meta.marketValueUsd = 과제 수 × $100`(9-4 가정), `demo: true`
+  - 과제가 참조하는 `snapshots`를 반드시 포함 (묶음만으로 재현)
+  - 공개 피드는 `resolutions` 포함·`includesResolution: true`, 비공개 평가셋(holdout)은 빼고 `false`
 - [ ] `POST /api/export` → `TaskPack` JSON, JSONL 다운로드
 - [ ] 데이터 카드: 출처(Open-Meteo·IEM ASOS·NOAA CPC), 기간·지역, 패밀리별 개수, 누출 방지 방식, Arena baseline 점수, "가정" 표시
 
