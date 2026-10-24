@@ -1,5 +1,7 @@
 # 팀 기획 초안: Weather Decision Gym (가칭)
 
+> **갱신 안내:** 방향이 `attentionx-weather-rl-gym.md`(4개 과제 패밀리) 기준으로 정리되어, 실행 계획은 루트 `PLAN.md`를 따른다. 이 문서의 화면 구성(6절)과 UI 참고(7절)는 그대로 참고용으로 유효하다.
+
 - 작성자: 홍유진
 - 작성일: 2026-10-24
 - 근거: `docs/research_yujin.md`, `docs/research_sungho/`, `docs/research_sj-park`, `attentionx-weather-rl-gym.md`
