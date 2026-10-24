@@ -1,0 +1,7 @@
+{
+  "demo": true,
+  "model": "claude-sonnet-5-5 (saved)",
+  "probability": 0.85,
+  "decision": "delay",
+  "rationale": "모든 모델이 17Z부터 풍속 9~13 mph, 돌풍 16~20 mph로 급격히 강해지는 흐름을 일치해서 예보한다. 4시간 창 안에서 조건이 깨질 가능성이 높아 살포를 연기한다."
+}
